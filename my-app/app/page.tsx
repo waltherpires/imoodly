@@ -5,12 +5,12 @@ export default function Home() {
   return (
     <main className="space-y-24">
       <section className="flex flex-col md:flex-row justify-between items-center"></section>
-      <section className="grid grid-cols-1 place-items-center md:grid-cols-3 gap-6">
-        <div className="col-span-1 md:col-span-3 text-center">
-          <h1 className="text-center  scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+      <section className="grid grid-cols-1 place-items-center md:grid-cols-3 gap-6 max-w-screen-lg mx-auto">
+        <div className="col-span-1 md:col-span-3 text-center mb-6">
+          <h1 className="text-center scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Funcionalidades Principais
           </h1>
-          <p className="text-zinc-600 text-center leading-2 [&:not(:first-child)]:mt-6">
+          <p className="text-zinc-600 text-center md:leading-2 [&:not(:first-child)]:mt-4">
             Conheça as ferramentas que vão transformar sua jornada de
             autoconhecimento
           </p>
