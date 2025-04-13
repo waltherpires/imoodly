@@ -1,10 +1,18 @@
+"use client"
+
+import { motion } from "framer-motion";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import { Progress } from "../ui/progress";
 
 export default function Mockup() {
   return (
-    <div className="w-full min-w-[400px] pb-2 shadow-2xl rounded-md">
+    <motion.div 
+      initial={{ opacity: 0, x: 100}}
+      animate={{ opacity: 1, x: 0}}
+      transition={{ duration: 0.7, ease: 'easeOut'}}
+      className="w-full min-w-[400px] pb-2 shadow-2xl rounded-md"
+    >
       <header className="flex bg-teal-600 items-center w-full border-b h-10 rounded-t-md">
         <div className="flex items-center gap-2 my-1 ml-3">
           <div className="rounded-xl bg-green-500 w-3 h-3"></div>
@@ -93,6 +101,6 @@ export default function Mockup() {
           </div>
         </section>
       </div>
-    </div>
+    </motion.div>
   );
 }
