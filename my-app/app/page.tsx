@@ -4,7 +4,7 @@ import MainFeatures from "@/components/sections/Home/MainFeatures";
 
 export default function Home() {
   return (
-    <main className="space-y-24 px-4 sm:px-6 md:px-12">
+    <main className="space-y-24 px-4 sm:px-2 lg:px-12">
       <Hero />
       <MainFeatures />
     </main>

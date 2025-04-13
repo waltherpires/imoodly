@@ -4,7 +4,7 @@ import { Progress } from "../ui/progress";
 
 export default function Mockup() {
   return (
-    <div className="w-full min-w-[400px] min-h-[400px] shadow-2xl rounded-md">
+    <div className="w-full min-w-[400px] pb-2 shadow-2xl rounded-md">
       <header className="flex bg-teal-600 items-center w-full border-b h-10 rounded-t-md">
         <div className="flex items-center gap-2 my-1 ml-3">
           <div className="rounded-xl bg-green-500 w-3 h-3"></div>
@@ -18,7 +18,7 @@ export default function Mockup() {
       <div className="grid grid-cols-1 lg:grid-cols-2 place-items-stretch">
         <section className="grid-span-1">
           <div className="flex flex-col bg-teal-100/60 rounded-md mx-1 max-w-full mt-2 p-2">
-            <h1 className="text-md font-medium mx-2 mb-1">
+            <h1 className="text-md mx-2 mb-1">
               Como você está se sentindo hoje?
             </h1>
             <div className="flex flex-wrap gap-x-3">
@@ -36,9 +36,9 @@ export default function Mockup() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col mx-1 max-w-full mt-2 p-2 bg-zinc-100">
-            <h1 className="text-md font-medium ml-2 mb-1">Diário</h1>
-            <div className="border-2 p-2 text-zinc-400 bg-">
+          <div className="flex flex-col mx-1 max-w-full mt-2 p-2 rounded-md bg-zinc-100">
+            <h1 className="text-md ml-2 mb-1">Diário</h1>
+            <div className="border-2 p-2 text-zinc-400 text-sm">
               Hoje foi um dia produtivo. Consegui fazer novos amigos e fui ao
               psicólogo.
             </div>
@@ -51,8 +51,8 @@ export default function Mockup() {
           </div>
         </section>
         <section className="grid-span-1">
-          <div className="flex flex-col mx-1 max-w-full mt-2 p-2 bg-zinc-100">
-            <h1 className="text-md font-medium mx-2 mb-1">Análise de Humor</h1>
+          <div className="flex flex-col mx-1 max-w-full mt-2 p-2 rounded-md bg-zinc-100">
+            <h1 className="text-md  mx-2 mb-1">Análise de Humor</h1>
             <div className="flex flex-col justify-around gap-2">
               <Progress
                 className="h-3"
@@ -76,7 +76,7 @@ export default function Mockup() {
               />
             </div>
             <Separator className="my-3 bg-zinc-300 h-[1px]" />
-            <h1 className="text-md font-medium mx-2 mb-1">
+            <h1 className="text-md mx-2 mb-1">
               Metas de bem-estar
             </h1>
             <div>
