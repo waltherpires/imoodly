@@ -17,7 +17,7 @@ export function FeatureCard({
     description,
 }: FeatureCardProps) {
     return (
-        <Card className="col-span-1 h-full w-8/12 md:w-full md:max-w-92">
+        <Card className="col-span-1 h-60 w-8/12 md:w-full md:max-w-92">
         <CardHeader>
           <CardTitle className="grid grid-cols-1 place-items-center gap-2">
             <div className={`flex items-center justify-center ${iconBg} p-1 rounded-3xl w-10 h-10`}>
