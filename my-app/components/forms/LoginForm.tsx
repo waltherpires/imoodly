@@ -30,15 +30,15 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col ">
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-neutral-100">E-mail</FormLabel>
+              <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input className="bg-neutral-50" placeholder="Digite seu e-mail" {...field}/>
+                <Input className="mb-5" placeholder="Digite seu e-mail" {...field}/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -50,16 +50,19 @@ export default function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-neutral-100">Senha</FormLabel>
+              <FormLabel>Senha</FormLabel>
               <FormControl>
-                <Input className="bg-neutral-50" type="password" placeholder="Digite sua senha" {...field} />
+                <Input className="mb-3" type="password" placeholder="Digite sua senha" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <p className="text-sm text-neutral-50">Não possui uma conta?<Link href="/signup" className="rounded-sm ml-1 px-1 text-black bg-neutral-100 hover:bg-neutral-300" >Crie uma aqui!</Link> </p>
-        <Button className="text-black self-end bg-neutral-100 hover:bg-neutral-300" type="submit">Entrar</Button>
+        <div className="self-end flex justify-end mt-2">
+        <p className="self-end text-xs pl-1">Não possui uma conta?<Link href="/signup" className="rounded-sm mr-2 p-1 text-teal-500" >Crie uma aqui!</Link> </p>
+        <Button className="self-end bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 hover:bg-teal-700" type="submit">Entrar</Button>
+        </div>
+
       </form>
     </Form>
   );

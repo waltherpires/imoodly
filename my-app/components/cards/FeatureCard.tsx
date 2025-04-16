@@ -27,7 +27,7 @@ export function FeatureCard({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-md text-muted-foreground text-center">{description}</p>
+          <p className="text-md text-muted-foreground text-center dark:text-teal-50">{description}</p>
         </CardContent>
       </Card>
     )

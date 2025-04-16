@@ -54,7 +54,7 @@ export default function Hero() {
             </span>
           ))}
         </h1>
-        <p className="text-zinc-600">
+        <p className="dark:text-teal-50">
           <span className="block">
             {"Monitore, analise e melhore seu bem-estar emocional com uma abordagem prática e baseada em dados."
               .split("")
@@ -71,7 +71,7 @@ export default function Hero() {
           </span>
         </p>
         <div className="flex justify-center md:justify-start space-x-5 mt-6">
-          <Button className="cursor-pointer bg-teal-600 opacity-0 button-anim">Começar agora</Button>
+          <Button className="cursor-pointer bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 opacity-0 button-anim">Começar agora</Button>
           <Button className="cursor-pointer button-anim opacity-0" variant="outline">Saiba mais</Button>
         </div>
       </div>
