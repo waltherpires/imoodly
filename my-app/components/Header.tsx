@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
+import ThemeToggle from "./my-ui/ThemeToggle";
 
 export default function Navbar() {
   return (
@@ -23,6 +24,7 @@ export default function Navbar() {
               Entrar
             </Button>
           </Link>
+          <ThemeToggle />
         </nav>
 
         <div className="md:hidden">
@@ -52,6 +54,7 @@ export default function Navbar() {
               </nav>
             </SheetContent>
           </Sheet>
+          <ThemeToggle />
         </div>
       </div>
     </header>

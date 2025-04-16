@@ -118,5 +118,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    @apply transition-all duration-300 ease-in-out;
   }
 }
