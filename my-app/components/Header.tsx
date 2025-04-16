@@ -19,7 +19,7 @@ export default function Navbar() {
           <Link href="/services">
             <Button variant="ghost">Serviços</Button>
           </Link>
-          <Link href="/auth/login">
+          <Link href="/login">
             <Button variant="ghost" className="w-full justify-start">
               Entrar
             </Button>
@@ -46,7 +46,7 @@ export default function Navbar() {
                     Serviços
                   </Button>
                 </Link>
-                <Link href="/auth/login">
+                <Link href="/login">
                   <Button variant="ghost" className="w-full justify-start">
                     Entrar
                   </Button>

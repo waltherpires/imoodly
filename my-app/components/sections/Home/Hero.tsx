@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { animate, stagger } from "motion";
 import Mockup from "@/components/my-ui/Mockup";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -71,7 +72,9 @@ export default function Hero() {
           </span>
         </p>
         <div className="flex justify-center md:justify-start space-x-5 mt-6">
+          <Link href="/signup">
           <Button className="cursor-pointer bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 opacity-0 button-anim">Começar agora</Button>
+          </Link>
           <Button className="cursor-pointer button-anim opacity-0" variant="outline">Saiba mais</Button>
         </div>
       </div>
