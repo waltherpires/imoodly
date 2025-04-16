@@ -24,7 +24,7 @@ export default function MainFeatures() {
           autoconhecimento
         </p>
       </motion.div>
-      <div className="col-span-1 md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6 place-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 place-items-center w-full">
         {[
           {
             icon: Smile,
