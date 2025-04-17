@@ -6,6 +6,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { usePosts } from "@/hooks/usePosts";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Post } from "@/lib/api/diaryPost";
+import { dateFormatter } from "@/helpers/dateFormatter";
 
 function getTagColor(tag: string) {
   switch (tag) {
@@ -24,8 +26,12 @@ function getTagColor(tag: string) {
   }
 }
 
+type Props = {
+  textFilter: string
+}
 
-export default function TodosTab() {
+
+export default function TodosTab({ textFilter }: Props) {
     const { data, isLoading, error } = usePosts();
 
   if (error) return <Card className="flex flex-col gap-2 justify-center items-center">
@@ -33,6 +39,18 @@ export default function TodosTab() {
   </Card>
 
   const skeletonCards = Array.from({ length: 1 });
+
+  const filterData = (data: Post[], textFilter: string) => {
+    if(!textFilter) return data;
+
+    return data.filter(item => {
+      return Object.values(item).some(value => 
+        typeof value === "string" && value.toLowerCase().includes(textFilter.toLowerCase())
+      );
+    });
+  };
+
+  const filteredData = filterData(data || [], textFilter);
 
     return (
         <TabsContent value="todos" className="mt-4 space-y-4">
@@ -59,14 +77,14 @@ export default function TodosTab() {
                 </CardFooter>
               </Card>
             ))
-            : data?.map((item) => (
+            : filteredData?.map((item) => (
               <Card key={item.id}>
               <CardHeader className="pb-2">
                 <div className="flex items-center jusitfy-between">
                   <CardTitle>{item.title}</CardTitle>
                   <div className="ml-2 flex items-center space-x-2 text-sm text-muted-foreground">
                     <Clock className="h-3.5 w-3.5" />
-                    <span>{item.date}</span>
+                    <span>{dateFormatter(item.date)}</span>
                   </div>
                 </div>
                 <div className="flex space-x-2 mt-1">
