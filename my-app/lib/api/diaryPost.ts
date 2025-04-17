@@ -1,6 +1,6 @@
 type Tag = "feliz" | "triste" | "contente" | "ansioso" | "motivado";
 
-type Post = {
+export type Post = {
   id: string;
   title: string;
   description: string;
