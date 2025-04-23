@@ -2,8 +2,11 @@ import { Tabs,  TabsTrigger } from "@/components/ui/tabs";
 import { TabsList } from "@radix-ui/react-tabs";
 import TodosTab from "./tabs/TodosTab";
 
+type Props = {
+  textFilter: string
+}
 
-export default function RecordsResult() {
+export default function RecordsResult({ textFilter }: Props) {
   return (
     <Tabs defaultValue="todos">
       <TabsList className="grid w-full grid-cols-3">
@@ -11,7 +14,7 @@ export default function RecordsResult() {
         <TabsTrigger value="favoritos">Favoritos</TabsTrigger>
         <TabsTrigger value="tags">Tags</TabsTrigger>
       </TabsList>
-      <TodosTab />
+      <TodosTab textFilter={textFilter}/>
     </Tabs>
   );
 }
