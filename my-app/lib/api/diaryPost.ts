@@ -1,4 +1,4 @@
-type Tag = "feliz" | "triste" | "contente" | "ansioso" | "motivado";
+export type Tag = "feliz" | "triste" | "contente" | "ansioso" | "motivado";
 
 export type Post = {
   id: string;

@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { FeatureCard } from "@/components/cards/FeatureCard";
-import { BookOpen, Calendar, Smile } from "lucide-react";
+import { BookOpen, Calendar, Smile, Users, Target, ChartColumnBig } from "lucide-react";
 
 export default function MainFeatures() {
   const ref = useRef(null);
@@ -39,11 +39,29 @@ export default function MainFeatures() {
               "Escreva sobre seu dia e acompanhe sua jornada emocional.",
           },
           {
+            icon: Users,
+            title: "Sugestões Terapêuticas",
+            description: 
+              "Receba recomendações personalizadas de psicólogos"
+          },
+          {
             icon: Calendar,
             title: "Agenda de Emoções",
             description:
               "Visualize seu histórico emocional de forma organizada no calendário.",
           },
+          {
+            icon: Target,
+            title: "Metas e Progresso",
+            description: 
+              "Defina metas e acompanhe seu progresso."
+          },
+          {
+            icon: ChartColumnBig,
+            title: "Receba Relatórios",
+            description: 
+              "Visualize relatórios para identificar padrões emocionais."
+          }
         ].map((card, index) => (
           <motion.div
             key={card.title}
