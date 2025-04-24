@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CalendarDays, Filter, Search } from "lucide-react";
+import { CalendarDays, Search } from "lucide-react";
 
 type Props = {
   textFilter: string;
