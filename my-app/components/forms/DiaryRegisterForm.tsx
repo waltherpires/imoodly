@@ -56,27 +56,26 @@ export default function DiaryRegisterForm() {
                 <FormLabel>Humor</FormLabel>
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
                   {[
-                    "😊 Feliz",
-                    "😔 Triste",
-                    "😠 Irritado",
-                    "😰 Ansioso",
-                    "😌 Calmo",
-                    "🤔 Confuso",
+                    {icon: "😊" , label: "Feliz"},
+                    {icon: "😔" , label: "Triste"},
+                    {icon: "😠", label: "Irritado"},
+                    {icon: "😰" , label: "Ansioso"},
+                    {icon: "😌", label: "Calmo"},
+                    {icon: "🤔", label: "Confuso"},
                   ].map((mood) => (
                     <Button
-                      className=""
-                      key={mood}
+                      key={mood.label}
                       type="button"
-                      variant={field.value.includes(mood) ? "default" : "outline"}
+                      variant={field.value.includes(mood.label) ? "default" : "outline"}
                       onClick={() => {
-                        const isSelected = field.value.includes(mood);
+                        const isSelected = field.value.includes(mood.label);
                         const newValue = isSelected
-                          ? field.value.filter((item) => item !== mood)
-                          : [...field.value, mood];
+                          ? field.value.filter((item) => item !== mood.label)
+                          : [...field.value, mood.label];
                           field.onChange(newValue);
                       }}
                     >
-                      {mood}
+                      <span>{mood.icon}<span className="ml-0.5">{mood.label}</span></span>
                     </Button>
                   ))}
                 </div>
