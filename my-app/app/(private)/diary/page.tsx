@@ -1,3 +1,4 @@
+import DiaryRegisterForm from "@/components/forms/DiaryRegisterForm";
 import Records from "@/components/sections/diary/Records";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
@@ -22,6 +23,7 @@ export default function DiaryPage() {
         </div>
         <div className="grid gap-6 md:grid-cols-3">
             <Records />
+            <DiaryRegisterForm />
         </div>
       </div>
     </main>
