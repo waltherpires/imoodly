@@ -35,10 +35,10 @@ export default function LoginForm() {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-5">
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input className="mb-5" placeholder="Digite seu e-mail" {...field}/>
+                <Input placeholder="Digite seu e-mail" {...field}/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -49,10 +49,10 @@ export default function LoginForm() {
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-3">
               <FormLabel>Senha</FormLabel>
               <FormControl>
-                <Input className="mb-3" type="password" placeholder="Digite sua senha" {...field} />
+                <Input type="password" placeholder="Digite sua senha" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -110,10 +110,11 @@ export default function DiaryRegisterForm() {
                 <FormControl>
                   <Textarea maxLength={350} placeholder="Descreva como você está se sentindo..." {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
-          <Button className="mt-2 bg-teal-500" type="submit">Enviar</Button>
+          <Button className="self-end w-40 mt-2 bg-teal-500" type="submit">Enviar</Button>
         </form>
       </Form>
     </Card>

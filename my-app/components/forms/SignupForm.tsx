@@ -55,16 +55,15 @@ export default function SignupFom() {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-3">
               <FormLabel>Nome</FormLabel>
               <FormControl>
                 <Input
-                  className="mb-3"
                   placeholder="Digite seu nome completo"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage  className=""/>
             </FormItem>
           )}
         />
@@ -73,10 +72,10 @@ export default function SignupFom() {
           control={form.control}
           name="birthDate"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-3">
               <FormLabel>Data de Nascimento</FormLabel>
               <FormControl>
-                <Input className="mb-3" type="date" {...field} />
+                <Input type="date" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -87,11 +86,10 @@ export default function SignupFom() {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-3">
               <FormLabel>E-mail</FormLabel>
               <FormControl>
                 <Input
-                  className="mb-5"
                   placeholder="Digite seu e-mail"
                   {...field}
                 />
@@ -105,11 +103,10 @@ export default function SignupFom() {
           control={form.control}
           name="password"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-3">
               <FormLabel>Senha</FormLabel>
               <FormControl>
                 <Input
-                  className="mb-3"
                   type="password"
                   placeholder="Digite sua nova senha"
                   {...field}
@@ -125,7 +122,7 @@ export default function SignupFom() {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>COnfirmar Senha</FormLabel>
+              <FormLabel>Confirmar Senha</FormLabel>
               <FormControl>
                 <Input
                   className="mb-3"
