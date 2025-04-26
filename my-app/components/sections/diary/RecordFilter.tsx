@@ -1,13 +1,15 @@
-import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/ui/datepicker";
 import { Input } from "@/components/ui/input";
-import { CalendarDays, Search } from "lucide-react";
+import { Search } from "lucide-react";
 
 type Props = {
   textFilter: string;
   setTextFilter: (value: string) => void;
+  date?: Date;
+  setDate: (value: Date | undefined) => void;
 };
 
-export default function RecordFilter({ textFilter, setTextFilter }: Props) {
+export default function RecordFilter({ textFilter, setTextFilter, date, setDate }: Props) {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTextFilter(event.target.value);
   };
@@ -24,10 +26,8 @@ export default function RecordFilter({ textFilter, setTextFilter }: Props) {
           onChange={handleInputChange}
         />
       </div>
-      <Button variant="outline" size="icon">
-        <CalendarDays className="h-4 w-4" />
-        <span className="sr-only">Calendário</span>
-      </Button>
+      <DatePicker date={date} setDate={setDate}/>
+
     </div>
   );
 }

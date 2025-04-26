@@ -4,9 +4,10 @@ import TodosTab from "./tabs/TodosTab";
 
 type Props = {
   textFilter: string
+  date: (Date | undefined)
 }
 
-export default function RecordsResult({ textFilter }: Props) {
+export default function RecordsResult({ textFilter, date }: Props) {
   return (
     <Tabs defaultValue="todos">
       <TabsList className="grid w-full grid-cols-3">
@@ -14,7 +15,7 @@ export default function RecordsResult({ textFilter }: Props) {
         <TabsTrigger value="favoritos">Favoritos</TabsTrigger>
         <TabsTrigger value="tags">Tags</TabsTrigger>
       </TabsList>
-      <TodosTab textFilter={textFilter}/>
+      <TodosTab textFilter={textFilter} date={date}/>
     </Tabs>
   );
 }

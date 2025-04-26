@@ -15,9 +15,9 @@ export default function Mockup() {
     >
       <header className="flex bg-teal-500 dark:bg-neutral-800 items-center w-full border-b h-10 rounded-t-sm">
         <div className="flex items-center gap-2 my-1 ml-3">
-          <div className="rounded-xl bg-green-500 w-3 h-3"></div>
-          <div className="rounded-xl bg-yellow-500 w-3 h-3"></div>
           <div className="rounded-xl bg-red-500 w-3 h-3"></div>
+          <div className="rounded-xl bg-yellow-500 w-3 h-3"></div>
+          <div className="rounded-xl bg-green-500 w-3 h-3"></div>
           <h1 className="text-white tracking-tight ml-3">
             iMoodly - Diário de bem-estar
           </h1>
