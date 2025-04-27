@@ -1,6 +1,7 @@
-import { Tabs,  TabsTrigger } from "@/components/ui/tabs";
-import { TabsList } from "@radix-ui/react-tabs";
+import { Tabs } from "@/components/ui/tabs";
+
 import TodosTab from "./tabs/TodosTab";
+import { Card } from "@/components/ui/card";
 
 type Props = {
   textFilter: string
@@ -9,13 +10,10 @@ type Props = {
 
 export default function RecordsResult({ textFilter, date }: Props) {
   return (
+    <Card className="p-2 rounded-sm">
     <Tabs defaultValue="todos">
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="todos">Todos</TabsTrigger>
-        <TabsTrigger value="favoritos">Favoritos</TabsTrigger>
-        <TabsTrigger value="tags">Tags</TabsTrigger>
-      </TabsList>
       <TodosTab textFilter={textFilter} date={date}/>
     </Tabs>
+    </Card>
   );
 }

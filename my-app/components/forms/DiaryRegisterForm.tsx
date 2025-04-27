@@ -15,8 +15,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
+import { usePostForm } from "@/hooks/diaryHooks/usePostForm";
 
-const formSchema = z.object({
+export const formSchema = z.object({
   mood: z.array(z.string()).min(1, "Escolha pelo menos um humor"),
   title: z
     .string()
@@ -29,6 +30,8 @@ const formSchema = z.object({
   tags: z.array(z.string()).optional(),
 });
 
+export type FormDataDiaryRegister = z.infer<typeof formSchema>;
+
 export default function DiaryRegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,15 +39,23 @@ export default function DiaryRegisterForm() {
       mood: [],
       title: "",
       description: "",
-
     },
   });
+  
+  const mutation = usePostForm();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    mutation.mutate(values, {
+      onSuccess: () => { 
+        form.reset();
+        console.log(values);
+      }
+    })
   }
-
+  
   return (
+    <div>
+
     <Card className="p-3">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
@@ -114,9 +125,10 @@ export default function DiaryRegisterForm() {
               </FormItem>
             )}
           />
-          <Button className="self-end w-40 mt-2 bg-teal-500" type="submit">Enviar</Button>
+          <Button disabled={mutation.isPending} className="self-end w-40 mt-2 bg-teal-500" type="submit">{mutation.isPending ? "Enviando... " : "Enviar"}</Button>
         </form>
       </Form>
     </Card>
+    </div>
   );
 }

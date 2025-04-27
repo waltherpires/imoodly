@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock, Tag } from "lucide-react";
+import { Clock } from "lucide-react";
 import { TabsContent } from "@/components/ui/tabs";
 import {
   Card,
@@ -10,10 +10,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { usePosts } from "@/hooks/usePosts";
+import { usePosts } from "@/hooks/diaryHooks/usePosts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Post } from "@/lib/api/diaryPost";
 import { dateFormatter, dateFormatterNoHours } from "@/helpers/dateFormatter";
+import { useEffect, useState } from "react";
+import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, } from "@/components/ui/pagination";
 
 function getTagColor(tag: string) {
   switch (tag) {
@@ -43,7 +45,12 @@ type Props = {
 };
 
 export default function TodosTab({ textFilter, date }: Props) {
+  const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading, error } = usePosts();
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [textFilter, date]);
 
   if (error)
     return (
@@ -54,7 +61,7 @@ export default function TodosTab({ textFilter, date }: Props) {
       </Card>
     );
 
-  const skeletonCards = Array.from({ length: 1 });
+  const skeletonCards = Array.from({ length: 5 });
 
   const filterData = (data: Post[], textFilter: string, date?: Date) => {
     let filtered = data;
@@ -76,16 +83,16 @@ export default function TodosTab({ textFilter, date }: Props) {
     }
 
     return filtered;
-    /*     if(!textFilter) return data;
-
-    return data.filter(item => {
-      return Object.values(item).some(value => 
-        typeof value === "string" && value.toLowerCase().includes(textFilter.toLowerCase())
-      );
-    }); */
   };
 
+  const itemsPerPage = 4;
   const filteredData = filterData(data || [], textFilter, date);
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const paginatedData = filteredData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <TabsContent value="todos" className="mt-4 space-y-4">
@@ -124,10 +131,10 @@ export default function TodosTab({ textFilter, date }: Props) {
           </h2>
         </Card>
       ) : (
-        filteredData?.map((item) => (
+        paginatedData?.map((item) => (
           <Card key={item.id}>
             <CardHeader className="pb-2">
-              <div className="flex items-center jusitfy-between">
+              <div className="flex items-center justify-between">
                 <CardTitle>{item.title}</CardTitle>
                 <div className="ml-2 flex items-center space-x-2 text-sm text-muted-foreground">
                   <Clock className="h-3.5 w-3.5" />
@@ -153,13 +160,7 @@ export default function TodosTab({ textFilter, date }: Props) {
             <CardContent>
               <p className="text-sm">{item.description}</p>
             </CardContent>
-            <CardFooter className="flex justify-between pt-0">
-              <div className="flex items-center space-x-2">
-                <Tag className="h-4 w-4 text-muted-foreground" />
-                <span className="text-xs text-muted-foreground">
-                  {item.tags.join(", ")}
-                </span>
-              </div>
+            <CardFooter className="flex justify-end pt-0">
               <Button variant="ghost" size="sm">
                 Ver mais
               </Button>
@@ -167,6 +168,28 @@ export default function TodosTab({ textFilter, date }: Props) {
           </Card>
         ))
       )}
+
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} />
+          </PaginationItem>
+
+          <PaginationItem className="text-sm">Página {currentPage} de {totalPages}</PaginationItem>
+
+          <PaginationItem>
+            
+            <PaginationNext 
+              onClick={() => 
+                setCurrentPage((prev) =>
+                  prev < totalPages ? prev + 1 : prev
+                )
+              }
+            />
+          </PaginationItem>
+
+        </PaginationContent>
+      </Pagination>
     </TabsContent>
   );
 }
