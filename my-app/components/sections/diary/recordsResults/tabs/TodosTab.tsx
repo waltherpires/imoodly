@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { usePosts } from "@/hooks/usePosts";
+import { usePosts } from "@/hooks/diaryHooks/usePosts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Post } from "@/lib/api/diaryPost";
 import { dateFormatter, dateFormatterNoHours } from "@/helpers/dateFormatter";

@@ -15,8 +15,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
+import { usePostForm } from "@/hooks/diaryHooks/usePostForm";
 
-const formSchema = z.object({
+export const formSchema = z.object({
   mood: z.array(z.string()).min(1, "Escolha pelo menos um humor"),
   title: z
     .string()
@@ -29,11 +30,9 @@ const formSchema = z.object({
   tags: z.array(z.string()).optional(),
 });
 
-interface DiaryRegisterFormPros {
-  onClose: () => void;
-}
+export type FormDataDiaryRegister = z.infer<typeof formSchema>;
 
-export default function DiaryRegisterForm({ onClose }: DiaryRegisterFormPros) {
+export default function DiaryRegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,16 +41,23 @@ export default function DiaryRegisterForm({ onClose }: DiaryRegisterFormPros) {
       description: "",
     },
   });
+  
+  const mutation = usePostForm();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    form.reset();
-    onClose();
+    mutation.mutate(values, {
+      onSuccess: () => { 
+        form.reset();
+        console.log(values);
+      }
+    })
   }
 
   
   return (
-    <Card className="p-3 max-h-100">
+    <div>
+
+    <Card className="p-3">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
           <FormField
@@ -120,9 +126,10 @@ export default function DiaryRegisterForm({ onClose }: DiaryRegisterFormPros) {
               </FormItem>
             )}
           />
-          <Button className="self-end w-40 mt-2 bg-teal-500" type="submit">Enviar</Button>
+          <Button disabled={mutation.isPending} className="self-end w-40 mt-2 bg-teal-500" type="submit">{mutation.isPending ? "Enviando... " : "Enviar"}</Button>
         </form>
       </Form>
     </Card>
+    </div>
   );
 }
