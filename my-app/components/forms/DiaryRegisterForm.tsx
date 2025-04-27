@@ -29,23 +29,29 @@ const formSchema = z.object({
   tags: z.array(z.string()).optional(),
 });
 
-export default function DiaryRegisterForm() {
+interface DiaryRegisterFormPros {
+  onClose: () => void;
+}
+
+export default function DiaryRegisterForm({ onClose }: DiaryRegisterFormPros) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       mood: [],
       title: "",
       description: "",
-
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    form.reset();
+    onClose();
   }
 
+  
   return (
-    <Card className="p-3">
+    <Card className="p-3 max-h-100">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
           <FormField
