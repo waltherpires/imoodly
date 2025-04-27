@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock, Tag } from "lucide-react";
+import { Clock } from "lucide-react";
 import { TabsContent } from "@/components/ui/tabs";
 import {
   Card,
