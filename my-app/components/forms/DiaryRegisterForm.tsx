@@ -52,7 +52,6 @@ export default function DiaryRegisterForm() {
       }
     })
   }
-
   
   return (
     <div>

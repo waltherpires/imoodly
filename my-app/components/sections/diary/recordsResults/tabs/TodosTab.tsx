@@ -175,7 +175,7 @@ export default function TodosTab({ textFilter, date }: Props) {
             <PaginationPrevious onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} />
           </PaginationItem>
 
-          <PaginationItem>Página {currentPage} de {totalPages}</PaginationItem>
+          <PaginationItem className="text-sm">Página {currentPage} de {totalPages}</PaginationItem>
 
           <PaginationItem>
             
