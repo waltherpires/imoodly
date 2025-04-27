@@ -4,11 +4,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import DiaryRegisterForm from "@/components/forms/DiaryRegisterForm";
 import Records from "@/components/sections/diary/Records";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
 
 export default function DiaryPage() {
   const [isFormOpen, setIsFormOpen] = useState(true);
+
+  function handleNewRegisterClick() {
+    setIsFormOpen((prevState) => !prevState);
+  }
 
   return (
     <main className="flex-1">
@@ -24,10 +28,19 @@ export default function DiaryPage() {
             <Button
               size="sm"
               className="bg-teal-500 hover:bg-teal-600"
-              onClick={() => setIsFormOpen(true)}
+              onClick={handleNewRegisterClick}
             >
-              <Plus className="mr-2 h-4 x-4" />
-              Novo registro
+              {isFormOpen ? (
+                <>
+                  <Minus className="mr-2 h-4 w-4" />
+                  Fechar Registro
+                </>
+              ) : (
+                <>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Novo registro
+                </>
+              )}
             </Button>
           </div>
         </div>
@@ -41,7 +54,7 @@ export default function DiaryPage() {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
-                <DiaryRegisterForm onClose={() => setIsFormOpen(false)} />
+                <DiaryRegisterForm />
               </motion.div>
             )}
           </AnimatePresence>
