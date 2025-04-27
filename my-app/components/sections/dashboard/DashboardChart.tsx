@@ -7,7 +7,7 @@ export default function DashboardChart() {
         <Card>
             <CardHeader>
                 <CardTitle>Análise de humor</CardTitle>
-                <CardDescription className="text-xs">Seus padrões emocionais nas últimas semanas</CardDescription>
+                <CardDescription className="text-xs">Seus padrões emocionais nos últimos meses</CardDescription>
             </CardHeader>
             <CardContent>
                 <Chart />
