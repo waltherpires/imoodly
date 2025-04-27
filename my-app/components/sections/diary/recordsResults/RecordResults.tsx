@@ -1,5 +1,5 @@
-import { Tabs,  TabsTrigger } from "@/components/ui/tabs";
-import { TabsList } from "@radix-ui/react-tabs";
+import { Tabs } from "@/components/ui/tabs";
+
 import TodosTab from "./tabs/TodosTab";
 
 type Props = {
@@ -9,13 +9,10 @@ type Props = {
 
 export default function RecordsResult({ textFilter, date }: Props) {
   return (
+    <div className="bg-teal-100 dark:bg-teal-900 p-2 rounded-sm">
     <Tabs defaultValue="todos">
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="todos">Todos</TabsTrigger>
-        <TabsTrigger value="favoritos">Favoritos</TabsTrigger>
-        <TabsTrigger value="tags">Tags</TabsTrigger>
-      </TabsList>
       <TodosTab textFilter={textFilter} date={date}/>
     </Tabs>
+    </div>
   );
 }
