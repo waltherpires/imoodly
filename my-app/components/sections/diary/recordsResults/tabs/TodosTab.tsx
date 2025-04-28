@@ -15,7 +15,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Post } from "@/lib/api/diaryPost";
 import { dateFormatter, dateFormatterNoHours } from "@/helpers/dateFormatter";
 import { useEffect, useState } from "react";
-import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious, } from "@/components/ui/pagination";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 function getTagColor(tag: string) {
   switch (tag) {
@@ -172,22 +178,22 @@ export default function TodosTab({ textFilter, date }: Props) {
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} />
-          </PaginationItem>
-
-          <PaginationItem className="text-sm">Página {currentPage} de {totalPages}</PaginationItem>
-
-          <PaginationItem>
-            
-            <PaginationNext 
-              onClick={() => 
-                setCurrentPage((prev) =>
-                  prev < totalPages ? prev + 1 : prev
-                )
-              }
+            <PaginationPrevious
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             />
           </PaginationItem>
 
+          <PaginationItem className="text-sm">
+            Página {currentPage} de {totalPages}
+          </PaginationItem>
+
+          <PaginationItem>
+            <PaginationNext
+              onClick={() =>
+                setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
+              }
+            />
+          </PaginationItem>
         </PaginationContent>
       </Pagination>
     </TabsContent>
