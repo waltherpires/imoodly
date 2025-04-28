@@ -14,7 +14,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
-      <div className="min-w-xl mx-10 space-y-5">
+      <div className="w-full max-w-screen space-y-5 px-10">
         <DashboardCards />
         <DashboardChart />
       </div>
