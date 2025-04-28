@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function DashboardCards() {
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-4">
+    <section className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-4 max-w-screen">
         <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
         <CardHeader>
           <CardTitle className="flex justify-between text-sm">
