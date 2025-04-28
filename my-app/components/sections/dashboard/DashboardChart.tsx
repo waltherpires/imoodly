@@ -108,7 +108,7 @@ export default function DashboardChart() {
           Seus padrões emocionais nos últimos meses
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pl-0">
         <Pagination>
           <PaginationContent>
             <PaginationItem>
