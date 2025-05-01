@@ -44,7 +44,7 @@ export default function LoginForm() {
       setUserId(res.data.id);
       router.replace('/dashboard');
     })
-    .catch((error) => {
+    .catch(() => {
       console.log('Erro ao fazer login');
     });
   }
