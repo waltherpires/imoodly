@@ -7,6 +7,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import axios from 'axios';
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/useAuth";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Email inválido" }),
@@ -14,6 +17,8 @@ const formSchema = z.object({
 })
 
 export default function LoginForm() {
+  const router = useRouter();
+  const { setUserId } = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -25,7 +30,23 @@ export default function LoginForm() {
 
   // adicionar integração backend
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    axios
+    .post('/api/login', {
+      email: values.email,
+      password: values.password,
+    })
+    .then(() => {
+      return axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
+        withCredentials: true,
+      });
+    })
+    .then((res) => {
+      setUserId(res.data.id);
+      router.replace('/dashboard');
+    })
+    .catch((error) => {
+      console.log('Erro ao fazer login');
+    });
   }
 
   return (
