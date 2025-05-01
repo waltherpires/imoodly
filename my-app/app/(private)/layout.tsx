@@ -1,16 +1,24 @@
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { AuthProvider } from "@/contexts/useAuth";
 
-export default function PrivateLayout({
+export default async function PrivateLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // adicionar logica de verificao do token
-  const token = true;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
 
   if (!token) {
     redirect("/login");
   }
 
-  return <div className="flex min-h-screen flex-col bg-teal-50 dark:bg-teal-950">{children}</div>;
+  return (
+    <AuthProvider>
+      <div className="flex min-h-screen flex-col bg-teal-50 dark:bg-teal-950">
+        {children}
+      </div>
+    </AuthProvider>
+  );
 }

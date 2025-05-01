@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <div className="bg-teal-50 dark:bg-teal-950 flex items-center justify-center min-h-screen px-4">
       <Card className="w-full max-w-md p-5">

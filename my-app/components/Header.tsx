@@ -3,9 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
 import ThemeToggle from "./my-ui/ThemeToggle";
+import { cookies } from "next/headers";
+import { isUserLoggedIn } from "@/lib/auth";
+import LogoutButton from "./my-ui/LogoutButton";
 
-export default function Navbar() {
-  const isLoggedIn = true;
+export default async function Navbar() {
+  const cookiesStore = await cookies();
+  const isLoggedIn = isUserLoggedIn(cookiesStore);
 
   return (
     <header className="w-full border-b">
@@ -26,6 +30,7 @@ export default function Navbar() {
                 <Link href="/messages">
                   <Button variant="ghost">Mensagens</Button>
                 </Link>
+                <LogoutButton />
               </nav>
 
               <div className="md:hidden">
@@ -61,6 +66,7 @@ export default function Navbar() {
                           Mensagens
                         </Button>
                       </Link>
+                      <LogoutButton className="w-full justify-start"/>
                     </nav>
                   </SheetContent>
                 </Sheet>
