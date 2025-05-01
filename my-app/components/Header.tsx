@@ -1,15 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
 import ThemeToggle from "./my-ui/ThemeToggle";
-import { cookies } from "next/headers";
-import { isUserLoggedIn } from "@/lib/auth";
 import LogoutButton from "./my-ui/LogoutButton";
+import { useAuth } from "@/contexts/useAuth";
 
-export default async function Navbar() {
-  const cookiesStore = await cookies();
-  const isLoggedIn = isUserLoggedIn(cookiesStore);
+export default function Navbar() {
+  const { userId } = useAuth();
 
   return (
     <header className="w-full border-b">
@@ -18,7 +18,7 @@ export default async function Navbar() {
           iMoodly
         </Link>
         <div className="flex">
-          {isLoggedIn && (
+          {userId && (
             <>
               <nav className="hidden md:flex gap-4">
                 <Link href="/dashboard">
@@ -73,7 +73,7 @@ export default async function Navbar() {
               </div>
             </>
           )}
-          {!isLoggedIn && (
+          {!userId && (
             <>
               <nav className="hidden md:flex gap-4">
                 <Link href="/about">
@@ -128,7 +128,6 @@ export default async function Navbar() {
               </div>
             </>
           )}
-
           <ThemeToggle />
         </div>
       </div>
