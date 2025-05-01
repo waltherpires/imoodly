@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchPosts } from '@/lib/api/diaryPost';
 
-export function usePosts() {
+export function usePosts(userId?: number) {
     return useQuery({
-        queryKey: ['posts'],
-        queryFn: fetchPosts,
+        queryKey: ['posts', userId],
+        queryFn: () => fetchPosts(userId),
+        enabled: !!userId,
     })
 }
