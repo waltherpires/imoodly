@@ -5,6 +5,8 @@ import Navbar from "@/components/Header";
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 import { QueryProvider } from "@/providers/queryProvider";
 import { Analytics } from "@vercel/analytics/next";
+import { Providers } from "../components/Providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,13 +33,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>
-          <ThemeProviderWrapper>
-            <Navbar />
-            {children}
-            <Analytics />
-          </ThemeProviderWrapper>
-        </QueryProvider>
+        <Providers>
+          <QueryProvider>
+            <ThemeProviderWrapper>
+              <Navbar />
+              {children}
+              <Analytics />
+              <Toaster richColors expand={true} />
+            </ThemeProviderWrapper>
+          </QueryProvider>
+        </Providers>
       </body>
     </html>
   );

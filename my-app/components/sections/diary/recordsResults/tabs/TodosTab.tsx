@@ -22,6 +22,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useSession } from "next-auth/react";
 
 function getTagColor(tag: string) {
   switch (tag) {
@@ -51,8 +52,12 @@ type Props = {
 };
 
 export default function TodosTab({ textFilter, date }: Props) {
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
+
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading, error } = usePosts();
+  console.log("userId", userId);
+  const { data, isLoading, error } = usePosts(Number(userId));
 
   useEffect(() => {
     setCurrentPage(1);

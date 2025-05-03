@@ -1,101 +1,53 @@
+import { fetchClient } from "./fetchClient";
+
 export type Tag = "feliz" | "triste" | "contente" | "ansioso" | "motivado";
 
 export type Post = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   tags: Tag[];
   date: string;
 };
 
-export async function fetchPosts(): Promise<Post[]> {
-  await new Promise((res) => setTimeout(res, 500));
+export async function fetchPosts(userId?: number): Promise<Post[]> {
+  const useMock = process.env.NEXT_PUBLIC_USE_MOCK === "true";
 
-  const allPosts: Post[] = [
-    {
-      id: "1",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-04-17T14:30:00.000Z"
-    },
-    {
-      id: "2",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-04-17T14:30:00.000Z"
-    },
-    {
-      id: "3",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-04-17T14:30:00.000Z"
-    },
-    {
-      id: "4",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-04-17T14:30:00.000Z"
-    },
-    {
-      id: "5",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-04-17T14:30:00.000Z"
-    },
-    {
-      id: "6",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-04-17T14:30:00.000Z"
-    },
-    {
-      id: "7",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-04-17T14:30:00.000Z"
-    },
-    {
-      id: "8",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-03-17T14:30:00.000Z"
-    },
-    {
-      id: "9",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-02-17T14:30:00.000Z"
-    },
-    {
-      id: "10",
-      title: "Dia Produtivo",
-      description:
-        "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-      tags: ["feliz", "motivado"],
-      date: "2025-01-17T14:30:00.000Z"
-    },
-  ];
+  if (useMock) {
+    await new Promise((res) => setTimeout(res, 500));
+    const allPosts: Post[] = [
+      {
+        id: 1,
+        title: "Dia Produtivo",
+        description:
+          "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
+        tags: ["feliz", "motivado"],
+        date: "2025-04-17T14:30:00.000Z",
+      },
+      {
+        id: 2,
+        title: "Dia Produtivo",
+        description:
+          "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
+        tags: ["feliz", "motivado"],
+        date: "2025-04-17T14:30:00.000Z",
+      },
+    ];
+    return allPosts;
+  }
 
+  const response = await fetchClient(`/mood-logs/user/${userId}`, {
+    method: "GET",
+  });
 
+  const data = response.data;
 
-  return allPosts;
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return data.map((item: any, index: number) => ({
+    id: index,
+    title: item.title,
+    description: item.description,
+    tags: item.tags as Tag[],
+    date: item.createdAt,
+  }));
 }

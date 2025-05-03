@@ -4,10 +4,16 @@ import { useRef, useEffect } from "react";
 import { animate, stagger } from "motion";
 import Mockup from "@/components/my-ui/Mockup";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ButtonWithLoading } from "@/components/my-ui/ButtonLoading";
 
 export default function Hero() {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleNavigate = async () => {
+    router.push("/signup");
+  };
 
   useEffect(() => {
     document.fonts.ready.then(() => {
@@ -72,10 +78,18 @@ export default function Hero() {
           </span>
         </p>
         <div className="flex justify-center md:justify-start space-x-5 mt-6">
-          <Link href="/signup">
-          <Button className="cursor-pointer bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 opacity-0 button-anim">Começar agora</Button>
-          </Link>
-          <Button className="cursor-pointer button-anim opacity-0" variant="outline">Saiba mais</Button>
+          <ButtonWithLoading
+            onClick={handleNavigate}
+            className="cursor-pointer bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 opacity-0 button-anim"
+          >
+            Começar agora
+          </ButtonWithLoading>
+          <Button
+            className="cursor-pointer button-anim opacity-0"
+            variant="outline"
+          >
+            Saiba mais
+          </Button>
         </div>
       </div>
       <div className="flex justify-center">
