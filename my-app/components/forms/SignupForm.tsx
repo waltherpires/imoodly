@@ -12,7 +12,6 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../ui/button";
 import Link from "next/link";
 import {
   Select,
@@ -22,11 +21,16 @@ import {
   SelectItem,
 } from "../ui/select";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSignup } from "@/hooks/authHooks/useSignup";
+import { ButtonWithLoading } from "../my-ui/ButtonLoading";
 
-const formSchema = z
+export const formSchema = z
   .object({
     name: z.string().min(2, { message: "Nome muito curto" }),
-    birthDate: z.string().min(1, { message: "Data de nascimento obrigatória" }),
+    birthdate: z
+      .string()
+      .min(1, { message: "Data de nascimento obrigatória" })
+      .refine((val) => !isNaN(Date.parse(val)), { message: "Data inválida" }),
     email: z.string().email({ message: "Email inválido" }),
     password: z
       .string()
@@ -59,11 +63,13 @@ const formSchema = z
   );
 
 export default function SignupForm() {
+  const { mutate: signup, isPending } = useSignup();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      birthDate: "",
+      birthdate: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -71,9 +77,8 @@ export default function SignupForm() {
     },
   });
 
-  // adicionar integração backend
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    signup(values);
   }
 
   return (
@@ -95,7 +100,7 @@ export default function SignupForm() {
 
         <FormField
           control={form.control}
-          name="birthDate"
+          name="birthdate"
           render={({ field }) => (
             <FormItem className="mb-3">
               <FormLabel>Data de Nascimento</FormLabel>
@@ -184,7 +189,11 @@ export default function SignupForm() {
           {form.watch("role") === "psicologo" && (
             <motion.div
               initial={{ opacity: 0, y: -20, zIndex: -1 }}
-              animate={{ opacity: [0, 0.3, 1], y: [-20, 5, 0], zIndex: [-1, 0.5 , 1] }}
+              animate={{
+                opacity: [0, 0.3, 1],
+                y: [-20, 5, 0],
+                zIndex: [-1, 0.5, 1],
+              }}
               exit={{ opacity: [1, 0.3, 0], y: -20 }}
               transition={{ duration: 0.3 }}
             >
@@ -211,12 +220,13 @@ export default function SignupForm() {
               Entre aqui!
             </Link>
           </p>
-          <Button
+          <ButtonWithLoading
+            loading={isPending}
             className="self-end bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 hover:bg-teal-700"
             type="submit"
           >
             Registrar
-          </Button>
+          </ButtonWithLoading>
         </div>
       </form>
     </Form>
