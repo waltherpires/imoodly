@@ -14,6 +14,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "../ui/select";
+import { motion, AnimatePresence } from "framer-motion";
 
 const formSchema = z
   .object({
@@ -25,13 +33,32 @@ const formSchema = z
       .min(6, { message: "A senha deve ter no mínimo 6 caracteres" })
       .max(50),
     confirmPassword: z.string(),
+    role: z.enum(["paciente", "psicologo"]),
+    crp: z
+      .string()
+      .regex(/^\d{4,6}\/[A-Z]{2}(-\d{2})?$/, {
+        message: "CRP inválido. Ex: 12345/CE ou 123456/SP-01",
+      })
+      .optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "As senhas não coincidem",
     path: ["confirmPassword"],
-  });
+  })
+  .refine(
+    (data) => {
+      if (data.role === "psicologo" && !data.crp) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "CRP obrigatório para psicólogos",
+      path: ["crp"],
+    }
+  );
 
-export default function SignupFom() {
+export default function SignupForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,6 +67,7 @@ export default function SignupFom() {
       email: "",
       password: "",
       confirmPassword: "",
+      role: "paciente",
     },
   });
 
@@ -58,12 +86,9 @@ export default function SignupFom() {
             <FormItem className="mb-3">
               <FormLabel>Nome</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Digite seu nome completo"
-                  {...field}
-                />
+                <Input placeholder="Digite seu nome completo" {...field} />
               </FormControl>
-              <FormMessage  className=""/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -89,10 +114,7 @@ export default function SignupFom() {
             <FormItem className="mb-3">
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Digite seu e-mail"
-                  {...field}
-                />
+                <Input placeholder="Digite seu e-mail" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -134,6 +156,54 @@ export default function SignupFom() {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="role"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Tipo de cadastro</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  {...field}
+                >
+                  <SelectTrigger className="w-full mb-3">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="paciente">Usuário</SelectItem>
+                    <SelectItem value="psicologo">Psicólogo</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <AnimatePresence>
+          {form.watch("role") === "psicologo" && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, zIndex: -1 }}
+              animate={{ opacity: [0, 0.3, 1], y: [-20, 5, 0], zIndex: [-1, 0.5 , 1] }}
+              exit={{ opacity: [1, 0.3, 0], y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <FormField
+                control={form.control}
+                name="crp"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>CRP</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Digite seu CRP" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div className="self-end flex justify-end mt-2">
           <p className="self-end text-xs pl-1">
             Já possui uma conta?

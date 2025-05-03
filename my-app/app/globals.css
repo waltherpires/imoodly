@@ -121,3 +121,7 @@
     @apply transition-all duration-300 ease-in-out;
   }
 }
+
+body {
+  width: 100%;
+}
