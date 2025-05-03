@@ -1,13 +1,17 @@
-import { redirect } from 'next/navigation'
-import { cookies } from 'next/headers'
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/api/auth";
+import { redirect } from "next/navigation";
 
-export default async function AuthLayout({ children }: { children: React.ReactNode }) {
-  const cookieStore = await cookies()
-  const token = cookieStore.get('token')?.value
+export default async function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await getServerSession(authOptions);
 
-  if (token) {
-    redirect('/dashboard')
+  if (session) {
+    redirect("/dashboard");
   }
 
-  return <>{children}</>
+  return <>{children}</>;
 }

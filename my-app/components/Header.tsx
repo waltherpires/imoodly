@@ -1,15 +1,17 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
 import ThemeToggle from "./my-ui/ThemeToggle";
 import LogoutButton from "./my-ui/LogoutButton";
-import { useAuth } from "@/contexts/useAuth";
 
 export default function Navbar() {
-  const { userId } = useAuth();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return null;
 
   return (
     <header className="w-full border-b">
@@ -18,7 +20,7 @@ export default function Navbar() {
           iMoodly
         </Link>
         <div className="flex">
-          {userId && (
+          {session && (
             <>
               <nav className="hidden md:flex gap-4">
                 <Link href="/dashboard">
@@ -66,14 +68,14 @@ export default function Navbar() {
                           Mensagens
                         </Button>
                       </Link>
-                      <LogoutButton className="w-full justify-start"/>
+                      <LogoutButton className="w-full justify-start" />
                     </nav>
                   </SheetContent>
                 </Sheet>
               </div>
             </>
           )}
-          {!userId && (
+          {!session && (
             <>
               <nav className="hidden md:flex gap-4">
                 <Link href="/about">

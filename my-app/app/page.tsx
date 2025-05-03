@@ -1,14 +1,15 @@
-import Hero from "@/components/sections/home/Hero";
-import MainFeatures from "@/components/sections/home/MainFeatures";
-import { cookies } from "next/headers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/api/auth";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
-  const cookieStore = await cookies()
-  const token = cookieStore.get('token')?.value
+import Hero from "@/components/sections/home/Hero";
+import MainFeatures from "@/components/sections/home/MainFeatures";
 
-  if (token) {
-    redirect('/dashboard')
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/dashboard");
   }
 
   return (

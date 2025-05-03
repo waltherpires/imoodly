@@ -1,4 +1,4 @@
-import api from "./axiosClient";
+import { fetchClient } from "./fetchClient";
 
 export type Tag = "feliz" | "triste" | "contente" | "ansioso" | "motivado";
 
@@ -10,9 +10,7 @@ export type Post = {
   date: string;
 };
 
-export async function fetchPosts(
-  userId?: number,
-): Promise<Post[]> {
+export async function fetchPosts(userId?: number): Promise<Post[]> {
   const useMock = process.env.NEXT_PUBLIC_USE_MOCK === "true";
 
   if (useMock) {
@@ -38,11 +36,11 @@ export async function fetchPosts(
     return allPosts;
   }
 
-  const response = await api.get(`/mood-logs/user/${userId}`)
+  const response = await fetchClient(`/mood-logs/user/${userId}`, {
+    method: "GET",
+  });
 
-  console.log("response do fetchPosts: ", response)
-  const data = response.data;  
-  console.log("data do fetchPosts: ", data);
+  const data = response.data;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return data.map((item: any, index: number) => ({

@@ -1,27 +1,22 @@
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
-import axios from 'axios'
-import { Button } from '../ui/button'
-import { useAuth } from '@/contexts/useAuth';
+import { Button } from "../ui/button";
+import { signOut } from "next-auth/react";
 
-interface LogoutButton {
-    className?: string;
+interface LogoutButtonProps {
+  className?: string;
 }
 
-export default function LogoutButton({ className }: LogoutButton) {
-  const { setUserId } = useAuth();
-  const router = useRouter()
-
+export default function LogoutButton({ className }: LogoutButtonProps) {
   const handleLogout = async () => {
-    await axios.post('/api/logout')
-    setUserId(null);
-    router.push('/login')
-  }
+    await signOut({
+      callbackUrl: "/login",
+    });
+  };
 
   return (
     <Button onClick={handleLogout} className={className} variant="ghost">
       Sair
     </Button>
-  )
+  );
 }
