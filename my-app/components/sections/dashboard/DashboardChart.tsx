@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
+import { useMonthlyEmotionSummary } from "@/hooks/moodHooks/useMonthlyEmotionSummary";
 import {
   Card,
   CardContent,
@@ -17,95 +19,59 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-
-const chartData: Record<
-  string,
-  {
-    month: string;
-    happy: number;
-    sad: number;
-    anxious: number;
-    angry: number;
-  }[]
-> = {
-  "2021": [
-    { month: "Janeiro", happy: 8, sad: 14, anxious: 4, angry: 12 },
-    { month: "Fevereiro", happy: 6, sad: 13, anxious: 2, angry: 11 },
-    { month: "Março", happy: 12, sad: 9, anxious: 5, angry: 10 },
-    { month: "Abril", happy: 11, sad: 15, anxious: 3, angry: 13 },
-    { month: "Maio", happy: 14, sad: 10, anxious: 2, angry: 9 },
-    { month: "Junho", happy: 13, sad: 12, anxious: 3, angry: 11 },
-    { month: "Julho", happy: 10, sad: 11, anxious: 4, angry: 12 },
-    { month: "Agosto", happy: 13, sad: 9, anxious: 5, angry: 10 },
-    { month: "Setembro", happy: 15, sad: 8, anxious: 3, angry: 9 },
-    { month: "Outubro", happy: 12, sad: 13, anxious: 2, angry: 11 },
-    { month: "Novembro", happy: 9, sad: 10, anxious: 3, angry: 12 },
-    { month: "Dezembro", happy: 14, sad: 11, anxious: 4, angry: 10 },
-  ],
-  "2022": [
-    { month: "Janeiro", happy: 10, sad: 12, anxious: 3, angry: 11 },
-    { month: "Fevereiro", happy: 7, sad: 14, anxious: 2, angry: 13 },
-    { month: "Março", happy: 13, sad: 10, anxious: 5, angry: 9 },
-    { month: "Abril", happy: 12, sad: 13, anxious: 4, angry: 12 },
-    { month: "Maio", happy: 16, sad: 9, anxious: 3, angry: 11 },
-    { month: "Junho", happy: 14, sad: 11, anxious: 4, angry: 10 },
-    { month: "Julho", happy: 11, sad: 12, anxious: 3, angry: 13 },
-    { month: "Agosto", happy: 15, sad: 10, anxious: 5, angry: 9 },
-    { month: "Setembro", happy: 17, sad: 8, anxious: 4, angry: 11 },
-    { month: "Outubro", happy: 13, sad: 12, anxious: 3, angry: 10 },
-    { month: "Novembro", happy: 10, sad: 11, anxious: 4, angry: 12 },
-    { month: "Dezembro", happy: 16, sad: 9, anxious: 5, angry: 11 },
-  ],
-  "2023": [
-    { month: "Janeiro", happy: 9, sad: 13, anxious: 4, angry: 12 },
-    { month: "Fevereiro", happy: 8, sad: 12, anxious: 3, angry: 11 },
-    { month: "Março", happy: 14, sad: 9, anxious: 5, angry: 10 },
-    { month: "Abril", happy: 13, sad: 14, anxious: 4, angry: 13 },
-    { month: "Maio", happy: 15, sad: 10, anxious: 3, angry: 12 },
-    { month: "Junho", happy: 13, sad: 11, anxious: 4, angry: 9 },
-    { month: "Julho", happy: 12, sad: 10, anxious: 3, angry: 11 },
-    { month: "Agosto", happy: 16, sad: 9, anxious: 5, angry: 10 },
-    { month: "Setembro", happy: 18, sad: 7, anxious: 4, angry: 12 },
-    { month: "Outubro", happy: 14, sad: 12, anxious: 3, angry: 10 },
-    { month: "Novembro", happy: 11, sad: 9, anxious: 4, angry: 13 },
-    { month: "Dezembro", happy: 17, sad: 8, anxious: 5, angry: 11 },
-  ],
-  "2024": [
-    { month: "Janeiro", happy: 12, sad: 10, anxious: 5, angry: 8 },
-    { month: "Fevereiro", happy: 8, sad: 15, anxious: 3, angry: 12 },
-    { month: "Março", happy: 18, sad: 7, anxious: 6, angry: 10 },
-    { month: "Abril", happy: 14, sad: 11, anxious: 2, angry: 9 },
-    { month: "Maio", happy: 17, sad: 6, anxious: 4, angry: 13 },
-    { month: "Junho", happy: 15, sad: 9, anxious: 3, angry: 11 },
-    { month: "Julho", happy: 13, sad: 8, anxious: 2, angry: 14 },
-    { month: "Agosto", happy: 16, sad: 10, anxious: 5, angry: 9 },
-    { month: "Setembro", happy: 19, sad: 7, anxious: 3, angry: 12 },
-    { month: "Outubro", happy: 14, sad: 12, anxious: 4, angry: 10 },
-    { month: "Novembro", happy: 11, sad: 9, anxious: 2, angry: 13 },
-    { month: "Dezembro", happy: 16, sad: 8, anxious: 5, angry: 11 },
-  ],
-  "2025": [
-    { month: "Janeiro", happy: 10, sad: 15, anxious: 3, angry: 15 },
-    { month: "Fevereiro", happy: 5, sad: 10, anxious: 1, angry: 15 },
-    { month: "Março", happy: 20, sad: 8, anxious: 6, angry: 15 },
-    { month: "Abril", happy: 10, sad: 19, anxious: 3, angry: 15 },
-    { month: "Maio", happy: 15, sad: 9, anxious: 1, angry: 15 },
-  ],
-};
+import { useSession } from "next-auth/react";
+import { monthNamesInPortuguese } from "@/helpers/dateFormatter";
 
 export default function DashboardChart() {
-  const years = Object.keys(chartData);
-  const totalPages = years.length - 1;
+  const { data: sessionData } = useSession();
+  const userId = sessionData?.user.id;
+  const { data, isLoading, isError } = useMonthlyEmotionSummary(Number(userId));
   const [currentPage, setCurrentPage] = useState(0);
+  
+  if (isLoading) return <p>Carregando...</p>;
+  if (isError) return <p>Erro ao carregar os dados.</p>;
+  if (!data) return <p>Sem dados disponíveis.</p>;
 
+  const formattedData = data.reduce((acc: any, item: any) => {
+    const year = item.year;
+    const month = item.month.trim();
+    const emotions = item.emotions;
+    
+    const translatedMonth = monthNamesInPortuguese[month] || month;
+  
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+  
+    acc[year].push({
+      month: translatedMonth,
+      happy: parseInt(emotions.feliz || "0"),
+      sad: parseInt(emotions.triste || "0"),
+      anxious: parseInt(emotions.ansioso || "0"),
+      angry: parseInt(emotions.irritado || "0"),
+      calm: parseInt(emotions.calmo || "0"),
+      confused: parseInt(emotions.confuso || "0"),
+    });
+  
+    return acc;
+  }, {});
+  
+  const years = formattedData ? Object.keys(formattedData) : [];
+  const totalPages = years.length - 1;
   const selectedYear = years[currentPage];
+
+
+  if (!formattedData) return <p>Sem dados disponíveis.</p>;
+  if (!selectedYear || !formattedData[selectedYear])
+    return <div>Carregando...</div>;
+
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Análise de humor</CardTitle>
         <CardDescription className="text-xs">
-          Seus padrões emocionais nos últimos meses
+          Seus padrões emocionais
         </CardDescription>
       </CardHeader>
       <CardContent className="pl-0">
@@ -117,9 +83,7 @@ export default function DashboardChart() {
               />
             </PaginationItem>
 
-            <PaginationItem className="text-sm">
-               {selectedYear} 
-            </PaginationItem>
+            <PaginationItem className="text-sm">{selectedYear}</PaginationItem>
 
             <PaginationItem>
               <PaginationNext
@@ -132,7 +96,7 @@ export default function DashboardChart() {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-        <Chart selectedYear={selectedYear} chartData={chartData} />
+        <Chart selectedYear={selectedYear} chartData={formattedData} />
       </CardContent>
     </Card>
   );

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const fetchProfile = async () => {
     const response = await axios.get('/api/profile');
+
     return response.data;
 }
 

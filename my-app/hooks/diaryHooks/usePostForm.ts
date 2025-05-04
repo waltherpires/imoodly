@@ -14,14 +14,15 @@ async function sendMoodPost(
   return response.data;
 }
 
-export function usePostForm() {
+export function usePostForm(userId?: string) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: sendMoodPost,
     onSuccess: () => {
       toast.success("Registro enviado!");
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["posts", userId] });
+      queryClient.invalidateQueries({ queryKey: ["monthly-emotions", userId] });
     },
     onError: () => {
       toast.error("Erro ao enviar!");

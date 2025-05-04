@@ -56,7 +56,6 @@ export default function TodosTab({ textFilter, date }: Props) {
   const userId = session?.user?.id;
 
   const [currentPage, setCurrentPage] = useState(1);
-  console.log("userId", userId);
   const { data, isLoading, error } = usePosts(Number(userId));
 
   useEffect(() => {
