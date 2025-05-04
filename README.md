@@ -5,7 +5,7 @@
 
 > iMoodly é uma aplicação web desenvolvida com Next.js no frontend e NestJS no backend, conectada a um banco de dados Supabase. A plataforma tem como objetivo promover o bem-estar emocional dos usuários, permitindo que eles registrem suas emoções diárias, acompanhem seu histórico emocional e recebam sugestões de atividades personalizadas.
 
- [Demo](imoodly.vercel.app)
+ [Demo](https://imoodly.vercel.app)
 
 ## Ferramentas
 [![Icons](https://skillicons.dev/icons?i=ts,nextjs,nestjs,react,tailwind,supabase)](https://skillicons.dev)
