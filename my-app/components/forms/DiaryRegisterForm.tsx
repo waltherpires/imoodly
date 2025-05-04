@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import { usePostForm } from "@/hooks/diaryHooks/usePostForm";
+import { useSession } from "next-auth/react";
 
 export enum Emotions {
   Feliz = "feliz",
@@ -62,6 +63,9 @@ export const formSchema = z.object({
 export type FormDataDiaryRegister = z.infer<typeof formSchema>;
 
 export default function DiaryRegisterForm() {
+  const { data: sessionData } = useSession();  
+  const userId = sessionData?.user.id;
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -71,7 +75,7 @@ export default function DiaryRegisterForm() {
     },
   });
 
-  const mutation = usePostForm();
+  const mutation = usePostForm(userId);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     mutation.mutate(values, {
