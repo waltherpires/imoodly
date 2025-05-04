@@ -48,7 +48,7 @@ const chartConfig = {
     label: "Calmo",
     color: "#782ec7",
   },
-  confuse: {
+  confused: {
     label: "Confuso",
     color: "#838587",
   },
@@ -68,7 +68,7 @@ export function Chart({
       anxious: number;
       angry: number;
       calm: number;
-      confuse: number;
+      confused: number;
     }[]
   >;
 }) {
@@ -87,17 +87,17 @@ export function Chart({
       anxious: 0,
       angry: 0,
       calm: 0,
-      confuse: 0,
+      confused: 0,
     };
 
     if (viewMode === "ano") {
-      data.forEach(({ happy, sad, anxious, angry, calm, confuse }) => {
+      data.forEach(({ happy, sad, anxious, angry, calm, confused }) => {
         totals.happy += Number(happy) || 0;
         totals.sad += Number(sad) || 0;
         totals.anxious += Number(anxious) || 0;
         totals.angry += Number(angry) || 0;
         totals.calm += Number(calm) || 0;
-        totals.confuse += Number(confuse) || 0;
+        totals.confused += Number(confused) || 0;
       });
     } else {
       const monthData = data[currentMonthIndex];
@@ -119,8 +119,8 @@ export function Chart({
       { emotion: "Calmo", value: totals.calm, fill: chartConfig.calm.color },
       {
         emotion: "Confuso",
-        value: totals.confuse,
-        fill: chartConfig.confuse.color,
+        value: totals.confused,
+        fill: chartConfig.confused.color,
       },
     ];
   }, [selectedYear, chartData, currentMonthIndex, viewMode]);
@@ -134,7 +134,7 @@ export function Chart({
   const totalCount = emotionTotals.reduce((acc, cur) => acc + cur.value, 0);
 
   return (
-    <Card className="flex flex-col md:w-6/12 ml-2">
+    <Card className="flex flex-col md:w-6/12 ml-2 drop-shadow-2xl">
       <CardHeader className="items-center pb-0">
         <CardTitle>Emoções</CardTitle>
         <CardDescription className="flex flex-col md:flew-row md:justify-between">
