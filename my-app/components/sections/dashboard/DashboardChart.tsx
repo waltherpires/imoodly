@@ -30,13 +30,21 @@ export default function DashboardChart() {
   const [currentPage, setCurrentPage] = useState(0);
 
   if (isLoading || !data) {
-    return (
-      <SkeletonChartCard />
-    )
+    return <SkeletonChartCard />;
   }
 
-  if (isError) return <p>Erro ao carregar os dados.</p>;
-
+  if (isError) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Erro</CardTitle>
+          <CardDescription className="text-xs">
+            Não foi possível carregar os dados.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    );
+  }
 
   const formattedData = data.reduce((acc: any, item: any) => {
     const year = item.year;
@@ -66,9 +74,9 @@ export default function DashboardChart() {
   const totalPages = years.length - 1;
   const selectedYear = years[currentPage];
 
-  if (!formattedData) return <p>Sem dados disponíveis.</p>;
-  if (!selectedYear || !formattedData[selectedYear])
-    return <div>Carregando...</div>;
+  if (! formattedData || !selectedYear || !formattedData[selectedYear]) {
+    return <SkeletonChartCard />;
+  }
 
   return (
     <Card>
@@ -117,7 +125,6 @@ function SkeletonChartCard() {
       </CardHeader>
 
       <CardContent className="pl-0">
-
         <Pagination>
           <PaginationContent>
             <PaginationItem>
