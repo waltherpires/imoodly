@@ -44,11 +44,12 @@ export const monthNamesInPortuguese: Record<string, string> = {
 
 export const lastWeekRecords = (register: Post[]) => {
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const lastWeek = new Date(today);
   lastWeek.setDate(today.getDate() - 7);
-
   return register.filter((record) => {
     const recordDate = new Date(record.date);
+    recordDate.setHours(0, 0, 0, 0);
     return recordDate >= lastWeek && recordDate <= today;
   });
 }
@@ -56,9 +57,10 @@ export const lastWeekRecords = (register: Post[]) => {
 export const thisMonthRecords = (register: Post[]) => {
   const today = new Date();
   const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
   return register.filter((record) => {
     const recordDate = new Date(record.date);
-    return recordDate >= firstDayOfMonth && recordDate <= today;
+    return recordDate >= firstDayOfMonth && recordDate <= lastDayOfMonth;
   });
 }

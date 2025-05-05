@@ -16,9 +16,11 @@ export default function DashboardCards() {
   const userId = sessionData?.user.id;
 
   const { data, isLoading, isError } = usePosts(Number(userId));
-  const { data: emotionData, isLoading: emotionLoading, isError: emotionError } = useMonthlyEmotionSummary(Number(userId));
-
-
+  const {
+    data: emotionData,
+    isLoading: emotionLoading,
+    isError: emotionError,
+  } = useMonthlyEmotionSummary(Number(userId));
 
   if (isLoading || emotionLoading) {
     return <DashboardSkeleton />;
@@ -28,14 +30,17 @@ export default function DashboardCards() {
     <ErrorCard />;
   }
 
-  const { emotion: predominantEmotion, percentage: predominantEmotionPercentage } = getPredominantEmotion(emotionData);
+  const {
+    emotion: predominantEmotion,
+    percentage: predominantEmotionPercentage,
+  } = getPredominantEmotion(emotionData);
 
   const lastWeekCount = lastWeekRecords(data || []).length;
   const thisMonthCount = thisMonthRecords(data || []).length;
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-4 max-w-screen">
-        <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
+      <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
         <CardHeader>
           <CardTitle className="flex justify-between text-sm">
             Humor predominante <Smile className="h-4 w-4 text-teal-700" />
@@ -44,7 +49,7 @@ export default function DashboardCards() {
         <CardContent>
           <p className="text-xl font-semibold mb-1">{predominantEmotion}</p>
           <p className="text-xs text-muted-foreground tracking-tight">
-           {predominantEmotionPercentage}% do geral
+            {predominantEmotionPercentage}% do geral
           </p>
         </CardContent>
       </Card>
@@ -57,7 +62,9 @@ export default function DashboardCards() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-xl font-semibold mb-1">{thisMonthCount} neste mês</p>
+            <p className="text-xl font-semibold mb-1">
+              {thisMonthCount} neste mês
+            </p>
             <p className="text-xs text-muted-foreground tracking-tight">
               {lastWeekCount} na última semana
             </p>
