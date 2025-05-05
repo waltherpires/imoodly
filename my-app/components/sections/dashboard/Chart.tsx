@@ -30,27 +30,27 @@ import { motion, AnimatePresence } from "framer-motion";
 const chartConfig = {
   sad: {
     label: "Triste",
-    color: "#1c22c9",
+    color: "#67C9D6",
   },
   happy: {
     label: "Feliz",
-    color: "#e3dd27",
+    color: "#FECD04",
   },
   anxious: {
     label: "Ansioso",
-    color: "#e07d26",
+    color: "#F79534",
   },
   angry: {
     label: "Bravo",
-    color: "#c7150c",
+    color: "#E8546C",
   },
   calm: {
     label: "Calmo",
-    color: "#782ec7",
+    color: "#A7CF3A",
   },
   confused: {
     label: "Confuso",
-    color: "#838587",
+    color: "#BB9FC8",
   },
 } satisfies ChartConfig;
 
@@ -199,7 +199,8 @@ export function Chart({
                   dataKey="value"
                   nameKey="emotion"
                   innerRadius={60}
-                  strokeWidth={5}
+                  strokeWidth={2}
+                  stroke="#fff"
                 >
                   <Label
                     content={({ viewBox }) => {
