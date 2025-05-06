@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -17,8 +16,8 @@ export default function LogoutButton({ className }: LogoutButtonProps) {
   };
 
   return (
-    <Button onClick={handleLogout} className={className} variant="ghost">
+    <span onClick={handleLogout} className={className}>
       Sair
-    </Button>
+    </span>
   );
 }
