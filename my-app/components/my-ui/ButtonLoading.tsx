@@ -2,7 +2,8 @@
 
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 interface ButtonWithLoadingProps {
   onClick?: () => Promise<void> | void;
   loadingText?: string;
@@ -22,6 +23,7 @@ export function ButtonWithLoading({
 }: ButtonWithLoadingProps) {
   const handleClick = async () => {
     if (onClick) await onClick();
+    NProgress.start();
   };
 
   return (

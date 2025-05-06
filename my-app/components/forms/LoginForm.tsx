@@ -13,6 +13,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 import { signIn } from "next-auth/react";
 import { ButtonWithLoading } from "../my-ui/ButtonLoading";
 import { useState } from "react";
@@ -92,14 +94,15 @@ export default function LoginForm() {
         <div className="self-end flex justify-end mt-2">
           <p className="self-end text-xs pl-1">
             Não possui uma conta?
-            <Link href="/signup" className="rounded-sm mr-2 p-1 text-teal-500">
+            <Link href="/signup" onClick={() => NProgress.start()} className="rounded-sm mr-2 p-1 text-teal-500">
               Crie uma aqui!
-            </Link>{" "}
+            </Link>
           </p>
           <ButtonWithLoading
             className="self-end bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 hover:bg-teal-700"
             type="submit"
             loading={loading}
+            
           >
             Entrar
           </ButtonWithLoading>

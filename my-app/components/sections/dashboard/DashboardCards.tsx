@@ -5,6 +5,8 @@ import { usePosts } from "@/hooks/diaryHooks/usePosts";
 import { Smile, ListTodo, MessageSquare, Clock } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 import { lastWeekRecords, thisMonthRecords } from "@/helpers/dateFormatter";
 import ErrorCard from "@/components/my-ui/ErrorCard";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -53,7 +55,7 @@ export default function DashboardCards() {
           </p>
         </CardContent>
       </Card>
-      <Link href="/diary">
+      <Link href="/diary" onClick={() => NProgress.start()}>
         <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
           <CardHeader>
             <CardTitle className="flex justify-between text-sm">
