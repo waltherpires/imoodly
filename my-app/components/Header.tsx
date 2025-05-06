@@ -2,6 +2,8 @@
 
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
@@ -16,20 +18,20 @@ export default function Navbar() {
   return (
     <header className="w-full border-b">
       <div className="flex items-center justify-between px-4 py-3 ,ax-w-7xl mx-auto">
-        <Link href="/" className="text-xl font-bold">
+        <Link href="/" onClick={() => NProgress.start()} className="text-xl font-bold">
           iMoodly
         </Link>
         <div className="flex">
           {session && (
             <>
               <nav className="hidden md:flex gap-4">
-                <Link href="/dashboard">
+                <Link href="/dashboard" onClick={() => NProgress.start()}>
                   <Button variant="ghost">Dashboard</Button>
                 </Link>
-                <Link href="/diary">
+                <Link href="/diary" onClick={() => NProgress.start()}>
                   <Button variant="ghost">Diário</Button>
                 </Link>
-                <Link href="/messages">
+                <Link href="/messages" onClick={() => NProgress.start()}>
                   <Button variant="ghost">Mensagens</Button>
                 </Link>
                 <LogoutButton />
@@ -44,7 +46,7 @@ export default function Navbar() {
                   </SheetTrigger>
                   <SheetContent side="right">
                     <nav className="flex flex-col gap-4 mt-6">
-                      <Link href="/dashboard">
+                      <Link href="/dashboard" onClick={() => NProgress.start()}>
                         <Button
                           variant="ghost"
                           className="w-full justify-start"
@@ -52,7 +54,7 @@ export default function Navbar() {
                           Dashboard
                         </Button>
                       </Link>
-                      <Link href="/diary">
+                      <Link href="/diary" onClick={() => NProgress.start()}>
                         <Button
                           variant="ghost"
                           className="w-full justify-start"
@@ -60,7 +62,7 @@ export default function Navbar() {
                           Diário
                         </Button>
                       </Link>
-                      <Link href="/messages">
+                      <Link href="/messages" onClick={() => NProgress.start()}>
                         <Button
                           variant="ghost"
                           className="w-full justify-start"
@@ -78,13 +80,13 @@ export default function Navbar() {
           {!session && (
             <>
               <nav className="hidden md:flex gap-4">
-                <Link href="/about">
-                  <Button variant="ghost">Sobre</Button>
+                <Link href="/about" onClick={() => NProgress.start()}>
+                  <Button variant="ghost" onClick={() => NProgress.start()}>Sobre</Button>
                 </Link>
-                <Link href="/services">
+                <Link href="/services" onClick={() => NProgress.start()}>
                   <Button variant="ghost">Serviços</Button>
                 </Link>
-                <Link href="/login">
+                <Link href="/login" onClick={() => NProgress.start()}>
                   <Button variant="ghost" className="w-full justify-start">
                     Entrar
                   </Button>
@@ -100,15 +102,15 @@ export default function Navbar() {
                   </SheetTrigger>
                   <SheetContent side="right">
                     <nav className="flex flex-col gap-4 mt-6">
-                      <Link href="/about">
+                      <Link href="/about" onClick={() => NProgress.start()}>
                         <Button
                           variant="ghost"
                           className="w-full justify-start"
                         >
                           Sobre
                         </Button>
-                      </Link>
-                      <Link href="/services">
+                      </Link >
+                      <Link href="/services" onClick={() => NProgress.start()}>
                         <Button
                           variant="ghost"
                           className="w-full justify-start"
@@ -116,7 +118,7 @@ export default function Navbar() {
                           Serviços
                         </Button>
                       </Link>
-                      <Link href="/login">
+                      <Link href="/login" onClick={() => NProgress.start()}>
                         <Button
                           variant="ghost"
                           className="w-full justify-start"
