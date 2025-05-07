@@ -1,13 +1,14 @@
 "use client"
 
-import { motion } from "framer-motion";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import { Progress } from "../ui/progress";
 
 export default function Mockup() {
   return (
-    <motion.div 
+    <LazyMotion features={domAnimation}>
+    <m.div 
       initial={{ opacity: 0, x: 100}}
       animate={{ opacity: 1, x: 0}}
       transition={{ duration: 0.7, ease: 'easeOut'}}
@@ -101,6 +102,7 @@ export default function Mockup() {
           </div>
         </section>
       </div>
-    </motion.div>
+    </m.div>
+    </LazyMotion>
   );
 }

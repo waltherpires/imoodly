@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useMonthlyEmotionSummary } from "@/hooks/moodHooks/useMonthlyEmotionSummary";
 import {
@@ -10,7 +11,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Chart } from "./Chart";
+const Chart = dynamic(() => import("./Chart"), { 
+  ssr: false,
+  loading: () => <Skeleton className="h-[200px] w-[200px]" />
+});
+
 
 import {
   Pagination,
@@ -29,11 +34,11 @@ export default function DashboardChart() {
   const { data, isLoading, isError } = useMonthlyEmotionSummary(Number(userId));
   const [currentPage, setCurrentPage] = useState(0);
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return <SkeletonChartCard />;
   }
 
-  if (isError) {
+  if (!data || isError) {
     return (
       <Card>
         <CardHeader>
@@ -114,7 +119,7 @@ export default function DashboardChart() {
   );
 }
 
-function SkeletonChartCard() {
+export function SkeletonChartCard() {
   return (
     <Card>
       <CardHeader>

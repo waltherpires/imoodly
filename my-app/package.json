@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^15.3.2",
     "@tailwindcss/postcss": "^4",
     "@tanstack/eslint-plugin-query": "^5.72.2",
     "@tanstack/react-query-devtools": "^5.74.4",

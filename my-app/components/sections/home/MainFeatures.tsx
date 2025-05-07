@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { LazyMotion, useInView, domAnimation, m } from "framer-motion";
 import { FeatureCard } from "@/components/cards/FeatureCard";
 import { BookOpen, Calendar, Smile, Users, Target, ChartColumnBig } from "lucide-react";
 
@@ -10,8 +10,9 @@ export default function MainFeatures() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
+    <LazyMotion features={domAnimation}>
     <section ref={ref} className="flex flex-col gap-6 max-w-screen-lg min-h-[80vh] justify-start mx-auto">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 50}}
         animate={isInView ? { opacity: 1, y: 0}: {}}
         transition={{ duration: 0.8 }}
@@ -23,7 +24,7 @@ export default function MainFeatures() {
           Conheça as ferramentas que vão transformar sua jornada de
           autoconhecimento
         </p>
-      </motion.div>
+      </m.div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 place-items-center w-full mb-10">
         {[
           {
@@ -63,7 +64,7 @@ export default function MainFeatures() {
               "Visualize relatórios para identificar padrões emocionais."
           }
         ].map((card, index) => (
-          <motion.div
+          <m.div
             key={card.title}
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -74,9 +75,10 @@ export default function MainFeatures() {
               title={card.title}
               description={card.description}
             />
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </section>
+    </LazyMotion>
   );
 }

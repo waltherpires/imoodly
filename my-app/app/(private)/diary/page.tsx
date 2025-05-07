@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion";
 import DiaryRegisterForm from "@/components/forms/DiaryRegisterForm";
 import Records from "@/components/sections/diary/Records";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ export default function DiaryPage() {
   }
 
   return (
+    <LazyMotion features={domAnimation}>
     <main className="flex-1">
       <div className="container py-6 md:py-8 mx-auto">
         <div className="flex flex-col md:flex-row  items-center justify-between mb-6">
@@ -48,18 +49,19 @@ export default function DiaryPage() {
           <Records />
           <AnimatePresence>
             {isFormOpen && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <DiaryRegisterForm />
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
         </div>
       </div>
     </main>
+    </LazyMotion>
   );
 }

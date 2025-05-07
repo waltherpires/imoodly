@@ -12,6 +12,7 @@ import ErrorCard from "@/components/my-ui/ErrorCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMonthlyEmotionSummary } from "@/hooks/moodHooks/useMonthlyEmotionSummary";
 import { getPredominantEmotion } from "@/helpers/predominantEmotion";
+import { useMemo } from "react";
 
 export default function DashboardCards() {
   const { data: sessionData } = useSession();
@@ -24,21 +25,26 @@ export default function DashboardCards() {
     isError: emotionError,
   } = useMonthlyEmotionSummary(Number(userId));
 
-  if (isLoading || emotionLoading) {
-    return <DashboardSkeleton />;
-  }
+  const lastWeekCount = useMemo(() => {
+    if (!data) return 0; 
+    return lastWeekRecords(data).length;
+  }, [data]);
+  
+  const thisMonthCount = useMemo(() => {
+    if (!data) return 0; 
+    return thisMonthRecords(data).length;
+  }, [data]);
 
-  if (isError || emotionError || !data || !Array.isArray(emotionData)) {
-    <ErrorCard />;
-  }
+  if (isLoading || emotionLoading) return <DashboardSkeleton />;
+  if (isError || emotionError || !Array.isArray(emotionData))
+    return <ErrorCard />;
 
   const {
     emotion: predominantEmotion,
     percentage: predominantEmotionPercentage,
   } = getPredominantEmotion(emotionData);
 
-  const lastWeekCount = lastWeekRecords(data || []).length;
-  const thisMonthCount = thisMonthRecords(data || []).length;
+
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-4 max-w-screen">

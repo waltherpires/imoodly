@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { motion, AnimatePresence } from "framer-motion";
+import { LazyMotion, AnimatePresence, domAnimation, m } from "framer-motion";
 
 const chartConfig = {
   sad: {
@@ -54,7 +54,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function Chart({
+export default function Chart({
   selectedYear,
   chartData,
 }: {
@@ -134,6 +134,7 @@ export function Chart({
   const totalCount = emotionTotals.reduce((acc, cur) => acc + cur.value, 0);
 
   return (
+    <LazyMotion features={domAnimation}>
     <Card className="flex flex-col md:w-6/12 ml-2 drop-shadow-2xl">
       <CardHeader className="items-center pb-0">
         <CardTitle>Emoções</CardTitle>
@@ -150,7 +151,7 @@ export function Chart({
         </CardDescription>
         <AnimatePresence>
           {viewMode === "mes" && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: [0, 0.3, 1], y: [-20, 5, 0] }}
               exit={{ opacity: [1, 0.6, 0], y: -20 }}
@@ -172,13 +173,13 @@ export function Chart({
                   ))}
                 </SelectContent>
               </Select>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={`${selectedYear}-${viewMode}-${currentMonthIndex}`}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -235,10 +236,11 @@ export function Chart({
                 <ChartLegend content={<CustomLegend />} />
               </PieChart>
             </ChartContainer>
-          </motion.div>
+          </m.div>
         </AnimatePresence>
       </CardContent>
     </Card>
+    </LazyMotion>
   );
 }
 

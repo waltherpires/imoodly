@@ -19,7 +19,7 @@ export default function MyDropdown({ className }: MyDropdownProps) {
     <DropdownMenu>
       <DropdownMenuTrigger className={className}>
         <Avatar>
-            <AvatarImage src="https://githu.com/shadcdn.png" />
+            <AvatarImage />
             <AvatarFallback className="hover:bg-zinc-200 hover:text-black transition duration-200"><User /></AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
