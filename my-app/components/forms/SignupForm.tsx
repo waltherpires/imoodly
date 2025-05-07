@@ -22,7 +22,7 @@ import {
   SelectContent,
   SelectItem,
 } from "../ui/select";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useSignup } from "@/hooks/authHooks/useSignup";
 import { ButtonWithLoading } from "../my-ui/ButtonLoading";
 
@@ -84,6 +84,7 @@ export default function SignupForm() {
   }
 
   return (
+    <LazyMotion features={domAnimation}>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col ">
         <FormField
@@ -189,7 +190,7 @@ export default function SignupForm() {
         />
         <AnimatePresence>
           {form.watch("role") === "psicologo" && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -20, zIndex: -1 }}
               animate={{
                 opacity: [0, 0.3, 1],
@@ -212,7 +213,7 @@ export default function SignupForm() {
                   </FormItem>
                 )}
               />
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
         <div className="self-end flex justify-end mt-2">
@@ -232,5 +233,6 @@ export default function SignupForm() {
         </div>
       </form>
     </Form>
+    </LazyMotion>
   );
 }

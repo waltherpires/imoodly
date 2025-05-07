@@ -1,6 +1,7 @@
 import { Tabs } from "@/components/ui/tabs";
 
-import TodosTab from "./tabs/TodosTab";
+import dynamic from "next/dynamic";
+const TodosTab = dynamic(() => import("./tabs/TodosTab"), { ssr: false });
 import { Card } from "@/components/ui/card";
 
 type Props = {
