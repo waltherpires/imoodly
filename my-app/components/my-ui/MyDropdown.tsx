@@ -1,3 +1,6 @@
+import Link from "next/link";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,29 +10,35 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import LogoutButton from "./LogoutButton";
-import { User } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { User } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type MyDropdownProps = {
-    className?: string;
-}
+  className?: string;
+};
 
 export default function MyDropdown({ className }: MyDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className={className}>
         <Avatar>
-            <AvatarImage />
-            <AvatarFallback className="hover:bg-zinc-200 hover:text-black transition duration-200"><User /></AvatarFallback>
+          <AvatarImage />
+          <AvatarFallback className="hover:bg-zinc-200 hover:text-black transition duration-200">
+            <User />
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-                Perfil
-            </DropdownMenuItem>
-        <DropdownMenuItem><LogoutButton /></DropdownMenuItem>
+          <Link href="/profile" onClick={() => NProgress.start()}>
+            Perfil
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <LogoutButton />
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

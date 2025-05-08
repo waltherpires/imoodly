@@ -86,7 +86,7 @@ export default function SignupForm() {
   return (
     <LazyMotion features={domAnimation}>
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col ">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
         <FormField
           control={form.control}
           name="name"
