@@ -29,6 +29,7 @@ const formSchema = z.object({
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,6 +41,8 @@ export default function LoginForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
+
+    setError(null);
     const result = await signIn("credentials", {
       email: values.email,
       password: values.password,
@@ -49,6 +52,8 @@ export default function LoginForm() {
 
     if (result?.error) {
       setLoading(false);
+      NProgress.done();
+      setError("Email ou senha inválidos");
       return;
     }
 
@@ -91,10 +96,17 @@ export default function LoginForm() {
             </FormItem>
           )}
         />
+
+        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+
         <div className="self-end flex justify-end mt-2">
           <p className="self-end text-xs pl-1">
             Não possui uma conta?
-            <Link href="/signup" onClick={() => NProgress.start()} className="rounded-sm mr-2 p-1 text-teal-500">
+            <Link
+              href="/signup"
+              onClick={() => NProgress.start()}
+              className="rounded-sm mr-2 p-1 text-teal-500"
+            >
               Crie uma aqui!
             </Link>
           </p>
@@ -102,7 +114,6 @@ export default function LoginForm() {
             className="self-end bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 hover:bg-teal-700"
             type="submit"
             loading={loading}
-            
           >
             Entrar
           </ButtonWithLoading>
