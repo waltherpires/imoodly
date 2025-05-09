@@ -31,13 +31,11 @@ export default function MyDropdown({ className }: MyDropdownProps) {
       <DropdownMenuContent>
         <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <Link href="/profile" onClick={() => NProgress.start()}>
+          <DropdownMenuItem>Perfil</DropdownMenuItem>
+        </Link>
         <DropdownMenuItem>
-          <Link href="/profile" onClick={() => NProgress.start()}>
-            Perfil
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <LogoutButton />
+          <LogoutButton className="w-full"/>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

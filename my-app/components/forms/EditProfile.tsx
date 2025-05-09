@@ -88,6 +88,7 @@ export default function EditProfileForm({
             </FormItem>
           )}
         />
+        <span className="text-sm text-muted-foreground">Você será deslogado ao fazer alterações.</span>
         <div className="flex justify-end space-x-2">
           <Button
             type="button"

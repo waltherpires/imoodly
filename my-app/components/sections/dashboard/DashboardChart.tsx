@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 const Chart = dynamic(() => import("./Chart"), { 
   ssr: false,
-  loading: () => <Skeleton className="h-[200px] w-[200px]" />
+  loading: () => <SkeletonChartCard />,
 });
 
 
@@ -34,11 +34,11 @@ export default function DashboardChart() {
   const { data, isLoading, isError } = useMonthlyEmotionSummary(Number(userId));
   const [currentPage, setCurrentPage] = useState(0);
 
-  if (isLoading) {
+  if (isLoading || !data) {
     return <SkeletonChartCard />;
   }
 
-  if (!data || isError) {
+  if ((!data || isError) && !isLoading) {
     return (
       <Card>
         <CardHeader>
