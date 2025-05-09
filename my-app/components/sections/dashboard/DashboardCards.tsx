@@ -36,7 +36,7 @@ export default function DashboardCards() {
   }, [data]);
 
   if (isLoading || emotionLoading) return <DashboardSkeleton />;
-  if (isError || emotionError || !Array.isArray(emotionData))
+  if ((isError || emotionError || !Array.isArray(emotionData)) && (!isLoading || !emotionLoading))
     return <ErrorCard />;
 
   const {

@@ -1,8 +1,11 @@
 import { Tabs } from "@/components/ui/tabs";
 
 import dynamic from "next/dynamic";
-const TodosTab = dynamic(() => import("./tabs/TodosTab"), { ssr: false });
+const TodosTab = dynamic(() => import("./tabs/TodosTab"), { ssr: false,
+  loading: () => <TodosTabSkeleton />
+ });
 import { Card } from "@/components/ui/card";
+import { TodosTabSkeleton } from "./tabs/TodosTab";
 
 type Props = {
   textFilter: string

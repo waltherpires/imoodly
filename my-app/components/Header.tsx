@@ -9,14 +9,23 @@ import ThemeToggle from "./my-ui/ThemeToggle";
 import LogoutButton from "./my-ui/LogoutButton";
 import { NavLink } from "./my-ui/NavLink";
 import MyDropdown from "./my-ui/MyDropdown";
+import Link from "next/link";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <header className="w-full border-b">
-      <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto">
-        <NavLink href="/">iMoodly</NavLink>
+    <header className="w-screen border-b">
+      <div className="flex items-center justify-between px-4 py-3 w-full mx-auto">
+        <Link
+          href="/"
+          onClick={() => NProgress.start()}
+          className="text-xl font-bold"
+        >
+          iMoodly
+        </Link>
         <div className="flex">
           {session && (
             <>
