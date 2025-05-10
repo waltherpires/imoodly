@@ -11,11 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-const Chart = dynamic(() => import("./Chart"), { 
+const Chart = dynamic(() => import("./Chart"), {
   ssr: false,
-  loading: () => <Skeleton className="h-[200px] w-[200px]" />
+  loading: () => <SkeletonChartCard />,
 });
-
 
 import {
   Pagination,
@@ -31,20 +30,33 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function DashboardChart() {
   const { data: sessionData } = useSession();
   const userId = sessionData?.user.id;
-  const { data, isLoading, isError } = useMonthlyEmotionSummary(Number(userId));
+  const { data, isPending, isError } = useMonthlyEmotionSummary(Number(userId));
   const [currentPage, setCurrentPage] = useState(0);
 
-  if (isLoading) {
+  if (isPending) {
     return <SkeletonChartCard />;
   }
 
-  if (!data || isError) {
+  if (isError) {
     return (
       <Card>
         <CardHeader>
           <CardTitle>Erro</CardTitle>
           <CardDescription className="text-xs">
             Não foi possível carregar os dados.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    );
+  }
+
+  if (!data || data.length === 0) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Sem Dados</CardTitle>
+          <CardDescription className="text-xs">
+            Nenhum dado disponível para exibição.
           </CardDescription>
         </CardHeader>
       </Card>
@@ -79,7 +91,7 @@ export default function DashboardChart() {
   const totalPages = years.length - 1;
   const selectedYear = years[currentPage];
 
-  if (! formattedData || !selectedYear || !formattedData[selectedYear]) {
+  if (!formattedData || !selectedYear || !formattedData[selectedYear]) {
     return <SkeletonChartCard />;
   }
 

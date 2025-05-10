@@ -4,12 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUser } from "@/lib/api/authMe";
 import ClientEditButton from "@/components/my-ui/EditButton";
 import { Skeleton } from "@/components/ui/skeleton";
+import { dateFormatterNoHours } from "@/helpers/dateFormatter";
 
 export default function ProfilePage() {
-  const { data: user, isLoading, isError } = useUser();
-  console.log("User data:", user);
+  const { data: user, isPending, isError } = useUser();
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Card className="w-full max-w-md p-5">
@@ -38,6 +38,8 @@ export default function ProfilePage() {
       </div>
     );
   }
+
+  const birthdate = dateFormatterNoHours(user.birthdate);
 
   return (
     <main className="flex items-center justify-center min-h-screen bg-teal-50 dark:bg-teal-950 px-4">
@@ -70,7 +72,7 @@ export default function ProfilePage() {
                 <p className="text-sm font-medium text-muted-foreground">
                   Data de Nascimento
                 </p>
-                <p className="text-lg font-semibold">{user.birthdate}</p>
+                <p className="text-lg font-semibold">{birthdate}</p>
               </div>
             </div>
           </CardContent>

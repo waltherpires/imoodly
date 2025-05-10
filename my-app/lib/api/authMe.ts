@@ -6,7 +6,6 @@ async function fetchUser() {
   const response = await fetchClient("/auth/me", {
     method: "GET",
   });
-  console.log("response: ", response.data);
   return response.data;
 }
 
