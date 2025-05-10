@@ -18,10 +18,10 @@ export default function DashboardCards() {
   const { data: sessionData } = useSession();
   const userId = sessionData?.user.id;
 
-  const { data, isLoading, isError } = usePosts(Number(userId));
+  const { data, isPending, isError } = usePosts(Number(userId));
   const {
     data: emotionData,
-    isLoading: emotionLoading,
+    isPending: emotionLoading,
     isError: emotionError,
   } = useMonthlyEmotionSummary(Number(userId));
 
@@ -35,8 +35,8 @@ export default function DashboardCards() {
     return thisMonthRecords(data).length;
   }, [data]);
 
-  if (isLoading || emotionLoading) return <DashboardSkeleton />;
-  if ((isError || emotionError || !Array.isArray(emotionData)) && (!isLoading || !emotionLoading))
+  if (isPending || emotionLoading) return <DashboardSkeleton />;
+  if ((isError || emotionError || !Array.isArray(emotionData)) && (!isPending || !emotionLoading))
     return <ErrorCard />;
 
   const {

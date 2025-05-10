@@ -17,7 +17,7 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <header className="w-screen border-b">
+    <header className="w-[100%] border-b">
       <div className="flex items-center justify-between px-4 py-3 w-full mx-auto">
         <Link
           href="/"

@@ -7,9 +7,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { dateFormatterNoHours } from "@/helpers/dateFormatter";
 
 export default function ProfilePage() {
-  const { data: user, isLoading, isError } = useUser();
+  const { data: user, isPending, isError } = useUser();
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Card className="w-full max-w-md p-5">

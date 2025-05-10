@@ -56,7 +56,7 @@ export default function TodosTab({ textFilter, date }: Props) {
   const userId = session?.user?.id;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading, error } = usePosts(Number(userId));
+  const { data, isPending, error } = usePosts(Number(userId));
 
   useEffect(() => {
     setCurrentPage(1);
@@ -104,7 +104,7 @@ export default function TodosTab({ textFilter, date }: Props) {
 
   return (
     <TabsContent value="todos" className="mt-4 space-y-4">
-      {isLoading ? (
+      {isPending ? (
         <TodosTabSkeleton />
       ) : filteredData.length === 0 ? (
         <Card className="flex flex-col items-center justify-center p-6">
