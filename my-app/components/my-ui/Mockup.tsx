@@ -55,7 +55,7 @@ export default function Mockup() {
             <div className="flex flex-col mx-1 max-w-full mt-2 p-2 rounded-md bg-zinc-100 dark:bg-teal-800">
               <h1 className="text-md ml-2 mb-1">Diário</h1>
               <textarea
-                disabled
+                disabled={buttonClick}
                 placeholder="Hoje foi um dia produtivo. Consegui fazer novos amigos e fui ao psicólogo."
                 className="border-2 p-2 text-zinc-400 dark:text-zinc-300 text-sm bg-transparent resize-none focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-sm"
               />
