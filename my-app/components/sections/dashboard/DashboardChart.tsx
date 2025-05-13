@@ -26,6 +26,7 @@ import {
 import { useSession } from "next-auth/react";
 import { monthNamesInPortuguese } from "@/helpers/dateFormatter";
 import { Skeleton } from "@/components/ui/skeleton";
+import DashboardGoals from "./Goals";
 
 export default function DashboardChart() {
   const { data: sessionData } = useSession();
@@ -125,7 +126,10 @@ export default function DashboardChart() {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-        <Chart selectedYear={selectedYear} chartData={formattedData} />
+        <div className="flex w-full items-stretch flex-col md:flex-row">
+          <Chart selectedYear={selectedYear} chartData={formattedData} />
+          <DashboardGoals />
+        </div>
       </CardContent>
     </Card>
   );
