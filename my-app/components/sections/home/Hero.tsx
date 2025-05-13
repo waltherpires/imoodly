@@ -16,8 +16,10 @@ export default function Hero() {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+
     document.fonts.ready.then(() => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || controller.signal.aborted) return;
 
       const words = containerRef.current.querySelectorAll(".word");
       const letters = containerRef.current.querySelectorAll(".letter");
@@ -36,6 +38,7 @@ export default function Hero() {
         { opacity: [0, 1], y: [-10, 0] },
         { duration: 0.4, delay: stagger(0.01) }
       ).finished.then(() => {
+        if (controller.signal.aborted) return;
         animate(
           buttons,
           { opacity: [0, 1], y: [10, 0] },
@@ -43,6 +46,10 @@ export default function Hero() {
         );
       });
     });
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   const headline = "Cuide da sua saúde mental";
