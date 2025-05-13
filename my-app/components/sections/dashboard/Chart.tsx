@@ -135,7 +135,7 @@ export default function Chart({
 
   return (
     <LazyMotion features={domAnimation}>
-    <Card className="flex flex-col md:w-6/12 ml-2 drop-shadow-2xl">
+    <Card className="flex flex-col max-h-140 lg:max-h-160 md:w-6/12 ml-2 drop-shadow-2xl">
       <CardHeader className="items-center pb-0">
         <CardTitle>Emoções</CardTitle>
         <CardDescription className="flex flex-col md:flew-row md:justify-between">
