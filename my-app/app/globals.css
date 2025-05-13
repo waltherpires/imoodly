@@ -125,3 +125,7 @@
 body {
   width: 100%;
 }
+
+#nprogress .bar {
+  background: #38d940 !important;
+}

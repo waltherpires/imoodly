@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 export function ProgressBar() {
   const pathname = usePathname();
-  NProgress.configure({ showSpinner: false })
+  NProgress.configure({ showSpinner: false  })
 
   useEffect(() => {
     NProgress.done();

@@ -8,7 +8,7 @@ const fetchProfile = async () => {
 }
 
 export function useProfile() {
-    const { data, error, isLoading } = useQuery({
+    const { data, error, isPending } = useQuery({
         queryKey: ['profile'],
         queryFn: fetchProfile, 
         retry: false,
@@ -17,7 +17,7 @@ export function useProfile() {
 
     return { 
         profile: data,
-        loading: isLoading,
+        loading: isPending,
         error: error instanceof Error ? error.message : null,
     };
 }

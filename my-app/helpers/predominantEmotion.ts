@@ -33,7 +33,7 @@ export function getPredominantEmotion(emotionData: EmotionDataEntry[]) {
 
   if (!currentMonthData || !currentMonthData.emotions) {
     console.log("Nenhum dado encontrado para o mês atual.");
-    return { emotion: "N/A", percentage: "0" };
+    return { emotion: "Sem registros", percentage: "0" };
   }
 
   const predominantEmotion = Object.entries(currentMonthData.emotions).reduce<
