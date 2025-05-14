@@ -20,12 +20,12 @@ export function usePostForm(userId?: string) {
   const mutation = useMutation({
     mutationFn: sendMoodPost,
     onSuccess: () => {
-      toast.success("Registro enviado!");
+      toast.success("Registro enviado.");
       queryClient.invalidateQueries({ queryKey: ["posts", userId] });
       queryClient.invalidateQueries({ queryKey: ["monthly-emotions", userId] });
     },
     onError: () => {
-      toast.error("Erro ao enviar!");
+      toast.error("Erro ao enviar.");
     },
   });
 

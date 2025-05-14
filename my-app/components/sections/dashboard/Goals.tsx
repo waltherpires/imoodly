@@ -1,5 +1,7 @@
-import Goal from "@/components/my-ui/Goal";
-import { Button } from "@/components/ui/button";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import CreateGoal from "@/components/forms/CreateGoal";
+import Goal, { NoGoal, SkeletonGoal } from "@/components/my-ui/Goal";
+import ModalButton from "@/components/my-ui/ModalButton";
 import {
   Card,
   CardContent,
@@ -7,16 +9,34 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useGoals } from "@/hooks/goalHooks/useGoals";
+import { useGoalsForm } from "@/hooks/goalHooks/useGoalsForm";
+import { useSession } from "next-auth/react";
 
 export default function DashboardGoals() {
+  const { data: sessionData } = useSession();
+  const userId = sessionData?.user.id;
+  const mutation = useGoalsForm(userId);
+  const { data, isPending } = useGoals(userId);
+
+  console.log("dados das metas: ", data);
+
   return (
     <Card className="flex flex-col flex-1 max-h-140 lg:max-h-160 mt-5 md:mt-0 md:w-6/12 ml-2 drop-shadow-2xl overflow-y-auto">
       <CardHeader className="items-center pb-0">
         <div className="flex flex-row items-center justify-between w-full">
           <CardTitle>Metas</CardTitle>
-          <Button variant="outline" className="mt-2">
-            Adicionar Meta
-          </Button>
+          <ModalButton variant="outline" buttonLabel="Adicionar Meta">
+            {(close) => (
+              <CreateGoal
+                onSubmit={(data) => {
+                  mutation.mutate(data);
+                  close();
+                }}
+                onClose={close}
+              />
+            )}
+          </ModalButton>
         </div>
 
         <CardDescription className="flex flex-col md:flew-row md:justify-between">
@@ -24,21 +44,20 @@ export default function DashboardGoals() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Goal label="Novas Amizades" dueDate="20 de junho" progress={100}>
-          Faça novas amizades e expanda sua rede social.
-        </Goal>
-        <Goal label="Fazer Terapia" progress={80}>
-          Marcar e ir à terapia regularmente.
-        </Goal>
-        <Goal label="Novas Amizades" progress={80}>
-          Faça novas amizades e expanda sua rede social.
-        </Goal>
-        <Goal label="Novas Amizades" progress={80}>
-          Faça novas amizades e expanda sua rede social.
-        </Goal>
-        <Goal label="Novas Amizades" progress={80}>
-          Faça novas amizades e expanda sua rede social.
-        </Goal>
+        {data ? (
+          data.map((goal: any) => (
+            <Goal
+              key={goal.id}
+              label={goal.title}
+              dueDate={goal.dueDate}
+              progress={{ current: goal.currentStep, total: goal.totalSteps }}
+            >{goal.description}</Goal>
+          ))
+        ) : isPending ? (
+          <SkeletonGoal />
+        ) : (
+          <NoGoal />
+        )}
       </CardContent>
     </Card>
   );
