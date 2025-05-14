@@ -11,31 +11,6 @@ export type Post = {
 };
 
 export async function fetchPosts(userId?: number): Promise<Post[]> {
-  const useMock = process.env.NEXT_PUBLIC_USE_MOCK === "true";
-
-  if (useMock) {
-    await new Promise((res) => setTimeout(res, 500));
-    const allPosts: Post[] = [
-      {
-        id: 1,
-        title: "Dia Produtivo",
-        description:
-          "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-        tags: ["feliz", "motivado"],
-        date: "2025-04-17T14:30:00.000Z",
-      },
-      {
-        id: 2,
-        title: "Dia Produtivo",
-        description:
-          "Hoje foi um dia muito produtivo. Consegui visitar meus pais depois do trabalho e também saí com minha namorada para tomar café.",
-        tags: ["feliz", "motivado"],
-        date: "2025-04-17T14:30:00.000Z",
-      },
-    ];
-    return allPosts;
-  }
-
   const response = await fetchClient(`/mood-logs/user/${userId}`, {
     method: "GET",
   });

@@ -1,23 +1,31 @@
 "use client";
 
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { createPortal } from 'react-dom';
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 const Modal = forwardRef(({ children }: { children: React.ReactNode }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   useImperativeHandle(ref, () => ({
     open: () => setIsOpen(true),
     close: () => setIsOpen(false),
   }));
 
-  if (!isOpen) return null;
+  if (!mounted || !isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white dark:bg-zinc-900 p-6 rounded-lg shadow-lg w-full max-w-md">
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 });
 
