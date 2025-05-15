@@ -50,7 +50,7 @@ export default function Navbar() {
                       <NavLink href="/diary">Diário</NavLink>
                       <NavLink href="/messages">Mensagens</NavLink>
                       <NavLink href="/profile">Perfil</NavLink>
-                      <LogoutButton className="font-semibold pl-4 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-900 py-2 rounded" />
+                      <LogoutButton className="font-semibold pl-8 text-sm py-2 rounded self-start" />
                     </nav>
                   </SheetContent>
                 </Sheet>

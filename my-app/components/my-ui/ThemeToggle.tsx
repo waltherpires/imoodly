@@ -19,7 +19,7 @@ export default function ThemeToggle() {
     <Button
       variant="ghost"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="px-4 py-2"
+      className="my-auto ml-1"
     >
       {theme === 'dark' ? <SunMedium /> : <Moon />}
     </Button>

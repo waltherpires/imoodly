@@ -13,10 +13,21 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useMonthlyEmotionSummary } from "@/hooks/moodHooks/useMonthlyEmotionSummary";
 import { getPredominantEmotion } from "@/helpers/predominantEmotion";
 import { useMemo } from "react";
+import { useGoalsSummary } from "@/hooks/goalHooks/useGoalsSummary";
 
 export default function DashboardCards() {
   const { data: sessionData } = useSession();
   const userId = sessionData?.user.id;
+  const today = new Date();
+
+  const { data: summary, isPending: summaryIsPending } = useGoalsSummary(
+    userId!,
+    today.getMonth() + 1,
+    today.getFullYear()
+  );
+
+
+  console.log("Dados summary: ", summary);
 
   const { data, isPending, isError } = usePosts(Number(userId));
   const {
@@ -26,17 +37,20 @@ export default function DashboardCards() {
   } = useMonthlyEmotionSummary(Number(userId));
 
   const lastWeekCount = useMemo(() => {
-    if (!data) return 0; 
+    if (!data) return 0;
     return lastWeekRecords(data).length;
   }, [data]);
-  
+
   const thisMonthCount = useMemo(() => {
-    if (!data) return 0; 
+    if (!data) return 0;
     return thisMonthRecords(data).length;
   }, [data]);
 
   if (isPending || emotionLoading) return <DashboardSkeleton />;
-  if ((isError || emotionError || !Array.isArray(emotionData)) && (!isPending || !emotionLoading))
+  if (
+    (isError || emotionError || !Array.isArray(emotionData)) &&
+    (!isPending || !emotionLoading)
+  )
     return <ErrorCard />;
 
   const {
@@ -44,7 +58,10 @@ export default function DashboardCards() {
     percentage: predominantEmotionPercentage,
   } = getPredominantEmotion(emotionData);
 
-
+  let percent = 0;
+  if (summary && summary.totalGoals > 0) {
+    percent = (summary.completedGoals / summary.totalGoals) * 100;
+  } 
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-4 max-w-screen">
@@ -86,13 +103,21 @@ export default function DashboardCards() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-xl font-semibold mb-1">7/10</p>
-          <p className="text-xs text-muted-foreground tracking-tight">
-            70% concluído
-          </p>
+          {summaryIsPending ? (
+            <>
+            <Skeleton className="w-6 h-4 rounded-md"/>
+            <Skeleton className="w-15 h-4 rounded-md" />
+            </>
+          ) : (
+            <>
+              <p className="text-xl font-semibold mb-1">{summary.completedGoals} de {summary.totalGoals}</p>
+              <p className="text-xs text-muted-foreground tracking-tight">
+                {percent.toFixed(1)}% concluído
+              </p>
+            </>
+          )}
         </CardContent>
       </Card>
-
       <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
         <CardHeader>
           <CardTitle className="flex justify-between text-sm">
