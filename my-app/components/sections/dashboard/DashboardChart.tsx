@@ -52,19 +52,6 @@ export default function DashboardChart() {
     );
   }
 
-  if (!data || data.length === 0) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Sem Dados</CardTitle>
-          <CardDescription className="text-xs">
-            Nenhum dado disponível para exibição.
-          </CardDescription>
-        </CardHeader>
-      </Card>
-    );
-  }
-
   const formattedData = data.reduce((acc: any, item: any) => {
     const year = item.year;
     const month = item.month.trim();
@@ -92,10 +79,6 @@ export default function DashboardChart() {
   const years = formattedData ? Object.keys(formattedData) : [];
   const totalPages = years.length - 1;
   const selectedYear = years[currentPage];
-
-  if (!formattedData || !selectedYear || !formattedData[selectedYear]) {
-    return <SkeletonChartCard />;
-  }
 
   return (
     <Card>
@@ -128,8 +111,25 @@ export default function DashboardChart() {
           </PaginationContent>
         </Pagination>
         <div className="flex w-full items-stretch flex-col md:flex-row">
-          <Chart selectedYear={selectedYear} chartData={formattedData} />
-          <DashboardGoals />
+          {!data || data.length === 0 ? (
+            <Card className="w-full md:w-6/12 ml-2">
+              <CardHeader>
+                <CardTitle>Sem Dados</CardTitle>
+                <CardDescription className="text-xs">
+                  Nenhum dado disponível para exibição.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          ) : !formattedData ||
+            !selectedYear ||
+            !formattedData[selectedYear] ? (
+            <Card className="w-full md:w-6/12 ml-2 drop-shadow-2xl items-center">
+              <Skeleton className="h-[200px] w-[200px] rounded-full" />
+            </Card>
+          ) : (
+            <Chart selectedYear={selectedYear} chartData={formattedData} />
+          )}
+          <DashboardGoals/>
         </div>
       </CardContent>
     </Card>
@@ -163,7 +163,7 @@ export function SkeletonChartCard() {
           </PaginationContent>
         </Pagination>
         <div className="flex flex-col sm:flex-row gap-2">
-          <Card className="flex flex-col md:w-6/12 ml-2 drop-shadow-2xl items-center">
+          <Card className="flex flex-col sm:w-6/12 ml-2 drop-shadow-2xl items-center">
             <Skeleton className="h-[200px] w-[200px] rounded-full" />
           </Card>
           <SkeletonGoal />
