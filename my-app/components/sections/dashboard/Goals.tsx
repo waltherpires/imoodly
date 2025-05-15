@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useGoals } from "@/hooks/goalHooks/useGoals";
+import { FetchGoalsParams, useGoals } from "@/hooks/goalHooks/useGoals";
 import { useGoalsForm } from "@/hooks/goalHooks/useGoalsForm";
 import { useSession } from "next-auth/react";
 
@@ -17,9 +17,7 @@ export default function DashboardGoals() {
   const { data: sessionData } = useSession();
   const userId = sessionData?.user.id;
   const mutation = useGoalsForm(userId);
-  const { data, isPending } = useGoals(userId);
-
-  console.log("dados das metas: ", data);
+  const { data, isPending } = useGoals({ userId, status: ["pending", "in_progress"]} as FetchGoalsParams);
 
   return (
     <Card className="flex flex-col flex-1 max-h-140 lg:max-h-160 mt-5 md:mt-0 md:w-6/12 ml-2 drop-shadow-2xl overflow-y-auto">
@@ -44,10 +42,11 @@ export default function DashboardGoals() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {data ? (
+        {data && data.length > 0 ? (
           data.map((goal: any) => (
             <Goal
               key={goal.id}
+              id={goal.id}
               label={goal.title}
               dueDate={goal.dueDate}
               progress={{ current: goal.currentStep, total: goal.totalSteps }}

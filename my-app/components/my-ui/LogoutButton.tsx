@@ -3,6 +3,7 @@
 import { signOut } from "next-auth/react";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { Button } from "../ui/button";
 interface LogoutButtonProps {
   className?: string;
 }
@@ -16,8 +17,8 @@ export default function LogoutButton({ className }: LogoutButtonProps) {
   };
 
   return (
-    <span onClick={handleLogout} className={className}>
+    <Button onClick={handleLogout} className={className} variant="link">
       Sair
-    </span>
+    </Button>
   );
 }

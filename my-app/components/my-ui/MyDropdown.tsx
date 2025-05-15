@@ -32,10 +32,10 @@ export default function MyDropdown({ className }: MyDropdownProps) {
         <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href="/profile" onClick={() => NProgress.start()}>
-          <DropdownMenuItem>Perfil</DropdownMenuItem>
+          <DropdownMenuItem className="py-4 font-semibold"><span className="hover:underline underline-offset-4">Perfil</span></DropdownMenuItem>
         </Link>
         <DropdownMenuItem>
-          <LogoutButton className="w-full"/>
+          <LogoutButton className="pl-0"/>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

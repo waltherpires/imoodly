@@ -27,6 +27,7 @@ import { useSession } from "next-auth/react";
 import { monthNamesInPortuguese } from "@/helpers/dateFormatter";
 import { Skeleton } from "@/components/ui/skeleton";
 import DashboardGoals from "./Goals";
+import { SkeletonGoal } from "@/components/my-ui/Goal";
 
 export default function DashboardChart() {
   const { data: sessionData } = useSession();
@@ -161,10 +162,12 @@ export function SkeletonChartCard() {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-
-        <Card className="flex flex-col md:w-6/12 ml-2 drop-shadow-2xl items-center">
-          <Skeleton className="h-[200px] w-[200px] rounded-full" />
-        </Card>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Card className="flex flex-col md:w-6/12 ml-2 drop-shadow-2xl items-center">
+            <Skeleton className="h-[200px] w-[200px] rounded-full" />
+          </Card>
+          <SkeletonGoal />
+        </div>
         <div className="flex flex-wrap justify-center gap-2 mt-4">
           {[...Array(6)].map((_, index) => (
             <div key={index} className="flex items-center gap-2">
