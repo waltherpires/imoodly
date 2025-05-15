@@ -27,9 +27,6 @@ export default function DashboardCards() {
     today.getFullYear()
   );
 
-
-  console.log("Dados summary: ", summary);
-
   const { data, isPending, isError } = usePosts(Number(userId));
   const {
     data: emotionData,

@@ -32,7 +32,6 @@ export function getPredominantEmotion(emotionData: EmotionDataEntry[]) {
   });
 
   if (!currentMonthData || !currentMonthData.emotions) {
-    console.log("Nenhum dado encontrado para o mês atual.");
     return { emotion: "Sem registros", percentage: "0" };
   }
 
