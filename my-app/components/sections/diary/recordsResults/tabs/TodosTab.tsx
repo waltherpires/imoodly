@@ -165,7 +165,7 @@ export default function TodosTab({ textFilter, date }: Props) {
           </PaginationItem>
 
           <PaginationItem className="text-sm">
-            Página {currentPage} de {totalPages}
+            Página {totalPages != 0 ? currentPage : '0'} de {totalPages}
           </PaginationItem>
 
           <PaginationItem>
