@@ -42,7 +42,7 @@ export default function DashboardGoals() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {data ? (
+        {data && data.length > 0 ? (
           data.map((goal: any) => (
             <Goal
               key={goal.id}

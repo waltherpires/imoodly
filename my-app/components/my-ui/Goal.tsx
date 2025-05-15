@@ -113,7 +113,7 @@ export function NoGoal() {
 
 export function SkeletonGoal() {
   return (
-    <Card className="w-full mb-2">
+    <Card className="w-1/2 mb-2">
       <CardHeader>
         <Skeleton className="h-7 w-20" />
       </CardHeader>

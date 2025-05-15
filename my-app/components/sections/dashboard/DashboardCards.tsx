@@ -14,6 +14,7 @@ import { useMonthlyEmotionSummary } from "@/hooks/moodHooks/useMonthlyEmotionSum
 import { getPredominantEmotion } from "@/helpers/predominantEmotion";
 import { useMemo } from "react";
 import { useGoalsSummary } from "@/hooks/goalHooks/useGoalsSummary";
+import { SkeletonGoal } from "@/components/my-ui/Goal";
 
 export default function DashboardCards() {
   const { data: sessionData } = useSession();
@@ -155,6 +156,7 @@ function DashboardSkeleton() {
           </CardContent>
         </Card>
       ))}
+      <SkeletonGoal />
     </section>
   );
 }
