@@ -1,32 +1,61 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormDataCreateGoal } from "@/components/forms/CreateGoal";
 import { fetchClient } from "@/lib/api/fetchClient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 import { toast } from "sonner";
 
-async function sendGoalForm(
-    data: FormDataCreateGoal
-) {
-    const response = await fetchClient("/goals", {
-        method: "POST",
-        data: data,
-    });
+async function sendGoalForm(data: FormDataCreateGoal) {
+  const response = await fetchClient("/goals", {
+    method: "POST",
+    data: data,
+  });
 
-    return response.data;
+  return response.data;
 }
 
 export function useGoalsForm(userId?: string) {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-    const mutation = useMutation({
-        mutationFn: sendGoalForm,
-        onSuccess: () => {
-            toast.success("Meta criada com sucesso.");
-            queryClient.invalidateQueries({ queryKey: ["goals", userId] });
-        },
-        onError: () => {
-            toast.error("Erro ao criar a meta.")
-        },
-    });
+  const mutation = useMutation({
+    mutationFn: sendGoalForm,
+    onMutate: async (newGoal) => {
+      await queryClient.cancelQueries({ queryKey: ["goals", userId] });
 
-    return mutation;
+      const previousGoals = queryClient.getQueryData<any>(["goals", userId]);
+
+      const optimisticGoal = {
+        id: Date.now(),
+        title: newGoal.title,
+        description: newGoal.description,
+        totalSteps: newGoal.totalSteps ?? 1,
+        currentStep: 0,
+        dueDate: newGoal.dueDate ?? null,
+        status: newGoal.totalSteps ? "in-progress" : "pending",
+      };
+
+      queryClient.setQueryData(["goals", userId], (old: any) => {
+        if (!old) return [optimisticGoal];
+        return [...old, optimisticGoal];
+      });
+
+      return { previousGoals };
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["goals", userId] });
+      NProgress.done();
+    },
+    onSuccess: () => {
+      toast.success("Meta criada com sucesso.");
+    },
+    onError: (err, newGoal, context) => {
+      toast.error("Erro ao criar a meta.");
+      if (context?.previousGoals) {
+        queryClient.setQueryData(["goals", userId], context.previousGoals);
+      }
+    },
+  });
+
+  return mutation;
 }
