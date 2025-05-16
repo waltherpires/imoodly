@@ -30,9 +30,8 @@ export default function Navbar() {
           {session && (
             <>
               <nav className="hidden md:flex gap-4">
-                <NavLink href="/dashboard">Dashboard</NavLink>
-                <NavLink href="/diary">Diário</NavLink>
-                <NavLink href="/messages">Mensagens</NavLink>
+                {session.user.role === "paciente" && <PatientLinks />}
+                {session.user.role === "psicologo" && <PsychologistLinks />}
                 <MyDropdown />
               </nav>
 
@@ -46,9 +45,10 @@ export default function Navbar() {
                   <SheetContent side="right">
                     <SheetTitle className="hidden sr-only"></SheetTitle>
                     <nav className="flex flex-col gap-4 mt-6">
-                      <NavLink href="/dashboard">Dashboard</NavLink>
-                      <NavLink href="/diary">Diário</NavLink>
-                      <NavLink href="/messages">Mensagens</NavLink>
+                      {session.user.role === "paciente" && <PatientLinks />}
+                      {session.user.role === "psicologo" && (
+                        <PsychologistLinks />
+                      )}
                       <NavLink href="/profile">Perfil</NavLink>
                       <LogoutButton className="font-semibold pl-8 text-sm py-2 rounded self-start" />
                     </nav>
@@ -88,5 +88,25 @@ export default function Navbar() {
         </div>
       </div>
     </header>
+  );
+}
+
+function PatientLinks() {
+  return (
+    <>
+      <NavLink href="/dashboard">Dashboard</NavLink>
+      <NavLink href="/diary">Diário</NavLink>
+      <NavLink href="/messages">Mensagens</NavLink>
+    </>
+  );
+}
+
+function PsychologistLinks() {
+  return (
+    <>
+      <NavLink href="/dashboard">Dashboard</NavLink>
+      <NavLink href="/patients">Pacientes</NavLink>
+      <NavLink href="/messages">Mensagens</NavLink>
+    </>
   );
 }

@@ -15,6 +15,9 @@ import { getPredominantEmotion } from "@/helpers/predominantEmotion";
 import { useMemo } from "react";
 import { useGoalsSummary } from "@/hooks/goalHooks/useGoalsSummary";
 import { SkeletonGoal } from "@/components/my-ui/Goal";
+import { Button } from "@/components/ui/button";
+import ModalButton from "@/components/my-ui/ModalButton";
+import PsychologistList from "./PsychologistList";
 
 export default function DashboardCards() {
   const { data: sessionData } = useSession();
@@ -59,10 +62,28 @@ export default function DashboardCards() {
   let percent = 0;
   if (summary && summary.totalGoals > 0) {
     percent = (summary.completedGoals / summary.totalGoals) * 100;
-  } 
+  }
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-4 max-w-screen">
+      <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
+        <CardHeader>
+          <CardTitle className="flex justify-between text-sm">
+            Psicólogo <Clock className="h-4 w-4 text-teal-700" />
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex justify-between items-end">
+          <div>
+            <p className="text-xl font-semibold mb-1">Dr. Silva</p>
+            <p className="text-xs text-muted-foreground tracking-tight">
+              Rua 13 de Maio, 1000
+            </p>
+          </div>
+          <ModalButton variant="default" buttonLabel="Buscar">
+            {(close) => <PsychologistList onClose={close} />}
+          </ModalButton>
+        </CardContent>
+      </Card>
       <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
         <CardHeader>
           <CardTitle className="flex justify-between text-sm">
@@ -103,30 +124,19 @@ export default function DashboardCards() {
         <CardContent>
           {summaryIsPending ? (
             <>
-            <Skeleton className="w-6 h-4 rounded-md"/>
-            <Skeleton className="w-15 h-4 rounded-md" />
+              <Skeleton className="w-6 h-4 rounded-md" />
+              <Skeleton className="w-15 h-4 rounded-md" />
             </>
           ) : (
             <>
-              <p className="text-xl font-semibold mb-1">{summary.completedGoals} de {summary.totalGoals}</p>
+              <p className="text-xl font-semibold mb-1">
+                {summary.completedGoals} de {summary.totalGoals}
+              </p>
               <p className="text-xs text-muted-foreground tracking-tight">
                 {percent.toFixed(1)}% concluído
               </p>
             </>
           )}
-        </CardContent>
-      </Card>
-      <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
-        <CardHeader>
-          <CardTitle className="flex justify-between text-sm">
-            Próxima sessão <Clock className="h-4 w-4 text-teal-700" />
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-xl font-semibold mb-1">Quinta</p>
-          <p className="text-xs text-muted-foreground tracking-tight">
-            15:00 - Dr. Silva
-          </p>
         </CardContent>
       </Card>
     </section>
