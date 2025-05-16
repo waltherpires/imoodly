@@ -15,7 +15,6 @@ import { getPredominantEmotion } from "@/helpers/predominantEmotion";
 import { useMemo } from "react";
 import { useGoalsSummary } from "@/hooks/goalHooks/useGoalsSummary";
 import { SkeletonGoal } from "@/components/my-ui/Goal";
-import { Button } from "@/components/ui/button";
 import ModalButton from "@/components/my-ui/ModalButton";
 import PsychologistList from "./PsychologistList";
 
