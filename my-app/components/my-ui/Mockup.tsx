@@ -102,7 +102,7 @@ export default function Mockup() {
               <div>
                 <div className="flex justify-between w-full">
                   <p className="text-sm mx-2 mb-1">Meditação diária</p>
-                  <p className="text-sm mx-2 mb-1">7/10</p>
+                  <p className="text-sm mx-2 mb-1">3/10</p>
                 </div>
                 <Progress
                   className="h-3"
