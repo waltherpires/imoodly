@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import CreateGoal from "@/components/forms/CreateGoal";
-import Goal, { NoGoal, SkeletonGoal } from "@/components/my-ui/Goal";
+import dynamic from "next/dynamic";
+const Goal = dynamic(() => import("@/components/my-ui/Goal"), {
+  loading: () => <SkeletonGoal />
+});
+const NoGoal = dynamic(() => import("@/components/my-ui/Goal/NoGoal"));
 import ModalButton from "@/components/my-ui/ModalButton";
+import CreateGoal from "@/components/forms/CreateGoal";
 import {
   Card,
   CardContent,
@@ -12,6 +16,7 @@ import {
 import { FetchGoalsParams, useGoals } from "@/hooks/goalHooks/useGoals";
 import { useGoalsForm } from "@/hooks/goalHooks/useGoalsForm";
 import { useSession } from "next-auth/react";
+import SkeletonGoal from "@/components/my-ui/Goal/GoalSkeleton";
 
 export default function DashboardGoals() {
   const { data: sessionData } = useSession();

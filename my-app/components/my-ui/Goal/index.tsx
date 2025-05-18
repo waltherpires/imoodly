@@ -1,15 +1,14 @@
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Progress } from "../ui/progress";
+} from "../../ui/card";
+import { Progress } from "../../ui/progress";
 
 import { ListTodo } from "lucide-react";
-import { Skeleton } from "../ui/skeleton";
 import { dateFormatterNoHours } from "@/helpers/dateFormatter";
 import { useGoalsProgress } from "@/hooks/goalHooks/useGoalProgress";
 import { useSession } from "next-auth/react";
@@ -99,24 +98,3 @@ export default function Goal({
   );
 }
 
-export function NoGoal() {
-  return (
-    <Card className="w-full mb-2">
-      <CardHeader>
-        <CardTitle className="flex flex-row text-lg font-semibold">
-          Não há metas cadastradas!
-        </CardTitle>
-      </CardHeader>
-    </Card>
-  );
-}
-
-export function SkeletonGoal() {
-  return (
-    <Card className="w-1/2 mb-2">
-      <CardHeader>
-        <Skeleton className="h-7 w-20" />
-      </CardHeader>
-    </Card>
-  );
-}

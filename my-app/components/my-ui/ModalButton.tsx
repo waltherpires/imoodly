@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import Modal from "@/components/my-ui/Modal";
+import dynamic from "next/dynamic";
+const Modal = dynamic(() => import("@/components/my-ui/Modal"));
 import { Button } from "@/components/ui/button";
 
 type ModalButtonProps = {
