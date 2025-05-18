@@ -2,7 +2,9 @@
 "use client";
 
 import { useRef } from "react";
-import Modal from "@/components/my-ui/Modal";
+import dynamic from "next/dynamic";
+
+const Modal = dynamic(() => import("@/components/my-ui/Modal"));
 import EditProfileForm from "../forms/EditProfile";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";

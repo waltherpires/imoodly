@@ -1,4 +1,6 @@
-import { DatePicker } from "@/components/ui/datepicker";
+
+import dynamic from "next/dynamic";
+const DatePicker = dynamic(() => import("@/components/ui/datepicker"))
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 

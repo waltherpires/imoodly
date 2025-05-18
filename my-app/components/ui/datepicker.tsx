@@ -2,10 +2,11 @@
 
 import * as React from "react"
 import { Calendar as CalendarIcon } from "lucide-react"
+import dynamic from "next/dynamic"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+const Calendar = dynamic(() => import("@/components/ui/calendar"));
 import {
   Popover,
   PopoverContent,
@@ -17,7 +18,7 @@ type DatePickerInterface = {
   setDate: (value: Date | undefined) => void;
 }
 
-export function DatePicker(
+export default function DatePicker(
 {date, setDate} : DatePickerInterface
 ) {
 
