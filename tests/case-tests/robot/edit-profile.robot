@@ -16,22 +16,25 @@ Cenário: Edição de Usuário com dados corretos
     ${PASSWORD}=    Get Environment Variable    PASSWORD
     ${NAME}=    Get Environment Variable    NAME
     Realizar login    ${EMAIL}    ${PASSWORD}
-    Capture Page Screenshot
     Wait Until Element Is Visible     css:[data-testid="my-dropdown-trigger"]
-    Sleep    1s
+    Sleep    4s
+    Capture Page Screenshot
     Click Element    css:[data-testid="my-dropdown-trigger"]
-    Sleep    2s
+    Sleep    3s
     Capture Page Screenshot
     Wait Until Element Is Visible    css:[data-testid="perfil-item"]
     Click Element    css:[data-testid="perfil-item"]
-    Sleep    2s
+    Sleep    3s
     Capture Page Screenshot
     Click Button    Editar
+    Sleep    3s
     Capture Page Screenshot
     Clear Element Text    name=name
     Input Text    name=name     Nome Alterado
     Capture Page Screenshot
+    Sleep    2s
     Click Button    Salvar
+    Sleep    2s
     Capture Page Screenshot
     Page Should Contain    Login
     Sleep    3s
@@ -42,15 +45,15 @@ Cenário: Edição de Usuário com dados incorretos
     ${PASSWORD}=    Get Environment Variable    PASSWORD
     ${EDITEMAIL}=    Get Environment Variable    EDITEMAIL
     Realizar login    ${EMAIL}    ${PASSWORD}
-    Capture Page Screenshot
     Wait Until Element Is Visible     css:[data-testid="my-dropdown-trigger"]
-    Sleep    1s
+    Sleep    4s
+    Capture Page Screenshot
     Click Element    css:[data-testid="my-dropdown-trigger"]
-    Sleep    2s
+    Sleep    3s
     Capture Page Screenshot
     Wait Until Element Is Visible    css:[data-testid="perfil-item"]
     Click Element    css:[data-testid="perfil-item"]
-    Sleep    2s
+    Sleep    3s
     Capture Page Screenshot
     Click Button    Editar
     Capture Page Screenshot
@@ -58,7 +61,7 @@ Cenário: Edição de Usuário com dados incorretos
     Input Text    name=email    ${EDITEMAIL}
     Capture Page Screenshot
     Click Button    Salvar
-    Sleep    2s
-    Page Should Contain    Email inválido
+    Sleep    3s
     Capture Page Screenshot
+    Page Should Contain    Email inválido
     

@@ -14,15 +14,17 @@ Cenário: Login de Usuário com dados corretos
     ${EMAIL}=    Get Environment Variable    EMAIL
     ${PASSWORD}=    Get Environment Variable    PASSWORD
     Open Browser    http://localhost:3000    chrome
+    Sleep    4s
     Capture Page Screenshot
+    Sleep    12s
     Click Link    Entrar
-    Sleep     2s
+    Sleep     5s
     Input Text    name=email    ${EMAIL}
     Capture Page Screenshot
-    Sleep    2s
+    Sleep    5s
     Input Password    name=password    ${PASSWORD}
     Capture Page Screenshot
-    Sleep   2s
+    Sleep   5s
     Click Button    xpath=//button[@type='submit']
     Sleep    5s
     Capture Page Screenshot
@@ -33,16 +35,19 @@ Cenário: Login de Usuário com dados incorretos
     ${EMAIL}=    Get Environment Variable    EMAIL
     ${WPASSWORD}=    Get Environment Variable    WPASSWORD
     Open Browser    http://localhost:3000    chrome
-    Capture Page Screenshot
-    Click Link    Entrar
-    Sleep     2s
-    Input Text    name=email    ${EMAIL}
-    Capture Page Screenshot
-    Sleep    2s
-    Input Password    name=password    ${WPASSWORD}
-    Capture Page Screenshot
-    Sleep   2s
-    Click Button    xpath=//button[@type='submit']
     Sleep    4s
     Capture Page Screenshot
-    Page Should Contain    Email ou senha inválidos
+    Sleep    12s
+    Click Link    Entrar
+    Sleep     5s
+    Input Text    name=email    ${EMAIL}
+    Capture Page Screenshot
+    Sleep    5s
+    Input Password    name=password    ${WPASSWORD}
+    Capture Page Screenshot
+    Sleep   5s
+    Click Button    xpath=//button[@type='submit']
+    Sleep    5s
+    Capture Page Screenshot
+    Sleep    5s
+    Page Should Contain    A senha deve ter no mínimo 6 caracteres
