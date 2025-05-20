@@ -20,7 +20,7 @@ type MyDropdownProps = {
 export default function MyDropdown({ className }: MyDropdownProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={className}>
+      <DropdownMenuTrigger className={className} data-testid="my-dropdown-trigger">
         <Avatar>
           <AvatarImage />
           <AvatarFallback className="hover:bg-zinc-200 hover:text-black transition duration-200">
@@ -31,7 +31,7 @@ export default function MyDropdown({ className }: MyDropdownProps) {
       <DropdownMenuContent>
         <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/profile" onClick={() => NProgress.start()}>
+        <Link href="/profile" onClick={() => NProgress.start()} data-testid="perfil-item">
           <DropdownMenuItem className="py-4 font-semibold"><span className="hover:underline underline-offset-4">Perfil</span></DropdownMenuItem>
         </Link>
         <DropdownMenuItem>
