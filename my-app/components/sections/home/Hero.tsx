@@ -87,7 +87,7 @@ export default function Hero() {
         <div className="flex justify-center md:justify-start space-x-5 mt-6">
           <ButtonWithLoading
             onClick={handleNavigate}
-            className="cursor-pointer bg-[#f9bc60] text-black hover:bg-[#e56d11] opacity-0 button-anim"
+            className="cursor-pointer bg-aqua-deep-400 hover:bg-aqua-deep-600 dark:bg-[#f9bc60] text-black dark:hover:bg-[#e56d11] opacity-0 button-anim"
           >
             Começar agora
           </ButtonWithLoading>
