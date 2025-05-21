@@ -122,11 +122,11 @@ export default function CreateGoal({ onSubmit, onClose }: CreateGoalProps) {
         <div className="flex flex-row gap-2 justify-end items-center">
           <Button
             onClick={handleClose}
-            className="bg-red-500 hover:bg-red-700 text-white"
+            className="cursor-pointer bg-red-500 hover:bg-red-700 text-white"
           >
             Cancelar
           </Button>
-          <ButtonWithLoading type="submit">Salvar Meta</ButtonWithLoading>
+          <ButtonWithLoading className="cursor-pointer" type="submit">Salvar Meta</ButtonWithLoading>
         </div>
       </form>
     </Form>

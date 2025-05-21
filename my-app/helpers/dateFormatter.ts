@@ -64,3 +64,16 @@ export const thisMonthRecords = (register: Post[]) => {
     return recordDate >= firstDayOfMonth && recordDate <= lastDayOfMonth;
   });
 }
+
+export const calculateAge = (birthDateDay: string | Date): number => {
+  const today = new Date();
+  const birthDate = new Date(birthDateDay);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const month = today.getMonth() - birthDate.getMonth();
+
+  if(month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+}

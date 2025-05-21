@@ -45,7 +45,7 @@ export default function ClientEditButton({ user }: { user: any }) {
 
   return (
     <>
-      <Button variant="default" onClick={handleEditClick}>
+      <Button variant="default" onClick={handleEditClick} className="cursor-pointer">
         Editar
       </Button>
       <Modal ref={modalRef}>

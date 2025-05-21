@@ -91,6 +91,7 @@ export default function EditProfileForm({
         <span className="text-sm text-muted-foreground">Você será deslogado ao fazer alterações.</span>
         <div className="flex justify-end space-x-2">
           <Button
+            className="cursor-pointer"
             type="button"
             variant="secondary"
             onClick={() => {
@@ -100,7 +101,7 @@ export default function EditProfileForm({
           >
             Cancelar
           </Button>
-          <Button type="submit" variant="default">
+          <Button className="cursor-pointer" type="submit" variant="default">
             Salvar
           </Button>
         </div>

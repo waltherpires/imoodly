@@ -32,7 +32,7 @@ export default function Navbar() {
               <nav className="hidden md:flex gap-4">
                 {session.user.role === "paciente" && <PatientLinks />}
                 {session.user.role === "psicologo" && <PsychologistLinks />}
-                <MyDropdown />
+                <MyDropdown className="cursor-pointer"/>
               </nav>
 
               <div className="md:hidden">
@@ -50,7 +50,7 @@ export default function Navbar() {
                         <PsychologistLinks />
                       )}
                       <NavLink href="/profile">Perfil</NavLink>
-                      <LogoutButton className="font-semibold pl-8 text-sm py-2 rounded self-start" />
+                      <LogoutButton className="cursor-pointer font-semibold pl-8 text-sm py-2 rounded self-start" />
                     </nav>
                   </SheetContent>
                 </Sheet>
@@ -68,7 +68,7 @@ export default function Navbar() {
               <div className="md:hidden">
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon">
+                    <Button variant="ghost" size="icon" className="cursor-pointer">
                       <Menu className="h-6 w-6" />
                     </Button>
                   </SheetTrigger>

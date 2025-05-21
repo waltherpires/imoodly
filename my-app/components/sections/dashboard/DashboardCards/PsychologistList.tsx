@@ -34,7 +34,7 @@ export default function PsychologistList({ onClose }: PsychologistListProps) {
     <>
       <div className="flex justify-end items-center mb-5">
         <Button
-          className="bg-red-500 hover:bg-red-700 text-white"
+          className="cursor-pointer bg-red-500 hover:bg-red-700 text-white"
           onClick={handleClose}
         >
           Fechar
@@ -72,7 +72,7 @@ export default function PsychologistList({ onClose }: PsychologistListProps) {
                     ) : (
                       <Button
                         disabled={item.hasPendingRequest}
-                        className="hover:cursor-pointer"
+                        className="cursor-pointer"
                         onClick={() => handleClick(item.user.id)}
                       >
                         <span className="hidden md:inline">Solicitar</span>

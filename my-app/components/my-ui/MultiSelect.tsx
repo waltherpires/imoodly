@@ -25,7 +25,7 @@ export default function MultiSelect({ value, onChange }: MultiSelectProps) {
     return (
         <Popover>
             <PopoverTrigger  asChild>
-                <Button variant="outline" className="mt-4 w-20">Tags</Button>
+                <Button variant="outline" className="cursor-pointer mt-4 w-20">Tags</Button>
             </PopoverTrigger>
             <PopoverContent>
                 <Card className="px-3 py-2 mt-1 relative translate-x-6">

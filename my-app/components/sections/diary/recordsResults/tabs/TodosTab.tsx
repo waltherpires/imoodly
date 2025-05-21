@@ -148,7 +148,7 @@ export default function TodosTab({ textFilter, date }: Props) {
               <p className="text-sm">{item.description}</p>
             </CardContent>
             <CardFooter className="flex justify-end pt-0">
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="cursor-pointer">
                 Ver mais
               </Button>
             </CardFooter>

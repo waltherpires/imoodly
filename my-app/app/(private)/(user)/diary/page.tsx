@@ -28,7 +28,7 @@ export default function DiaryPage() {
           <div className="mt-4 flex space-x-2 md:mt-0">
             <Button
               size="sm"
-              className="bg-aqua-deep-500 hover:bg-aqua-deep-600"
+              className="cursor pointer bg-aqua-deep-500 hover:bg-aqua-deep-600"
               onClick={handleNewRegisterClick}
             >
               {isFormOpen ? (

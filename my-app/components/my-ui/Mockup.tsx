@@ -63,8 +63,8 @@ export default function Mockup() {
                 disabled={buttonClick}
                 className={`${
                   buttonClick
-                    ? "dark:bg-zinc-200 bg-zinc-950"
-                    : "bg-aqua-deep-500 dark:bg-aqua-deep-300 dark:hover:bg-aqua-deep-500"
+                    ? "dark:bg-zinc-200 bg-zinc-950 cursor-pointer"
+                    : "bg-aqua-deep-500 dark:bg-aqua-deep-300 dark:hover:bg-aqua-deep-500 cursor-pointer"
                 } w-1/3 mt-1 self-end rounded-sm disabled:opacity-100 disabled:cursor-not-allowed`}
                 onClick={handleClick}
               >

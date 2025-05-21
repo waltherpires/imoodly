@@ -1,6 +1,6 @@
 import PatientDashboard from "@/components/sections/patients/PatientDashboard";
 
-export default function Patients() {
+export default async function Patients() {
   return (
     <main className="flex-1">
       <div className="py-6 md:py-8 mx-auto overflow-auto">
@@ -15,7 +15,7 @@ export default function Patients() {
           </div>
         </div>
       </div>
-      <PatientDashboard />
+      <PatientDashboard/>
     </main>
   );
 }
