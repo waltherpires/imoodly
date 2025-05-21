@@ -10,6 +10,5 @@ export default function ThemeProviderWrapper({ children }: { children: React.Rea
     setIsMounted(true);
   }, []);
 
-  // Só aplica o ThemeProvider se o componente foi montado no cliente
   return isMounted ? <ThemeProvider attribute="class" defaultTheme="dark">{children}</ThemeProvider> : null;
 }

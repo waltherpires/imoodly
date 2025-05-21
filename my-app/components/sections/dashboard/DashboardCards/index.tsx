@@ -15,7 +15,7 @@ import { getPredominantEmotion } from "@/helpers/predominantEmotion";
 import { useMemo } from "react";
 import { useGoalsSummary } from "@/hooks/goalHooks/useGoalsSummary";
 import ModalButton from "@/components/my-ui/ModalButton";
-import PsychologistList from "../PsychologistList";
+import PsychologistList from "./PsychologistList";
 import DashboardSkeleton from "./DashboardSkeleton";
 
 export default function DashboardCards() {

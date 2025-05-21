@@ -71,6 +71,7 @@ export default function PsychologistList({ onClose }: PsychologistListProps) {
                       </Button>
                     ) : (
                       <Button
+                        disabled={item.hasPendingRequest}
                         className="hover:cursor-pointer"
                         onClick={() => handleClick(item.user.id)}
                       >

@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-const Chart = dynamic(() => import("@/components/sections/dashboard/Chart"), {
+const Chart = dynamic(() => import("@/components/sections/dashboard/DashboardChart/Chart"), {
   ssr: false,
   loading: () => <SkeletonChartCard />,
 });
