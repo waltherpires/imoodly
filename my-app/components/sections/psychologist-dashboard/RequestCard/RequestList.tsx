@@ -19,7 +19,7 @@ type ListProps = {
 export default function RequestList({ onClose }: ListProps) {
   const session = useSession();
   const userId = session.data?.user.id;
-  const { data, isPending } = useFetchRequests(userId);
+  const { data } = useFetchRequests(userId);
 
   const handleClose = () => {
     onClose();
