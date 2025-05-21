@@ -111,7 +111,7 @@ export default function LoginForm() {
             </Link>
           </p>
           <ButtonWithLoading
-            className="self-end bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 hover:bg-teal-700"
+            className="self-end bg-aqua-deep-500 dark:bg-aqua-deep-300 dark:hover:bg-aqua-deep-500 hover:bg-aqua-deep-700"
             type="submit"
             loading={loading}
           >

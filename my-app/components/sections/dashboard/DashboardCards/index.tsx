@@ -15,7 +15,7 @@ import { getPredominantEmotion } from "@/helpers/predominantEmotion";
 import { useMemo } from "react";
 import { useGoalsSummary } from "@/hooks/goalHooks/useGoalsSummary";
 import ModalButton from "@/components/my-ui/ModalButton";
-import PsychologistList from "../PsychologistList";
+import PsychologistList from "./PsychologistList";
 import DashboardSkeleton from "./DashboardSkeleton";
 
 export default function DashboardCards() {
@@ -97,7 +97,7 @@ export default function DashboardCards() {
         </CardContent>
       </Card>
       <Link href="/diary" onClick={() => NProgress.start()}>
-        <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
+        <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800 py-8">
           <CardHeader>
             <CardTitle className="flex justify-between text-sm">
               Registros

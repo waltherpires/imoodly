@@ -1,4 +1,4 @@
-import PatientListCard from "@/components/sections/patients/PatientListCard";
+import PatientDashboard from "@/components/sections/patients/PatientDashboard";
 
 export default function Patients() {
   return (
@@ -15,9 +15,7 @@ export default function Patients() {
           </div>
         </div>
       </div>
-      <div className="w-full px-10">
-        <PatientListCard />
-      </div>
+      <PatientDashboard />
     </main>
   );
 }

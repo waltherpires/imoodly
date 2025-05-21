@@ -12,16 +12,16 @@ type FeatureCardProps = {
 export function FeatureCard({
     icon: Icon,
     iconColor = "text-green-600",
-    iconBg = "bg-green-200",
+    iconBg = "bg-aqua-deep-200",
     title,
     description,
 }: FeatureCardProps) {
     return (
-        <Card className="col-span-1 h-60 w-full max-w-sm md:max-w-92">
+        <Card className="col-span-1 h-60 w-full min-w-sm max-w-sm lg:min-w-xs lg:max-w-92">
         <CardHeader>
           <CardTitle className="grid grid-cols-1 place-items-center gap-2">
             <div className={`flex items-center justify-center ${iconBg} p-1 rounded-3xl w-10 h-10`}>
-              <Icon className={`${iconColor}`} />
+              <Icon className={`${iconColor} border-aqua-deep-300 fill-aqua-deep-400`} />
             </div>
             <h4 className="scroll-m-20 text-center text-xl font-semibold tracking-tight">{title}</h4>
           </CardTitle>

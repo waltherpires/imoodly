@@ -43,6 +43,20 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+@theme {
+  --color-aqua-deep-50: #effefb;
+  --color-aqua-deep-100: #c8fff3;
+  --color-aqua-deep-200: #90ffe7;
+  --color-aqua-deep-300: #51f7da;
+  --color-aqua-deep-400: #1de4c7;
+  --color-aqua-deep-500: #05c7ae;
+  --color-aqua-deep-600: #00a18f;
+  --color-aqua-deep-700: #058074;
+  --color-aqua-deep-800: #0a655d;
+  --color-aqua-deep-900: #0e534e;
+  --color-aqua-deep-950: #004643;
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

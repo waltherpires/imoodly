@@ -56,7 +56,7 @@ export default function Hero() {
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-[2fr_4fr] items-center max-w-3/4 mx-auto gap-20 md:gap-10 lg:gap-x-48 min-h-screen place-items-center">
-      <div className="space-y-4" ref={containerRef}>
+      <div className="mt-20 md:mt-0 space-y-4" ref={containerRef}>
         <h1
           id="h1"
           className="text-center md:text-left scroll-m-20 text-4xl font-bold tracking-tight md:text-5xl"
@@ -87,7 +87,7 @@ export default function Hero() {
         <div className="flex justify-center md:justify-start space-x-5 mt-6">
           <ButtonWithLoading
             onClick={handleNavigate}
-            className="cursor-pointer bg-teal-500 dark:bg-teal-300 dark:hover:bg-teal-500 opacity-0 button-anim"
+            className="cursor-pointer bg-aqua-deep-400 hover:bg-aqua-deep-600 dark:bg-[#f9bc60] text-black dark:hover:bg-[#e56d11] opacity-0 button-anim"
           >
             Começar agora
           </ButtonWithLoading>

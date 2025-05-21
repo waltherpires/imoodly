@@ -169,7 +169,7 @@ export default function DiaryRegisterForm() {
             />
             <Button
               disabled={mutation.isPending}
-              className="self-end w-40 mt-2 bg-teal-500"
+              className="self-end w-40 mt-2 bg-aqua-deep-500"
               type="submit"
             >
               {mutation.isPending ? "Enviando... " : "Enviar"}
