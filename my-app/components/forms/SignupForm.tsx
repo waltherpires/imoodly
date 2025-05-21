@@ -225,7 +225,7 @@ export default function SignupForm() {
           </p>
           <ButtonWithLoading
             loading={isPending}
-            className="self-end bg-aqua-deep-500 dark:bg-aqua-deep-300 dark:hover:bg-aqua-deep-500 hover:bg-aqua-deep-700"
+            className="cursor-pointer self-end bg-aqua-deep-500 dark:bg-aqua-deep-300 dark:hover:bg-aqua-deep-500 hover:bg-aqua-deep-700"
             type="submit"
           >
             Registrar

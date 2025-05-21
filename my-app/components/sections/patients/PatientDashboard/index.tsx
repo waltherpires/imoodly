@@ -10,7 +10,7 @@ export default function PatientDashboard() {
   return (
     <div className="w-full px-10">
       <PatientFilter setTextFilter={setTextFilter} textFilter={textFilter} />
-      <PatientListCard />
+      <PatientListCard textFilter={textFilter}/>
     </div>
   );
 }

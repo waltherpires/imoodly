@@ -2,6 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Pagination,
+  PaginationContent,
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
@@ -11,6 +12,7 @@ import useMyPatients from "@/hooks/psychologistHooks/useMyPatients";
 import { useSession } from "next-auth/react";
 import PatientCardSkeleton from "./PatientCard/PatientCardSkeleton";
 import NoPatientCard from "./PatientCard/NoPatientCard";
+import { useEffect, useMemo, useState } from "react";
 
 type PatientListCardProps = {
   textFilter?: string;
@@ -20,6 +22,12 @@ export default function PatientListCard({ textFilter }: PatientListCardProps) {
   const { data: session } = useSession();
   const userId = session?.user?.id;
   const { data, isPending, error } = useMyPatients(userId);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [textFilter, data]);
 
   const filterData = (data: any, textFilter?: string) => {
     let filtered = data;
@@ -37,9 +45,21 @@ export default function PatientListCard({ textFilter }: PatientListCardProps) {
     return filtered;
   };
 
-  const filteredData = filterData(data || [], textFilter);
+  const filteredData = useMemo(
+    () => filterData(data || [], textFilter),
+    [data, textFilter]
+  );
 
-  if(error) return <NoPatientCard />
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = useMemo(
+    () => filteredData.slice(indexOfFirstItem, indexOfLastItem),
+    [filteredData, indexOfFirstItem, indexOfLastItem]
+  );
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+  if (error) return <NoPatientCard />;
 
   return (
     <Card>
@@ -51,19 +71,39 @@ export default function PatientListCard({ textFilter }: PatientListCardProps) {
           {isPending ? (
             <PatientCardSkeleton />
           ) : (
-            filteredData.map((item: any) => (
-              <PatientCard key={item.id} name={item.name} />
+            currentItems.map((item: any) => (
+              <PatientCard key={item.id} linkData={item} />
             ))
           )}
         </div>
         <Pagination>
-          <PaginationItem>
-            <PaginationPrevious />
-          </PaginationItem>
-          <PaginationItem>1</PaginationItem>
-          <PaginationItem>
-            <PaginationNext />
-          </PaginationItem>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              />
+            </PaginationItem>
+
+            {Array.from({ length: totalPages }, (_, i) => (
+              <PaginationItem
+                key={i + 1}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`cursor-pointer ${
+                  currentPage === i + 1 ? "font-bold" : ""
+                }`}
+              >
+                {i + 1}
+              </PaginationItem>
+            ))}
+
+            <PaginationItem>
+              <PaginationNext
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
         </Pagination>
       </CardContent>
     </Card>

@@ -78,17 +78,17 @@ export default function Goal({
         </div>
         <div className="flex justify-between mt-2">
           <Button
-            className="mt-2 bg-red-400 text-white hover:bg-red-500"
+            className="cursor-pointer mt-2 bg-red-400 text-white hover:bg-red-500"
             onClick={handleRegress}
           >
             Regredir
           </Button>
           {percentage < 100 ? (
-            <Button variant="outline" className="mt-2" onClick={handleAdvance}>
+            <Button variant="outline" className="cursor-pointer mt-2" onClick={handleAdvance}>
               Avançar
             </Button>
           ) : (
-            <Button className="mt-2 bg-green-400 text-white hover:bg-green-500" onClick={handleComplete}>
+            <Button className="cursor-pointer mt-2 bg-green-400 text-white hover:bg-green-500" onClick={handleComplete}>
               Completar
             </Button>
           )}
