@@ -14,7 +14,7 @@ export default async function PrivateLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-teal-50 dark:bg-teal-950">
+    <div className="flex min-h-screen flex-col bg-aqua-deep-50 dark:bg-aqua-deep-950">
       {children}
     </div>
   );

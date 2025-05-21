@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <main className="h-screen flex flex-col items-center justify-center bg-teal-50 dark:bg-teal-950 px-4">
+    <main className="h-screen flex flex-col items-center justify-center bg-aqua-deep-50 dark:bg-aqua-deep-950 px-4">
       <Image
         src="404.svg"
         alt="Página não encontrada"

@@ -16,7 +16,7 @@ export default function GlobalError({ error }: { error: Error }) {
   }, [error]);
 
   return (
-    <main className="h-screen bg-teal-50 dark:bg-teal-950 px-4 sm:px-2 lg:px-12 flex items-center justify-center">
+    <main className="h-screen bg-aqua-deep-50 dark:bg-aqua-deep-950 px-4 sm:px-2 lg:px-12 flex items-center justify-center">
       <section className="flex items-center justify-center">
         <Card className="min-w-md">
           <CardHeader>
