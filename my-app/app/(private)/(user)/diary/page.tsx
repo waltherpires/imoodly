@@ -16,7 +16,7 @@ export default function DiaryPage() {
 
   return (
     <LazyMotion features={domAnimation}>
-    <main className="flex-1">
+    <main className="flex-1 pt-16">
       <div className="container py-6 md:py-8 mx-auto">
         <div className="flex flex-col md:flex-row  items-center justify-between mb-6">
           <div>
