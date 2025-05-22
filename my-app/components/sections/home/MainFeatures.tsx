@@ -55,7 +55,7 @@ export default function MainFeatures() {
             icon: Target,
             title: "Metas e Progresso",
             description: 
-              "Defina metas e acompanhe seu progresso."
+              "Defina metas, acompanhe seu progresso e veja os resultados."
           },
           {
             icon: ChartColumnBig,

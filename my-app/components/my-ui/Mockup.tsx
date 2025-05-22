@@ -19,7 +19,7 @@ export default function Mockup() {
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="w-full bg-neutral-50 min-w-[400px] pb-2 shadow-2xl rounded-md"
+        className="w-full bg-neutral-50 min-w-[360px] pb-2 shadow-2xl rounded-md"
       >
         <header className="flex bg-aqua-deep-500 dark:bg-neutral-800 items-center w-full border-b h-10 rounded-t-sm">
           <div className="flex items-center gap-2 my-1 ml-3">
