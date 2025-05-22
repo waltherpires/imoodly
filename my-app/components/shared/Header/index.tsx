@@ -13,6 +13,7 @@ import Link from "next/link";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { useServicesNavigation } from "./useServicesNavigation";
+import Image from "next/image";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -24,17 +25,19 @@ export default function Navbar() {
         <Link
           href="/"
           onClick={() => NProgress.start()}
-          className="text-xl font-bold"
+          className="flex flex-row justify-center items-center gap-2 text-xl font-bold"
         >
+          <Image alt="imoodly" src="/logo.svg" width={35} height={35} />
           iMoodly
         </Link>
+
         <div className="flex">
           {session && (
             <>
               <nav className="hidden md:flex gap-4">
                 {session.user.role === "paciente" && <PatientLinks />}
                 {session.user.role === "psicologo" && <PsychologistLinks />}
-                <MyDropdown className="cursor-pointer"/>
+                <MyDropdown className="cursor-pointer" />
               </nav>
 
               <div className="md:hidden">
@@ -70,7 +73,11 @@ export default function Navbar() {
               <div className="md:hidden">
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon" className="cursor-pointer">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="cursor-pointer"
+                    >
                       <Menu className="h-6 w-6" />
                     </Button>
                   </SheetTrigger>
