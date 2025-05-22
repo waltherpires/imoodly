@@ -126,7 +126,7 @@ export default function CreateGoal({ onSubmit, onClose }: CreateGoalProps) {
           >
             Cancelar
           </Button>
-          <ButtonWithLoading className="cursor-pointer" type="submit">Salvar Meta</ButtonWithLoading>
+          <ButtonWithLoading className="cursor-pointer not-dark:bg-koromiko-300 not-dark:hover:bg-koromiko-400" type="submit">Salvar Meta</ButtonWithLoading>
         </div>
       </form>
     </Form>

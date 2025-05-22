@@ -143,7 +143,7 @@ export default function Chart({
             ? selectedYear
             : `${chartData[selectedYear][currentMonthIndex].month} de ${selectedYear}`}
           <Button
-            className="cursor-pointer w-30 mt-2"
+            className="cursor-pointer w-30 mt-2 not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300"
             onClick={() => setViewMode(viewMode === "ano" ? "mes" : "ano")}
           >
             {viewMode === "ano" ? "Ver por mês" : "Ver por ano"}

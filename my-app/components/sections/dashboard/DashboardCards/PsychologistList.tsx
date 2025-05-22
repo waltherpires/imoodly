@@ -72,7 +72,7 @@ export default function PsychologistList({ onClose }: PsychologistListProps) {
                     ) : (
                       <Button
                         disabled={item.hasPendingRequest}
-                        className="cursor-pointer"
+                        className="cursor-pointer not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300 "
                         onClick={() => handleClick(item.user.id)}
                       >
                         <span className="hidden md:inline">Solicitar</span>

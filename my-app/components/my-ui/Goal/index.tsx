@@ -88,7 +88,7 @@ export default function Goal({
               Avançar
             </Button>
           ) : (
-            <Button className="cursor-pointer mt-2 bg-green-400 text-white hover:bg-green-500" onClick={handleComplete}>
+            <Button className="cursor-pointer mt-2 not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300" onClick={handleComplete}>
               Completar
             </Button>
           )}

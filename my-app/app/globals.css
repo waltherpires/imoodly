@@ -55,6 +55,28 @@
   --color-aqua-deep-800: #0a655d;
   --color-aqua-deep-900: #0e534e;
   --color-aqua-deep-950: #004643;
+  --color-sea-nymph-50: #f5f8f6;
+  --color-sea-nymph-100: #dee9e5;
+  --color-sea-nymph-200: #bcd3ca;
+  --color-sea-nymph-300: #93b5aa;
+  --color-sea-nymph-400: #7da196;
+  --color-sea-nymph-500: #527a6f;
+  --color-sea-nymph-600: #406158;
+  --color-sea-nymph-700: #364f49;
+  --color-sea-nymph-800: #2e413d;
+  --color-sea-nymph-900: #293834;
+  --color-sea-nymph-950: #141f1c;
+  --color-koromiko-50: #fff9ed;
+  --color-koromiko-100: #fef1d6;
+  --color-koromiko-200: #fcdeac;
+  --color-koromiko-300: #f9bc60;
+  --color-koromiko-400: #f7a340;
+  --color-koromiko-500: #f4881b;
+  --color-koromiko-600: #e56d11;
+  --color-koromiko-700: #be5310;
+  --color-koromiko-800: #974215;
+  --color-koromiko-900: #7a3714;
+  --color-koromiko-950: #421a08;
 }
 
 :root {

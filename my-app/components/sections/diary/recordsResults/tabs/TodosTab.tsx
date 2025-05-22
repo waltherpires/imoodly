@@ -1,50 +1,17 @@
 "use client";
 
-import { Clock } from "lucide-react";
 import { TabsContent } from "@/components/ui/tabs";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { usePosts } from "@/hooks/diaryHooks/usePosts";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Post } from "@/lib/api/diaryPost";
-import { dateFormatter, dateFormatterNoHours } from "@/helpers/dateFormatter";
-import { useEffect, useState } from "react";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import { dateFormatterNoHours } from "@/helpers/dateFormatter";
 import { useSession } from "next-auth/react";
-
-function getTagColor(tag: string) {
-  switch (tag) {
-    case "feliz":
-      return "bg-green-500";
-    case "motivado":
-      return "bg-blue-500";
-    case "triste":
-      return "bg-red-500";
-    case "contente":
-      return "bg-yellow-500";
-    case "ansioso":
-      return "bg-purple-500";
-    default:
-      return "bg-gray-500";
-  }
-}
-
-const isSameDay = (d1: Date, d2: Date) =>
-  d1.getFullYear() === d2.getFullYear() &&
-  d1.getMonth() === d2.getMonth() &&
-  d1.getDate() === d2.getDate();
+import { filterData } from "@/helpers/filterDataText";
+import { usePagination } from "@/hooks/paginationHooks/usePagination";
+import { isSameDay } from "@/helpers/postHelpers";
+import { TodosTabSkeleton } from "./TodosTabSkeleton";
+import PostCard from "../../PostCard";
+import CustomPagination from "@/components/my-ui/CustomPagination";
 
 type Props = {
   textFilter: string;
@@ -54,15 +21,34 @@ type Props = {
 export default function TodosTab({ textFilter, date }: Props) {
   const { data: session } = useSession();
   const userId = session?.user?.id;
-
-  const [currentPage, setCurrentPage] = useState(1);
   const { data, isPending, error } = usePosts(Number(userId));
+  const filters = [];
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [textFilter, date]);
+  if (textFilter) {
+    filters.push((item: Post) =>
+      Object.values(item).some(
+        (value) =>
+          typeof value === "string" &&
+          value.toLowerCase().includes(textFilter.toLowerCase())
+      )
+    );
+  }
 
-  if (error)
+  if (date) {
+    filters.push((item: Post) => isSameDay(new Date(item.date), date));
+  }
+
+  const itemsPerPage = 4;
+  const filteredData = filterData(data || [], filters);
+  const {
+    currentPage,
+    totalPages,
+    currentItems,
+    goToNextPage,
+    goToPreviousPage,
+  } = usePagination(filteredData, itemsPerPage, [textFilter, date]);
+
+  if (error) {
     return (
       <Card className="flex flex-col gap-2 justify-center items-center">
         <h1 className="text-xl font-semibold leading-tight">
@@ -70,37 +56,7 @@ export default function TodosTab({ textFilter, date }: Props) {
         </h1>
       </Card>
     );
-
-  const filterData = (data: Post[], textFilter: string, date?: Date) => {
-    let filtered = data;
-
-    if (textFilter) {
-      filtered = filtered.filter((item) =>
-        Object.values(item).some(
-          (value) =>
-            typeof value === "string" &&
-            value.toLowerCase().includes(textFilter.toLowerCase())
-        )
-      );
-    }
-
-    if (date) {
-      filtered = filtered.filter((item) =>
-        isSameDay(new Date(item.date), date)
-      );
-    }
-
-    return filtered;
-  };
-
-  const itemsPerPage = 4;
-  const filteredData = filterData(data || [], textFilter, date);
-
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const paginatedData = filteredData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  }
 
   return (
     <TabsContent value="todos" className="mt-4 space-y-4">
@@ -118,94 +74,15 @@ export default function TodosTab({ textFilter, date }: Props) {
           </h2>
         </Card>
       ) : (
-        paginatedData?.map((item) => (
-          <Card key={item.id}>
-            <CardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <CardTitle>{item.title}</CardTitle>
-                <div className="ml-2 flex items-center space-x-2 text-sm text-muted-foreground">
-                  <Clock className="h-3.5 w-3.5" />
-                  <span>{dateFormatter(item.date)}</span>
-                </div>
-              </div>
-              <div className="flex space-x-2 mt-1">
-                {item.tags.map((tag) => (
-                  <div
-                    key={tag}
-                    className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground"
-                  >
-                    <span
-                      className={` flex h-1.5 w-1.5 rounded-full mr-1 ${getTagColor(
-                        tag
-                      )}`}
-                    ></span>
-                    {tag}
-                  </div>
-                ))}
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm">{item.description}</p>
-            </CardContent>
-            <CardFooter className="flex justify-end pt-0">
-              <Button variant="ghost" size="sm" className="cursor-pointer">
-                Ver mais
-              </Button>
-            </CardFooter>
-          </Card>
-        ))
+        currentItems?.map((item) => <PostCard key={item.id} post={item} />)
       )}
 
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            />
-          </PaginationItem>
-
-          <PaginationItem className="text-sm">
-            Página {totalPages != 0 ? currentPage : '0'} de {totalPages}
-          </PaginationItem>
-
-          <PaginationItem>
-            <PaginationNext
-              onClick={() =>
-                setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
-              }
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    </TabsContent>
-  );
-}
-
-export function TodosTabSkeleton() {
-  return (
-    <TabsContent value="todos" className="mt-4 space-y-4">
-      <Card>
-        <CardHeader className="pb-2">
-          <div className="flex items-center justify-between">
-            <CardTitle>
-              <Skeleton className="h-4 w-2/3" />
-            </CardTitle>
-            <div className="ml-2 flex items-center space-x-2 text-sm text-muted-foreground">
-              <Skeleton className="h-4 w-1/3" />
-              <Skeleton className="h-4 w-1/3" />
-            </div>
-          </div>
-          <div className="flex space-x-2 mt-1">
-              <Skeleton className="h-4 w-[250px]" />
-          </div>
-        </CardHeader>
-        <CardContent>
-              <Skeleton className="h-4 w-[200px]" />
-        </CardContent>
-        <CardFooter className="flex justify-end pt-0">
-          <Skeleton className="h-6 w-12 rounded" />
-        </CardFooter>
-      </Card>
+      <CustomPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onNext={goToNextPage}
+        onPrevious={goToPreviousPage}
+      />
     </TabsContent>
   );
 }
