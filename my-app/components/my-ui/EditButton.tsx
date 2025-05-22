@@ -45,7 +45,7 @@ export default function ClientEditButton({ user }: { user: any }) {
 
   return (
     <>
-      <Button variant="default" onClick={handleEditClick} className="cursor-pointer">
+      <Button variant="default" onClick={handleEditClick} className="cursor-pointer not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300">
         Editar
       </Button>
       <Modal ref={modalRef}>

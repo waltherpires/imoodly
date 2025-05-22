@@ -13,7 +13,7 @@ export default function DiaryRegisterForm() {
   const { form, onSubmit, mutation } = useDiaryForm();
 
   return (
-    <Card className="p-3 not-dark:bg-shadow-green-200">
+    <Card className="p-3 not-dark:bg-sea-nymph-100/60">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
           <FormField
