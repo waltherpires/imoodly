@@ -8,10 +8,15 @@ import { useState } from "react";
 
 export default function Mockup() {
   const [buttonClick, setButtonClick] = useState(false);
+  const [textAreaValue, setTextAreaValue] = useState('');
 
-  const handleClick = () => {
+  const handleClick = async  () => {
     setButtonClick(true);
   };
+
+  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextAreaValue(event.target.value);
+  }
 
   return (
     <LazyMotion features={domAnimation}>
@@ -21,7 +26,7 @@ export default function Mockup() {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="w-full bg-neutral-50 min-w-[360px] pb-2 shadow-2xl rounded-md"
       >
-        <header className="flex bg-aqua-deep-500 dark:bg-neutral-800 items-center w-full border-b h-10 rounded-t-sm">
+        <header className="flex bg-sea-nymph-300 dark:bg-neutral-800 items-center w-full border-b h-10 rounded-t-sm">
           <div className="flex items-center gap-2 my-1 ml-3">
             <div className="rounded-xl bg-red-500 w-3 h-3"></div>
             <div className="rounded-xl bg-yellow-500 w-3 h-3"></div>
@@ -56,6 +61,8 @@ export default function Mockup() {
               <h1 className="text-md ml-2 mb-1">Diário</h1>
               <textarea
                 disabled={buttonClick}
+                onChange={handleTextAreaChange}
+                value={buttonClick ? 'Crie sua conta e comece!' : textAreaValue}
                 placeholder="Hoje foi um dia produtivo. Consegui fazer novos amigos e fui ao psicólogo."
                 className="border-2 p-2 text-zinc-400 dark:text-zinc-300 text-sm bg-transparent resize-none focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-sm"
               />
@@ -63,12 +70,12 @@ export default function Mockup() {
                 disabled={buttonClick}
                 className={`${
                   buttonClick
-                    ? "dark:bg-zinc-200 bg-zinc-950 cursor-pointer"
-                    : "bg-aqua-deep-500 dark:bg-aqua-deep-300 dark:hover:bg-aqua-deep-500 cursor-pointer"
+                    ? "dark:bg-zinc-200 bg-sea-nymph-700 cursor-pointer"
+                    : "bg-sea-nymph-400 hover:bg-sea-nymph-300 dark:bg-aqua-deep-300 dark:hover:bg-aqua-deep-500 cursor-pointer"
                 } w-1/3 mt-1 self-end rounded-sm disabled:opacity-100 disabled:cursor-not-allowed`}
                 onClick={handleClick}
               >
-                {buttonClick ? "Enviado!" : "Salvar"}
+                {buttonClick ? "😊" : "Salvar"}
               </Button>
             </div>
           </section>

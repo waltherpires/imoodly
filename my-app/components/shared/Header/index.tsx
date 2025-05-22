@@ -3,18 +3,20 @@
 import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../../ui/sheet";
 import { Menu } from "lucide-react";
-import ThemeToggle from "./my-ui/ThemeToggle";
-import LogoutButton from "./my-ui/LogoutButton";
-import { NavLink } from "./my-ui/NavLink";
-import MyDropdown from "./my-ui/MyDropdown";
+import ThemeToggle from "../../my-ui/ThemeToggle";
+import LogoutButton from "../../my-ui/LogoutButton";
+import { NavLink } from "../../my-ui/NavLink";
+import MyDropdown from "../../my-ui/MyDropdown";
 import Link from "next/link";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { useServicesNavigation } from "./useServicesNavigation";
 
 export default function Navbar() {
   const { data: session } = useSession();
+  const { gotToServices } = useServicesNavigation();
 
   return (
     <header className="fixed top-0 left-0 z-50 w-[100%] border-b bg-[#abd1c6] dark:bg-zinc-950">
@@ -61,7 +63,7 @@ export default function Navbar() {
             <>
               <nav className="hidden md:flex gap-4">
                 <NavLink href="/about">Sobre</NavLink>
-                <NavLink href="/services">Serviços</NavLink>
+                <NavLink onClick={gotToServices}>Serviços</NavLink>
                 <NavLink href="/login">Entrar</NavLink>
               </nav>
 
@@ -76,7 +78,7 @@ export default function Navbar() {
                     <SheetTitle className="hidden sr-only"></SheetTitle>
                     <nav className="flex flex-col gap-4 mt-6">
                       <NavLink href="/about">Sobre</NavLink>
-                      <NavLink href="/services">Serviços</NavLink>
+                      <NavLink onClick={gotToServices}>Serviços</NavLink>
                       <NavLink href="/login">Entrar</NavLink>
                     </nav>
                   </SheetContent>

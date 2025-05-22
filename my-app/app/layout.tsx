@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Header";
-import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
+import Navbar from "@/components/shared/Header";
+import ThemeProviderWrapper from "@/components/shared/ThemeProviderWrapper";
 import { QueryProvider } from "@/providers/queryProvider";
 import { Analytics } from "@vercel/analytics/next";
-import { Providers } from "../components/Providers";
+import { Providers } from "../components/shared/Providers";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" className="dark">
+    <html lang="pt-br">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { FormDataDiaryRegister } from "@/components/forms/DiaryRegisterForm";
+import { FormDataDiaryRegister } from "@/components/forms/DiaryRegisterForm/DiaryRegisterForm";
 import { fetchClient } from "@/lib/api/fetchClient";
 import { toast } from "sonner";
 import { Tag } from "@/lib/api/diaryPost";

@@ -10,5 +10,5 @@ export default function ThemeProviderWrapper({ children }: { children: React.Rea
     setIsMounted(true);
   }, []);
 
-  return isMounted ? <ThemeProvider attribute="class" defaultTheme="dark">{children}</ThemeProvider> : null;
+  return isMounted ? <ThemeProvider attribute="class" defaultTheme="light" enableSystem>{children}</ThemeProvider> : null;
 }
