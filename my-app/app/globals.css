@@ -177,8 +177,12 @@ body {
   width: 100%;
 }
 
-#nprogress .bar {
+.dark #nprogress .bar {
   background: #38d940 !important;
+}
+
+#nprogress .bar {
+  background: #be5310 !important;
 }
 
 ::-webkit-scrollbar {
