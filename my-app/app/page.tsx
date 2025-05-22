@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import dynamic from "next/dynamic";
 
 const Hero = dynamic(() => import("@/components/sections/home/Hero"));
-const MainFeatures = dynamic(() => import("@/components/sections/home/MainFeatures"));
+const MainFeatures = dynamic(() => import("@/components/sections/home/MainFeatures/MainFeatures"));
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
