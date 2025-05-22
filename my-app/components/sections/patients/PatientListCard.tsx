@@ -5,7 +5,7 @@ import useMyPatients from "@/hooks/psychologistHooks/useMyPatients";
 import { useSession } from "next-auth/react";
 import PatientCardSkeleton from "./PatientCard/PatientCardSkeleton";
 import NoPatientCard from "./PatientCard/NoPatientCard";
-import { filterData } from "@/helpers/filterDataText";
+import { filterData, createFilterText } from "@/helpers/filterDataText";
 import { usePagination } from "@/hooks/paginationHooks/usePagination";
 import CustomPagination from "@/components/my-ui/CustomPagination";
 
@@ -20,13 +20,7 @@ export default function PatientListCard({ textFilter }: PatientListCardProps) {
   const filters = [];
 
   if (textFilter) {
-    filters.push((item: any) =>
-      Object.values(item).some(
-        (value) =>
-          typeof value === "string" &&
-          value.toLowerCase().includes(textFilter.toLowerCase())
-      )
-    );
+    filters.push(createFilterText(textFilter));
   }
 
   const filteredData = filterData(data || [], filters);

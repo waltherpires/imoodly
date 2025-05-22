@@ -6,10 +6,12 @@ import Mockup from "@/components/my-ui/Mockup";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { ButtonWithLoading } from "@/components/my-ui/ButtonLoading";
+import { useServicesNavigation } from "@/components/shared/Header/useServicesNavigation";
 
 export default function Hero() {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
+  const { gotToServices } = useServicesNavigation();
 
   const handleNavigate = async () => {
     router.push("/signup");
@@ -87,13 +89,14 @@ export default function Hero() {
         <div className="flex justify-center md:justify-start space-x-5 mt-6">
           <ButtonWithLoading
             onClick={handleNavigate}
-            className="cursor-pointer bg-aqua-deep-400 hover:bg-aqua-deep-600 dark:bg-[#f9bc60] text-black dark:hover:bg-[#e56d11] opacity-0 button-anim"
+            className="cursor-pointer bg-koromiko-300 hover:bg-koromiko-400 text-black opacity-0 button-anim"
           >
             Começar agora
           </ButtonWithLoading>
           <Button
             className="cursor-pointer button-anim opacity-0"
             variant="outline"
+            onClick={gotToServices}
           >
             Saiba mais
           </Button>

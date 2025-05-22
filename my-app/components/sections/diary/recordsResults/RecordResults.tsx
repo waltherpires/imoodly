@@ -14,7 +14,7 @@ type Props = {
 
 export default function RecordsResult({ textFilter, date }: Props) {
   return (
-    <Card className="p-2 rounded-sm not-dark:bg-[#abd1c6]">
+    <Card className="p-2 rounded-sm not-dark:bg-sea-nymph-100/60">
     <Tabs defaultValue="todos">
       <TodosTab textFilter={textFilter} date={date}/>
     </Tabs>

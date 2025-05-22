@@ -22,7 +22,7 @@ export default function GlobalError({ error }: { error: Error }) {
         </p>
 
         <Link className="self-center sm:self-start" href="/">
-          <Button className="cursor-pointer text-md px-20 sm:px-10 py-5">Voltar</Button>
+          <Button className="cursor-pointer not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300 text-md px-20 sm:px-10 py-5">Voltar</Button>
         </Link>
       </div>
     </main>

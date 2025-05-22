@@ -6,9 +6,8 @@ import { usePosts } from "@/hooks/diaryHooks/usePosts";
 import { Post } from "@/lib/api/diaryPost";
 import { dateFormatterNoHours } from "@/helpers/dateFormatter";
 import { useSession } from "next-auth/react";
-import { filterData } from "@/helpers/filterDataText";
+import { createDateFilter, createFilterText, filterData } from "@/helpers/filterDataText";
 import { usePagination } from "@/hooks/paginationHooks/usePagination";
-import { isSameDay } from "@/helpers/postHelpers";
 import { TodosTabSkeleton } from "./TodosTabSkeleton";
 import PostCard from "../../PostCard";
 import CustomPagination from "@/components/my-ui/CustomPagination";
@@ -22,20 +21,14 @@ export default function TodosTab({ textFilter, date }: Props) {
   const { data: session } = useSession();
   const userId = session?.user?.id;
   const { data, isPending, error } = usePosts(Number(userId));
-  const filters = [];
+  const filters: ((item: Post) => boolean)[] = [];
 
   if (textFilter) {
-    filters.push((item: Post) =>
-      Object.values(item).some(
-        (value) =>
-          typeof value === "string" &&
-          value.toLowerCase().includes(textFilter.toLowerCase())
-      )
-    );
+    filters.push(createFilterText<Post>(textFilter));
   }
 
   if (date) {
-    filters.push((item: Post) => isSameDay(new Date(item.date), date));
+    filters.push(createDateFilter<Post>(date));
   }
 
   const itemsPerPage = 4;

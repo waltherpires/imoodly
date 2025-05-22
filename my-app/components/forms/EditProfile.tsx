@@ -101,7 +101,7 @@ export default function EditProfileForm({
           >
             Cancelar
           </Button>
-          <Button className="cursor-pointer" type="submit" variant="default">
+          <Button className="cursor-pointer not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300" type="submit" variant="default">
             Salvar
           </Button>
         </div>

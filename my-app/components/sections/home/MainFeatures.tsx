@@ -11,7 +11,7 @@ export default function MainFeatures() {
 
   return (
     <LazyMotion features={domAnimation}>
-    <section ref={ref} className="flex flex-col gap-6 max-w-screen-lg min-h-[80vh] justify-start mx-auto">
+    <section ref={ref} id="services" className="flex flex-col gap-6 max-w-screen-lg min-h-[80vh] justify-start mx-auto">
       <m.div
         initial={{ opacity: 0, y: 50}}
         animate={isInView ? { opacity: 1, y: 0}: {}}
