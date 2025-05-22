@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 import PatientCard from "./PatientCard";
 import useMyPatients from "@/hooks/psychologistHooks/useMyPatients";
 import { useSession } from "next-auth/react";
 import PatientCardSkeleton from "./PatientCard/PatientCardSkeleton";
 import NoPatientCard from "./PatientCard/NoPatientCard";
-import { useEffect, useMemo, useState } from "react";
+import { filterData } from "@/helpers/filterDataText";
+import { usePagination } from "@/hooks/paginationHooks/usePagination";
+import CustomPagination from "@/components/my-ui/CustomPagination";
 
 type PatientListCardProps = {
   textFilter?: string;
@@ -22,42 +17,26 @@ export default function PatientListCard({ textFilter }: PatientListCardProps) {
   const { data: session } = useSession();
   const userId = session?.user?.id;
   const { data, isPending, error } = useMyPatients(userId);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const filters = [];
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [textFilter, data]);
+  if (textFilter) {
+    filters.push((item: any) =>
+      Object.values(item).some(
+        (value) =>
+          typeof value === "string" &&
+          value.toLowerCase().includes(textFilter.toLowerCase())
+      )
+    );
+  }
 
-  const filterData = (data: any, textFilter?: string) => {
-    let filtered = data;
-
-    if (textFilter) {
-      filtered = filtered.filter((item: any) =>
-        Object.values(item).some(
-          (value) =>
-            typeof value === "string" &&
-            value.toLowerCase().includes(textFilter.toLowerCase())
-        )
-      );
-    }
-
-    return filtered;
-  };
-
-  const filteredData = useMemo(
-    () => filterData(data || [], textFilter),
-    [data, textFilter]
-  );
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = useMemo(
-    () => filteredData.slice(indexOfFirstItem, indexOfLastItem),
-    [filteredData, indexOfFirstItem, indexOfLastItem]
-  );
-
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const filteredData = filterData(data || [], filters);
+  const {
+    currentPage,
+    totalPages,
+    currentItems,
+    goToNextPage,
+    goToPreviousPage,
+  } = usePagination(filteredData, 12, [textFilter, data]);
 
   if (error) return <NoPatientCard />;
 
@@ -76,35 +55,12 @@ export default function PatientListCard({ textFilter }: PatientListCardProps) {
             ))
           )}
         </div>
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              />
-            </PaginationItem>
-
-            {Array.from({ length: totalPages }, (_, i) => (
-              <PaginationItem
-                key={i + 1}
-                onClick={() => setCurrentPage(i + 1)}
-                className={`cursor-pointer ${
-                  currentPage === i + 1 ? "font-bold" : ""
-                }`}
-              >
-                {i + 1}
-              </PaginationItem>
-            ))}
-
-            <PaginationItem>
-              <PaginationNext
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <CustomPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onNext={goToNextPage}
+          onPrevious={goToPreviousPage}
+        />
       </CardContent>
     </Card>
   );

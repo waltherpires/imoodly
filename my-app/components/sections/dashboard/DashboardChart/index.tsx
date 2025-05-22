@@ -80,7 +80,7 @@ export default function DashboardChart() {
   const selectedYear = years[currentPage];
 
   return (
-    <Card>
+    <Card className="not-dark:bg-[#abd1c6]">
       <CardHeader>
         <CardTitle>Análise de humor</CardTitle>
         <CardDescription className="text-xs">

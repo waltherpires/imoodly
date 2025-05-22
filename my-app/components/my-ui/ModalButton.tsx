@@ -24,7 +24,7 @@ export default function ModalButton({ buttonLabel, children, variant = "default"
 
   return (
     <>
-      <Button variant={variant} onClick={handleClick}>
+      <Button variant={variant} className="not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300" onClick={handleClick}>
         {buttonLabel}
       </Button>
       <Modal ref={modalRef}>

@@ -16,7 +16,7 @@ export default function DiaryPage() {
 
   return (
     <LazyMotion features={domAnimation}>
-    <main className="flex-1">
+    <main className="flex-1 pt-16">
       <div className="container py-6 md:py-8 mx-auto">
         <div className="flex flex-col md:flex-row  items-center justify-between mb-6">
           <div>
@@ -28,7 +28,7 @@ export default function DiaryPage() {
           <div className="mt-4 flex space-x-2 md:mt-0">
             <Button
               size="sm"
-              className="cursor pointer bg-aqua-deep-500 hover:bg-aqua-deep-600"
+              className="cursor pointer not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300"
               onClick={handleNewRegisterClick}
             >
               {isFormOpen ? (

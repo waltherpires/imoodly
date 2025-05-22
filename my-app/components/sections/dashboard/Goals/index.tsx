@@ -29,7 +29,7 @@ export default function DashboardGoals() {
       <CardHeader className="items-center pb-0">
         <div className="flex flex-row items-center justify-between w-full">
           <CardTitle>Metas</CardTitle>
-          <ModalButton variant="outline" buttonLabel="Adicionar Meta">
+          <ModalButton variant="default" buttonLabel="Adicionar Meta">
             {(close) => (
               <CreateGoal
                 onSubmit={(data) => {

@@ -11,7 +11,7 @@ export default function ProfilePage() {
 
   if (isPending) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="pt-16 flex items-center justify-center min-h-screen">
         <Card className="w-full max-w-md p-5">
           <CardHeader>
             <CardTitle>Carregando...</CardTitle>
@@ -26,7 +26,7 @@ export default function ProfilePage() {
 
   if (isError || !user) {
     return (
-      <div className="bg-aqua-deep-50 dark:bg-aqua-deep-950 flex items-center justify-center min-h-screen px-4">
+      <div className="pt-16 bg-aqua-deep-50 dark:bg-aqua-deep-950 flex items-center justify-center min-h-screen px-4">
         <Card className="w-full max-w-md p-5">
           <CardHeader>
             <CardTitle>Erro</CardTitle>
@@ -42,7 +42,7 @@ export default function ProfilePage() {
   const birthdate = dateFormatterNoHours(user.birthdate);
 
   return (
-    <main className="flex items-center justify-center min-h-screen bg-aqua-deep-50 dark:bg-aqua-deep-950 px-4">
+    <main className="pt-16 flex items-center justify-center min-h-screen bg-aqua-deep-50 dark:bg-aqua-deep-950 px-4">
       <div className="flex flex-col md:flex-row items-center justify-center w-full space-x-5">
         <div className="text-center md:text-start md:self-start mt-10 mb-10 w-full max-w-xs">
           <h1 className="text-3xl font-bold tracking-tight">Perfil</h1>

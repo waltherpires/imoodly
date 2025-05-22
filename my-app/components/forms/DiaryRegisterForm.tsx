@@ -87,7 +87,7 @@ export default function DiaryRegisterForm() {
 
   return (
     <div>
-      <Card className="p-3">
+      <Card className="p-3 not-dark:bg-[#abd1c6]">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -142,6 +142,7 @@ export default function DiaryRegisterForm() {
                   <FormLabel>Título</FormLabel>
                   <FormControl>
                     <Input
+                      className="bg-white"
                       placeholder="Dê um título para seu registro"
                       {...field}
                     />
@@ -160,6 +161,7 @@ export default function DiaryRegisterForm() {
                   <FormControl>
                     <Textarea
                       maxLength={350}
+                      className="bg-white"
                       placeholder="Descreva como você está se sentindo..."
                       {...field}
                     />
@@ -170,7 +172,7 @@ export default function DiaryRegisterForm() {
             />
             <Button
               disabled={mutation.isPending}
-              className="self-end w-40 mt-2 bg-aqua-deep-500"
+              className="self-end w-40 mt-2 not-dark:bg-koromiko-300 not-dark:hover:bg-koromiko-400"
               type="submit"
             >
               {mutation.isPending ? "Enviando... " : "Enviar"}
