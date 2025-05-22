@@ -10,7 +10,7 @@ import {
 export default function LoginPage() {
 
   return (
-    <div className="bg-aqua-deep-50 dark:bg-aqua-deep-950 flex items-center justify-center min-h-screen px-4">
+    <div className="pt-16 bg-aqua-deep-50 dark:bg-aqua-deep-950 flex items-center justify-center min-h-screen px-4">
       <Card className="w-full max-w-md p-5">
         <CardHeader>
           <CardTitle>Login</CardTitle>
