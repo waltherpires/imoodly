@@ -55,7 +55,7 @@ export default function Hero() {
   const headline = "Cuide da sua saúde mental";
 
   return (
-   <section className="grid grid-cols-1 md:grid-cols-[2fr_4fr] items-center justify-center max-w-screen-lg gap-5 lg:gap-x-48 min-h-screen mx-auto">
+   <section className="grid grid-cols-1 md:grid-cols-[2fr_4fr] items-center justify-center md:max-w-screen-lg gap-4 lg:gap-x-48 min-h-screen mx-auto">
       <div className="mt-20 md:mt-0 space-y-4" ref={containerRef}>
         <h1
           id="h1"
