@@ -25,6 +25,7 @@ import {
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useSignup } from "@/hooks/authHooks/useSignup";
 import { ButtonWithLoading } from "../my-ui/ButtonLoading";
+import { calculateAge, minEighteen } from "@/helpers/dateFormatter";
 
 export const formSchema = z
   .object({
@@ -32,7 +33,15 @@ export const formSchema = z
     birthdate: z
       .string()
       .min(1, { message: "Data de nascimento obrigatória" })
-      .refine((val) => !isNaN(Date.parse(val)), { message: "Data inválida" }),
+      .refine((val) => !isNaN(Date.parse(val)), { message: "Data inválida" })
+      .refine((val) =>  {
+        const date = new Date(val);
+        return date.getFullYear() >= 1910; 
+      }, { message: "Ano de nascimento não pode ser anterior a 1910"})
+      .refine((val) => {
+        const date = new Date(val);
+        return calculateAge(date) >= 18;
+      }, { message: "Você precisa ter pelo menos 18 anos", }),
     email: z.string().email({ message: "Email inválido" }),
     password: z
       .string()
@@ -108,7 +117,7 @@ export default function SignupForm() {
             <FormItem className="mb-3">
               <FormLabel>Data de Nascimento</FormLabel>
               <FormControl>
-                <Input type="date" {...field} />
+                <Input type="date" min="1910-01-01" max={minEighteen()} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

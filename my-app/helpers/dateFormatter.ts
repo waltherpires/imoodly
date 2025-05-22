@@ -77,3 +77,16 @@ export const calculateAge = (birthDateDay: string | Date): number => {
 
   return age;
 }
+
+export const minEighteen = () => {
+    const today = new Date();
+    const maxDate = new Date(
+      today.getFullYear() - 18,
+      today.getMonth(),
+      today.getDate()
+    )
+      .toISOString()
+      .split('T')[0];
+
+    return maxDate;
+}

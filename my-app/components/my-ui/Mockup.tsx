@@ -31,7 +31,7 @@ export default function Mockup() {
             </h1>
           </div>
         </header>
-        <div className="grid grid-cols-1 lg:grid-cols-2 place-items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 place-items-stretch">
           <section className="grid-span-1">
             <div className="flex flex-col bg-aqua-deep-100/60 dark:bg-aqua-deep-800 rounded-md mx-1 max-w-full mt-2 p-2">
               <h1 className="text-md mx-2 mb-1">

@@ -1,8 +1,8 @@
 import PsychologistCards from "@/components/sections/psychologist-dashboard/Cards";
 
 export default function PsychologistDashboard() {
-    return (
-            <main className="flex-1">
+  return (
+    <main className="flex-1 pt-16">
       <div className="py-6 md:py-8 mx-auto overflow-auto">
         <div className="flex flex-col md:flex-row  items-center justify-between mb-6">
           <div className="mx-auto sm:ml-10">
