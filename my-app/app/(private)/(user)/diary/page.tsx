@@ -1,7 +1,7 @@
 "use client";
 
 import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion";
-import DiaryRegisterForm from "@/components/forms/DiaryRegisterForm/DiaryRegisterForm";
+import DiaryRegisterForm from "@/components/forms/DiaryRegisterForm";
 import Records from "@/components/sections/diary/Records";
 import { Button } from "@/components/ui/button";
 import { Plus, Minus } from "lucide-react";
