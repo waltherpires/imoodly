@@ -184,7 +184,7 @@ export default function Chart({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="h-[400px]"
+            className="h-[500px]"
           >
             <ChartContainer
               config={chartConfig}
