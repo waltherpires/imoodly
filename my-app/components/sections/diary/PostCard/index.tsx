@@ -19,10 +19,10 @@ export default function PostCard({ post }: Props) {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
           <CardTitle>{post.title}</CardTitle>
-          <div className="ml-2 flex items-center space-x-2 text-sm text-muted-foreground">
-            <Clock className="h-3.5 w-3.5" />
+          <div className="mt-2 sm:ml-2 flex items-center space-x-2 text-sm text-muted-foreground">
+            <Clock className="hidden sm:inline h-3.5 w-3.5" />
             <span>{dateFormatter(post.date)}</span>
           </div>
         </div>
@@ -33,7 +33,9 @@ export default function PostCard({ post }: Props) {
               className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground"
             >
               <span
-                className={`flex h-1.5 w-1.5 rounded-full mr-1 ${getTagColor(tag)}`}
+                className={`flex h-1.5 w-1.5 rounded-full mr-1 ${getTagColor(
+                  tag
+                )}`}
               ></span>
               {tag}
             </div>
