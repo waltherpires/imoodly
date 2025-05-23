@@ -31,7 +31,7 @@ export default function DiaryRecordsCard({ userId }: { userId?: string }) {
   }
 
   return (
-    <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800 py-8">
+    <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800 min-h-40 py-8">
       <CardHeader>
         <CardTitle className="flex justify-between text-sm">
           Registros
