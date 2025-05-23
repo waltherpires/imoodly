@@ -33,6 +33,7 @@ export default function useRespondRequest() {
     },
     onSuccess: (_data, variables: { requestId: string; status: LinkRequestStatus; userId?: string }) => {
       queryClient.invalidateQueries({ queryKey: ["requests", variables.userId] });
+      queryClient.invalidateQueries({ queryKey: ["psychologist", variables.userId] })
       toast.success("Resposta enviada.");
     },
     onError: () => {

@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import DashboardSkeleton from "@/components/sections/dashboard/DashboardCards/DashboardSkeleton";
+import DashboardSkeleton from "@/components/sections/dashboard/DashboardCards/CardSkeleton";
 const DashboardCards = dynamic(() => import("@/components/sections/dashboard/DashboardCards"), 
   {
     loading: () => <DashboardSkeleton />,
