@@ -46,7 +46,7 @@ export default function DiaryPage() {
           </div>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="order-2 md:order-1">
+          <div className="order-2 md:order-1 md:col-span-2">
           <Records />
           </div>
           <AnimatePresence>
