@@ -177,7 +177,7 @@ export default function Chart({
           )}
         </AnimatePresence>
       </CardHeader>
-      <CardContent className="flex-1 pb-0 min-h-[400px]">
+      <CardContent className="flex-1 pb-0 min-w-[100px] min-h-[400px]">
         <AnimatePresence mode="wait">
           <m.div
             key={`${selectedYear}-${viewMode}-${currentMonthIndex}`}
@@ -187,7 +187,7 @@ export default function Chart({
           >
             <ChartContainer
               config={chartConfig}
-              className="min-h-[400px] w-full max-h-[500px] min-w-[90px]"
+              className="min-h-[400px] w-full max-h-[500px] min-w-[100px]"
             >
               <PieChart>
                 <ChartTooltip
