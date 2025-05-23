@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import PatientCard from "./PatientCard";
-import useMyPatients from "@/hooks/psychologistHooks/useMyPatients";
+import useMyPatients from "@/hooks/requestHooks/useMyPatients";
 import { useSession } from "next-auth/react";
 import PatientCardSkeleton from "./PatientCard/PatientCardSkeleton";
 import NoPatientCard from "./PatientCard/NoPatientCard";
