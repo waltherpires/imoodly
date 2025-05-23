@@ -184,10 +184,11 @@ export default function Chart({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
+            className="h-[400px]"
           >
             <ChartContainer
               config={chartConfig}
-              className="min-h-[400px] w-full max-h-[500px] min-w-[100px]"
+              className="min-h-[400px] w-full min-w-[100px]"
             >
               <PieChart>
                 <ChartTooltip
