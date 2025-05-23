@@ -49,7 +49,7 @@ export default function PsychologistList({ onClose }: PsychologistListProps) {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">Nome</TableHead>
-              <TableHead>E-mail</TableHead>
+              <TableHead className="hidden sm:table-cell">E-mail</TableHead>
               <TableHead className="hidden sm:table-cell">CRP</TableHead>
               <TableHead className="sm:text-center">Ações</TableHead>
             </TableRow>
@@ -59,7 +59,7 @@ export default function PsychologistList({ onClose }: PsychologistListProps) {
               data.map((item: any) => (
                 <TableRow key={item.id}>
                   <TableCell>{item.user.name}</TableCell>
-                  <TableCell>{item.user.email}</TableCell>
+                  <TableCell className="hidden sm:table-cell">{item.user.email}</TableCell>
                   <TableCell className="hidden sm:table-cell">
                     {item.crp}
                   </TableCell>
