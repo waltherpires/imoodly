@@ -177,7 +177,7 @@ export default function Chart({
           )}
         </AnimatePresence>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="flex-1 pb-0 min-h-[400px]">
         <AnimatePresence mode="wait">
           <m.div
             key={`${selectedYear}-${viewMode}-${currentMonthIndex}`}
