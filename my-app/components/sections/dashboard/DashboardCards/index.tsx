@@ -10,7 +10,7 @@ export default async function DashboardCards() {
   const userId = session?.user.id;
 
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:grid-cols-4 max-w-screen">
+    <section className="grid grid-cols-1 sm:grid-cols-2 gap-2 xl:grid-cols-4 max-w-screen">
       <PsychologistCard userId={userId} />
       <PredominantMoodCard userId={userId} />
       <Link href="/diary">

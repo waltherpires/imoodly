@@ -12,8 +12,6 @@ import NoPsychologist from "./NoPsychologist";
 export default function PsychologistCard({ userId }: { userId?: string }) {
   const { data, isPending, isError } = useMyPsychologist(userId);
 
-  console.log('dados do link-request: ', data);
-
   if (isPending) {
     return <CardSkeleton />;
   }
@@ -27,8 +25,7 @@ export default function PsychologistCard({ userId }: { userId?: string }) {
   }
 
   const psychologistData = data?.[0]?.recipient;
-  console.log("dados psicologo: ", psychologistData)
-
+  
   return (
     <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
       <CardHeader>
