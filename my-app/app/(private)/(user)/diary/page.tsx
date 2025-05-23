@@ -46,7 +46,9 @@ export default function DiaryPage() {
           </div>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
+          <div className="order-2 md:order-1">
           <Records />
+          </div>
           <AnimatePresence>
             {isFormOpen && (
               <m.div
@@ -54,6 +56,7 @@ export default function DiaryPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
+                className="order-1 md:order-2"
               >
                 <DiaryRegisterForm />
               </m.div>

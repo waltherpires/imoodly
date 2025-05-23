@@ -68,7 +68,7 @@ export default function Goal({
       </CardHeader>
       <CardContent>
         <Progress value={percentage} className="w-full" />
-        <div className="flex justify-between mt-2">
+        <div className="flex flex-col sm:flex-row justify-between mt-2">
           <span className="text-xs text-gray-500">
             {prazo ? `Prazo: ${prazo}` : ""}
           </span>
