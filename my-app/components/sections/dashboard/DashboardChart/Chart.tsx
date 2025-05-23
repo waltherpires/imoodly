@@ -187,7 +187,7 @@ export default function Chart({
           >
             <ChartContainer
               config={chartConfig}
-              className="min-h-[300px] w-full max-h-[500px]"
+              className="min-h-[400px] w-full max-h-[500px] min-w-[90px]"
             >
               <PieChart>
                 <ChartTooltip
