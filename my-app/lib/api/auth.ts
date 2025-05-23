@@ -26,9 +26,6 @@ export const authOptions: NextAuthOptions = {
             }
           );
 
-          console.log('response.status: ', response.status);
-          console.log('response.data:', response.data);
-
           if (response.status !== 200) return null;
 
           const authData = response.data;
