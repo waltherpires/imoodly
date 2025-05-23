@@ -19,12 +19,15 @@ export const authOptions: NextAuthOptions = {
 
         try {
           const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+            `${process.env.API_URL}/auth/login`,
             {
               email: credentials.email,
               password: credentials.password,
             }
           );
+
+          console.log('response.status: ', response.status);
+          console.log('response.data:', response.data);
 
           if (response.status !== 200) return null;
 
