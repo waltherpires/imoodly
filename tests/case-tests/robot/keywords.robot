@@ -4,7 +4,6 @@ Library    SeleniumLibrary
 *** Keywords ***
 Realizar login
     [Arguments]    ${email}    ${senha}
-    Open Browser    http://localhost:3000    chrome
     Click Link    Entrar
     Sleep     2s
     Input Text    name=email    ${email}
@@ -12,4 +11,4 @@ Realizar login
     Input Password    name=password    ${senha}
     Sleep   2s
     Click Button    xpath=//button[@type='submit']
-    Sleep    5s
+    Sleep    3s
