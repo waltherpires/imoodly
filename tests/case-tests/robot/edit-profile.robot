@@ -15,6 +15,7 @@ Cenário: Edição de Usuário com dados corretos
     ${EMAIL}=    Get Environment Variable    EMAIL
     ${PASSWORD}=    Get Environment Variable    PASSWORD
     ${NAME}=    Get Environment Variable    NAME
+    Open Browser    http://localhost:3000    edge    
     Realizar login    ${EMAIL}    ${PASSWORD}
     Wait Until Element Is Visible     css:[data-testid="my-dropdown-trigger"]
     Sleep    4s
@@ -44,6 +45,7 @@ Cenário: Edição de Usuário com dados incorretos
     ${EMAIL}=    Get Environment Variable    EMAIL
     ${PASSWORD}=    Get Environment Variable    PASSWORD
     ${EDITEMAIL}=    Get Environment Variable    EDITEMAIL
+    Open Browser    http://localhost:3000    edge    
     Realizar login    ${EMAIL}    ${PASSWORD}
     Wait Until Element Is Visible     css:[data-testid="my-dropdown-trigger"]
     Sleep    4s
