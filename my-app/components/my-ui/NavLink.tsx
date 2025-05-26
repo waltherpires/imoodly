@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,7 @@ import "nprogress/nprogress.css";
 interface NavLinkProps {
   href?: string;
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
 }
 
 export function NavLink({ href, children, onClick }: NavLinkProps) {

@@ -14,10 +14,16 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { useServicesNavigation } from "./useServicesNavigation";
 import Image from "next/image";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { data: session } = useSession();
   const { gotToServices } = useServicesNavigation();
+  const router = useRouter();
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  const handleCloseSheet = () => setSheetOpen(false);
 
   return (
     <header className="fixed top-0 left-0 z-50 w-[100%] border-b bg-[#abd1c6] dark:bg-zinc-950">
@@ -35,13 +41,17 @@ export default function Navbar() {
           {session && (
             <>
               <nav className="hidden md:flex gap-4">
-                {session.user.role === "paciente" && <PatientLinks />}
-                {session.user.role === "psicologo" && <PsychologistLinks />}
+                {session.user.role === "paciente" && (
+                  <PatientLinks onNavigate={handleCloseSheet} />
+                )}
+                {session.user.role === "psicologo" && (
+                  <PsychologistLinks onNavigate={handleCloseSheet} />
+                )}
                 <MyDropdown className="cursor-pointer" />
               </nav>
 
               <div className="md:hidden">
-                <Sheet>
+                <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                   <SheetTrigger asChild>
                     <Button variant="ghost" size="icon">
                       <Menu className="h-6 w-6" />
@@ -50,11 +60,20 @@ export default function Navbar() {
                   <SheetContent side="right">
                     <SheetTitle className="hidden sr-only"></SheetTitle>
                     <nav className="flex flex-col gap-4 mt-6">
-                      {session.user.role === "paciente" && <PatientLinks />}
-                      {session.user.role === "psicologo" && (
-                        <PsychologistLinks />
+                      {session.user.role === "paciente" && (
+                        <PatientLinks onNavigate={handleCloseSheet} />
                       )}
-                      <NavLink href="/profile">Perfil</NavLink>
+                      {session.user.role === "psicologo" && (
+                        <PsychologistLinks onNavigate={handleCloseSheet} />
+                      )}
+                      <NavLink
+                        onClick={() => {
+                          handleCloseSheet();
+                          router.push("/profile");
+                        }}
+                      >
+                        Perfil
+                      </NavLink>
                       <LogoutButton className="cursor-pointer font-semibold pl-8 text-sm py-2 rounded self-start" />
                     </nav>
                   </SheetContent>
@@ -71,7 +90,7 @@ export default function Navbar() {
               </nav>
 
               <div className="md:hidden">
-                <Sheet>
+                <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                   <SheetTrigger asChild>
                     <Button
                       variant="ghost"
@@ -84,9 +103,30 @@ export default function Navbar() {
                   <SheetContent side="right">
                     <SheetTitle className="hidden sr-only"></SheetTitle>
                     <nav className="flex flex-col gap-4 mt-6">
-                      <NavLink href="/about">Sobre</NavLink>
-                      <NavLink onClick={gotToServices}>Serviços</NavLink>
-                      <NavLink href="/login">Entrar</NavLink>
+                      <NavLink
+                        onClick={() => {
+                          router.push("/about");
+                          handleCloseSheet();
+                        }}
+                      >
+                        Sobre
+                      </NavLink>
+                      <NavLink
+                        onClick={() => {
+                          gotToServices();
+                          handleCloseSheet();
+                        }}
+                      >
+                        Serviços
+                      </NavLink>
+                      <NavLink
+                        onClick={() => {
+                          handleCloseSheet();
+                          router.push("/login");
+                        }}
+                      >
+                        Entrar
+                      </NavLink>
                     </nav>
                   </SheetContent>
                 </Sheet>
@@ -100,22 +140,68 @@ export default function Navbar() {
   );
 }
 
-function PatientLinks() {
+function PatientLinks({ onNavigate }: { onNavigate: () => void }) {
+  const router = useRouter();
+
   return (
     <>
-      <NavLink href="/dashboard">Dashboard</NavLink>
-      <NavLink href="/diary">Diário</NavLink>
-      <NavLink href="/messages">Mensagens</NavLink>
+      <NavLink
+        onClick={() => {
+          router.push("/dashboard");
+          onNavigate();
+        }}
+      >
+        Dashboard
+      </NavLink>
+      <NavLink
+        onClick={() => {
+          router.push("/diary");
+          onNavigate();
+        }}
+      >
+        Diário
+      </NavLink>
+      <NavLink
+        onClick={() => {
+          router.push("/messages");
+          onNavigate();
+        }}
+      >
+        Mensagens
+      </NavLink>
     </>
   );
 }
 
-function PsychologistLinks() {
+function PsychologistLinks({ onNavigate }: { onNavigate: () => void }) {
+  const router = useRouter();
+
   return (
     <>
-      <NavLink href="/dashboard">Dashboard</NavLink>
-      <NavLink href="/patients">Pacientes</NavLink>
-      <NavLink href="/messages">Mensagens</NavLink>
+      <NavLink
+        onClick={() => {
+          router.push("/dashboard");
+          onNavigate();
+        }}
+      >
+        Dashboard
+      </NavLink>
+      <NavLink
+        onClick={() => {
+          router.push("/patients");
+          onNavigate();
+        }}
+      >
+        Pacientes
+      </NavLink>
+      <NavLink
+        onClick={() => {
+          router.push("/messages");
+          onNavigate();
+        }}
+      >
+        Mensagens
+      </NavLink>
     </>
   );
 }
