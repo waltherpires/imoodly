@@ -26,7 +26,7 @@ NEXTAUTH_SECRET=seu_segredo_aqui
 ## Instalar
 
 ```sh
-npm install
+npm i --legacy-peer-deps
 ```
 
 
