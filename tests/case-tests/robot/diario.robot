@@ -11,7 +11,7 @@ ${DESCRICAO}    ${EMPTY}
 
 
 *** Test Cases ***
-Cenário: Criar diário sem título
+Cenário: Criar diário sem descrição
     [Documentation]    Preencher o diario com emoção e descrição e testar a funcionalidade
     ${EMAIL}=    Get Environment Variable    EMAIL
     ${PASSWORD}=    Get Environment Variable    PASSWORD
@@ -39,7 +39,7 @@ Cenário: Criar diário sem título
 
     Page Should Contain    Informe uma descrição 
 
-Cenário: Criar diário sem descrição
+Cenário: Criar diário sem título
     [Documentation]    Preencher o diario com emoção e descrição e testar a funcionalidade
     ${EMAIL}=    Get Environment Variable    EMAIL
     ${PASSWORD}=    Get Environment Variable    PASSWORD
