@@ -4,6 +4,8 @@ import DiaryRecordsCard from "./DiaryRecordsCard";
 import GoalsSummaryCard from "./GoalsSummaryCard";
 import { getUserSession } from "@/lib/api/getUserSession";
 import PsychologistCard from "./PsychologistCard";
+import { Suspense } from "react";
+import CardSkeleton from "./CardSkeleton";
 
 export default async function DashboardCards() {
   const session = await getUserSession();
@@ -11,12 +13,21 @@ export default async function DashboardCards() {
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 gap-2 xl:grid-cols-4 max-w-screen">
-      <PsychologistCard userId={userId} />
-      <PredominantMoodCard userId={userId} />
+      <Suspense fallback={<CardSkeleton />}>
+        <PsychologistCard userId={userId} />
+      </Suspense>
+      <Suspense fallback={<CardSkeleton />}>
+        <PredominantMoodCard userId={userId} />
+      </Suspense>
+
       <Link href="/diary">
-        <DiaryRecordsCard userId={userId} />
+        <Suspense fallback={<CardSkeleton />}>
+          <DiaryRecordsCard userId={userId} />
+        </Suspense>
       </Link>
-      <GoalsSummaryCard userId={userId} />
+      <Suspense fallback={<CardSkeleton />}>
+        <GoalsSummaryCard userId={userId} />
+      </Suspense>
     </section>
   );
 }

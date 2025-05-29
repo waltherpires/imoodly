@@ -13,8 +13,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 import { signIn } from "next-auth/react";
 import { ButtonWithLoading } from "../my-ui/ButtonLoading";
 import { useState } from "react";
@@ -52,7 +50,6 @@ export default function LoginForm() {
 
     if (result?.error) {
       setLoading(false);
-      NProgress.done();
       setError("Email ou senha inválidos");
       return;
     }
@@ -104,7 +101,6 @@ export default function LoginForm() {
             Não possui uma conta?
             <Link
               href="/signup"
-              onClick={() => NProgress.start()}
               className="rounded-sm mr-2 p-1 text-teal-500"
             >
               Crie uma aqui!

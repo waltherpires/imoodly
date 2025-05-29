@@ -1,6 +1,4 @@
 import Link from "next/link";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,7 +29,7 @@ export default function MyDropdown({ className }: MyDropdownProps) {
       <DropdownMenuContent>
         <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/profile" onClick={() => NProgress.start()} data-testid="perfil-item">
+        <Link href="/profile" data-testid="perfil-item">
           <DropdownMenuItem className="py-4 font-semibold"><span className="hover:underline underline-offset-4">Perfil</span></DropdownMenuItem>
         </Link>
         <DropdownMenuItem>

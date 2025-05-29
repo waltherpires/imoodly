@@ -25,7 +25,7 @@ export default function DashboardGoals() {
   const { data, isPending } = useGoals({ userId, status: ["pending", "in_progress"]} as FetchGoalsParams);
 
   return (
-    <Card className="flex flex-col flex-1 max-h-140 lg:max-h-160 mt-5 md:mt-0 md:w-6/12 ml-2 drop-shadow-2xl overflow-y-auto">
+    <Card className="flex flex-col flex-1 max-h-140 lg:max-h-160 mt-5 w-full md:mt-0 md:w-6/12 drop-shadow-2xl overflow-y-auto">
       <CardHeader className="items-center pb-0">
         <div className="flex flex-row items-center justify-between w-full">
           <CardTitle>Metas</CardTitle>

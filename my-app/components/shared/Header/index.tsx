@@ -10,12 +10,12 @@ import LogoutButton from "../../my-ui/LogoutButton";
 import { NavLink } from "../../my-ui/NavLink";
 import MyDropdown from "../../my-ui/MyDropdown";
 import Link from "next/link";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 import { useServicesNavigation } from "./useServicesNavigation";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { PsychologistLinks } from "./PsychologistLinks";
+import { PatientLinks } from "./PatientLinks";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -30,7 +30,6 @@ export default function Navbar() {
       <div className="flex items-center justify-between px-4 py-3 w-full mx-auto">
         <Link
           href="/"
-          onClick={() => NProgress.start()}
           className="flex flex-row justify-center items-center gap-2 text-xl font-bold"
         >
           <Image alt="imoodly" src="/logo.svg" width={35} height={35} />
@@ -42,10 +41,10 @@ export default function Navbar() {
             <>
               <nav className="hidden md:flex gap-4">
                 {session.user.role === "paciente" && (
-                  <PatientLinks onNavigate={handleCloseSheet} />
+                  <PatientLinks  />
                 )}
                 {session.user.role === "psicologo" && (
-                  <PsychologistLinks onNavigate={handleCloseSheet} />
+                  <PsychologistLinks />
                 )}
                 <MyDropdown className="cursor-pointer" />
               </nav>
@@ -140,68 +139,6 @@ export default function Navbar() {
   );
 }
 
-function PatientLinks({ onNavigate }: { onNavigate: () => void }) {
-  const router = useRouter();
 
-  return (
-    <>
-      <NavLink
-        onClick={() => {
-          router.push("/dashboard");
-          onNavigate();
-        }}
-      >
-        Dashboard
-      </NavLink>
-      <NavLink
-        onClick={() => {
-          router.push("/diary");
-          onNavigate();
-        }}
-      >
-        Diário
-      </NavLink>
-      <NavLink
-        onClick={() => {
-          router.push("/messages");
-          onNavigate();
-        }}
-      >
-        Mensagens
-      </NavLink>
-    </>
-  );
-}
 
-function PsychologistLinks({ onNavigate }: { onNavigate: () => void }) {
-  const router = useRouter();
 
-  return (
-    <>
-      <NavLink
-        onClick={() => {
-          router.push("/dashboard");
-          onNavigate();
-        }}
-      >
-        Dashboard
-      </NavLink>
-      <NavLink
-        onClick={() => {
-          router.push("/patients");
-          onNavigate();
-        }}
-      >
-        Pacientes
-      </NavLink>
-      <NavLink
-        onClick={() => {
-          router.push("/messages");
-          onNavigate();
-        }}
-      >
-        Mensagens
-      </NavLink>
-    </>
-  );
-}
