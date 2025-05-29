@@ -48,7 +48,7 @@ export function useGoalsForm(userId?: string) {
       toast.success("Meta criada com sucesso.");
     },
     onError: (err, newGoal, context) => {
-      toast.error("Erro ao criar a meta.");
+      toast.error(err.message || "Erro ao criar a meta.");
       if (context?.previousGoals) {
         queryClient.setQueryData(["goals", userId], context.previousGoals);
       }

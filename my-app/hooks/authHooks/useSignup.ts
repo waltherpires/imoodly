@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { formSchema } from "@/components/forms/SignupForm";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -20,8 +21,12 @@ export function useSignup() {
     onSuccess: () => {
       toast.success("Cadastrado com sucesso!");
     },
-    onError: () => {
-      toast.error("Falha ao cadastrar!");
+    onError: (error: any) => {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Falha ao cadastrar";
+      toast.error(message);
     },
   });
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { fetchClient } from "@/lib/api/fetchClient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -31,13 +32,28 @@ export default function useRespondRequest() {
     }) => {
       return respondRequest(requestId, status);
     },
-    onSuccess: (_data, variables: { requestId: string; status: LinkRequestStatus; userId?: string }) => {
-      queryClient.invalidateQueries({ queryKey: ["requests", variables.userId] });
-      queryClient.invalidateQueries({ queryKey: ["psychologist", variables.userId] })
+    onSuccess: (
+      _data,
+      variables: {
+        requestId: string;
+        status: LinkRequestStatus;
+        userId?: string;
+      }
+    ) => {
+      queryClient.invalidateQueries({
+        queryKey: ["requests", variables.userId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["psychologist", variables.userId],
+      });
       toast.success("Resposta enviada.");
     },
-    onError: () => {
-      toast.error("Erro ao enviar resposta.");
+    onError: (error: any) => {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Erro ao enviar resposta.";
+      toast.error(message);
     },
   });
 }
