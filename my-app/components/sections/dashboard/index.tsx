@@ -1,11 +1,8 @@
 import dynamic from "next/dynamic";
-import DashboardSkeleton from "@/components/sections/dashboard/DashboardCards/CardSkeleton";
-const DashboardCards = dynamic(() => import("@/components/sections/dashboard/DashboardCards"), 
-  {
-    loading: () => <DashboardSkeleton />,
-  }
+const DashboardCards = dynamic(
+  () => import("@/components/sections/dashboard/DashboardCards")
 );
-const DashboardChart = dynamic(() => import("@/components/sections/dashboard/DashboardChart/index"));
+import DashboardChart from "@/components/sections/dashboard/DashboardChart/index";
 
 export default function DashboardPage() {
   return (

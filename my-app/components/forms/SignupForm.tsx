@@ -13,8 +13,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 import {
   Select,
   SelectTrigger,
@@ -228,7 +226,7 @@ export default function SignupForm() {
         <div className="self-end flex justify-end mt-2">
           <p className="self-end text-xs pl-1">
             Já possui uma conta?
-            <Link href="/login" onClick={() => NProgress.start()} className="rounded-sm mr-2 p-1 text-teal-500">
+            <Link href="/login" className="rounded-sm mr-2 p-1 text-teal-500">
               Entre aqui!
             </Link>
           </p>

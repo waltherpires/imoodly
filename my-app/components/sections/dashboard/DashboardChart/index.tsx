@@ -2,7 +2,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useMonthlyEmotionSummary } from "@/hooks/moodHooks/useMonthlyEmotionSummary";
 import {
   Card,
@@ -11,10 +11,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-const Chart = dynamic(() => import("@/components/sections/dashboard/DashboardChart/Chart"), {
-  ssr: false,
-  loading: () => <SkeletonChartCard />,
-});
+const Chart = dynamic(
+  () => import("@/components/sections/dashboard/DashboardChart/Chart"),
+  {
+    ssr: false,
+    loading: () => <SkeletonCard />,
+  }
+);
 import {
   Pagination,
   PaginationContent,
@@ -26,16 +29,17 @@ import { useSession } from "next-auth/react";
 import { monthNamesInPortuguese } from "@/helpers/dateFormatter";
 import { Skeleton } from "@/components/ui/skeleton";
 import DashboardGoals from "../Goals";
-import SkeletonChartCard from "./SkeletonChartCard";
+import SkeletonCard from "./SkeletonCard";
+import SkeletonDashboardContainer from "./SkeletonDashboardContainer";
 
-export default function DashboardChart() {
+export default function DashboardContainer() {
   const { data: sessionData } = useSession();
   const userId = sessionData?.user.id;
   const { data, isPending, isError } = useMonthlyEmotionSummary(Number(userId));
   const [currentPage, setCurrentPage] = useState(0);
 
   if (isPending) {
-    return <SkeletonChartCard />;
+    return <SkeletonDashboardContainer />;
   }
 
   if (isError) {
@@ -87,7 +91,7 @@ export default function DashboardChart() {
           Seus padrões emocionais
         </CardDescription>
       </CardHeader>
-      <CardContent className="pl-0">
+      <CardContent className="w-full mx-auto">
         <Pagination>
           <PaginationContent>
             <PaginationItem>
@@ -109,7 +113,7 @@ export default function DashboardChart() {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-        <div className="flex w-full items-stretch flex-col md:flex-row">
+        <div className="flex w-full items-stretch flex-col md:flex-row space-x-5">
           {!data || data.length === 0 ? (
             <Card className="w-full md:w-6/12 ml-2">
               <CardHeader>
@@ -128,11 +132,11 @@ export default function DashboardChart() {
           ) : (
             <Chart selectedYear={selectedYear} chartData={formattedData} />
           )}
-          <DashboardGoals/>
+          <Suspense fallback={<SkeletonCard />}>
+            <DashboardGoals />
+          </Suspense>
         </div>
       </CardContent>
     </Card>
   );
 }
-
-

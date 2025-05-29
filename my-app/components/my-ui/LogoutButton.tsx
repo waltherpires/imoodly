@@ -1,8 +1,6 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 import { Button } from "../ui/button";
 interface LogoutButtonProps {
   className?: string;
@@ -10,7 +8,6 @@ interface LogoutButtonProps {
 
 export default function LogoutButton({ className }: LogoutButtonProps) {
   const handleLogout = async () => {
-    NProgress.start();
     await signOut({
       callbackUrl: "/login",
     });

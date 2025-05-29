@@ -2,8 +2,6 @@
 import { FormDataCreateGoal } from "@/components/forms/CreateGoal";
 import { fetchClient } from "@/lib/api/fetchClient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 import { toast } from "sonner";
 
 async function sendGoalForm(data: FormDataCreateGoal) {
@@ -45,7 +43,6 @@ export function useGoalsForm(userId?: string) {
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["goals", userId] });
       queryClient.invalidateQueries({ queryKey: ["goals-summary", userId]});
-      NProgress.done();
     },
     onSuccess: () => {
       toast.success("Meta criada com sucesso.");
