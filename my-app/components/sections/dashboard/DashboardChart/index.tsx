@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 "use client";
 
 import dynamic from "next/dynamic";
-import { Suspense, useState } from "react";
-import { useMonthlyEmotionSummary } from "@/hooks/moodHooks/useMonthlyEmotionSummary";
+import { Suspense } from "react";
 import {
   Card,
   CardContent,
@@ -11,6 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import DashboardGoals from "../Goals";
+import SkeletonCard from "./SkeletonCard";
+
 const Chart = dynamic(
   () => import("@/components/sections/dashboard/DashboardChart/Chart"),
   {
@@ -18,71 +20,8 @@ const Chart = dynamic(
     loading: () => <SkeletonCard />,
   }
 );
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { useSession } from "next-auth/react";
-import { monthNamesInPortuguese } from "@/helpers/dateFormatter";
-import { Skeleton } from "@/components/ui/skeleton";
-import DashboardGoals from "../Goals";
-import SkeletonCard from "./SkeletonCard";
-import SkeletonDashboardContainer from "./SkeletonDashboardContainer";
 
 export default function DashboardContainer() {
-  const { data: sessionData } = useSession();
-  const userId = sessionData?.user.id;
-  const { data, isPending, isError } = useMonthlyEmotionSummary(Number(userId));
-  const [currentPage, setCurrentPage] = useState(0);
-
-  if (isPending) {
-    return <SkeletonDashboardContainer />;
-  }
-
-  if (isError) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Erro</CardTitle>
-          <CardDescription className="text-xs">
-            Não foi possível carregar os dados.
-          </CardDescription>
-        </CardHeader>
-      </Card>
-    );
-  }
-
-  const formattedData = data.reduce((acc: any, item: any) => {
-    const year = item.year;
-    const month = item.month.trim();
-    const emotions = item.emotions;
-
-    const translatedMonth = monthNamesInPortuguese[month] || month;
-
-    if (!acc[year]) {
-      acc[year] = [];
-    }
-
-    acc[year].push({
-      month: translatedMonth,
-      happy: parseInt(emotions.feliz || "0"),
-      sad: parseInt(emotions.triste || "0"),
-      anxious: parseInt(emotions.ansioso || "0"),
-      angry: parseInt(emotions.irritado || "0"),
-      calm: parseInt(emotions.calmo || "0"),
-      confused: parseInt(emotions.confuso || "0"),
-    });
-
-    return acc;
-  }, {});
-
-  const years = formattedData ? Object.keys(formattedData) : [];
-  const totalPages = years.length - 1;
-  const selectedYear = years[currentPage];
-
   return (
     <Card className="not-dark:bg-sea-nymph-100/60">
       <CardHeader>
@@ -92,46 +31,10 @@ export default function DashboardContainer() {
         </CardDescription>
       </CardHeader>
       <CardContent className="w-full mx-auto">
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-              />
-            </PaginationItem>
-
-            <PaginationItem className="text-sm">{selectedYear}</PaginationItem>
-
-            <PaginationItem>
-              <PaginationNext
-                onClick={() =>
-                  setCurrentPage((prev) =>
-                    prev < totalPages ? prev + 1 : prev
-                  )
-                }
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
         <div className="flex w-full items-stretch flex-col md:flex-row space-x-5">
-          {!data || data.length === 0 ? (
-            <Card className="w-full md:w-6/12 ml-2">
-              <CardHeader>
-                <CardTitle>Sem Dados</CardTitle>
-                <CardDescription className="text-xs">
-                  Nenhum dado disponível para exibição.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          ) : !formattedData ||
-            !selectedYear ||
-            !formattedData[selectedYear] ? (
-            <Card className="w-full md:w-6/12 ml-2 drop-shadow-2xl items-center">
-              <Skeleton className="h-[200px] w-[200px] rounded-full" />
-            </Card>
-          ) : (
-            <Chart selectedYear={selectedYear} chartData={formattedData} />
-          )}
+          <Suspense fallback={<SkeletonCard />}>
+            <Chart />
+          </Suspense>
           <Suspense fallback={<SkeletonCard />}>
             <DashboardGoals />
           </Suspense>
