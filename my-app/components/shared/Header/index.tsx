@@ -2,25 +2,22 @@
 
 import { useSession } from "next-auth/react";
 
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../../ui/sheet";
-import { Menu } from "lucide-react";
 import ThemeToggle from "../../my-ui/ThemeToggle";
-import LogoutButton from "../../my-ui/LogoutButton";
 import { NavLink } from "../../my-ui/NavLink";
 import MyDropdown from "../../my-ui/MyDropdown";
 import Link from "next/link";
 import { useServicesNavigation } from "./useServicesNavigation";
 import Image from "next/image";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { PsychologistLinks } from "./PsychologistLinks";
 import { PatientLinks } from "./PatientLinks";
+import Notifications from "./Notifications";
+import SheetNoSession from "./Sheet/SheetNoSession";
+import SheetSession from "./Sheet";
 
 export default function Navbar() {
   const { data: session } = useSession();
   const { gotToServices } = useServicesNavigation();
-  const router = useRouter();
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const handleCloseSheet = () => setSheetOpen(false);
@@ -38,107 +35,37 @@ export default function Navbar() {
 
         <div className="flex">
           {session && (
-            <>
-              <nav className="hidden md:flex gap-4">
-                {session.user.role === "paciente" && (
-                  <PatientLinks  />
-                )}
-                {session.user.role === "psicologo" && (
-                  <PsychologistLinks />
-                )}
-                <MyDropdown className="cursor-pointer" />
-              </nav>
-
-              <div className="md:hidden">
-                <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-                  <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <Menu className="h-6 w-6" />
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent side="right">
-                    <SheetTitle className="hidden sr-only"></SheetTitle>
-                    <nav className="flex flex-col gap-4 mt-6">
-                      {session.user.role === "paciente" && (
-                        <PatientLinks onNavigate={handleCloseSheet} />
-                      )}
-                      {session.user.role === "psicologo" && (
-                        <PsychologistLinks onNavigate={handleCloseSheet} />
-                      )}
-                      <NavLink
-                        onClick={() => {
-                          handleCloseSheet();
-                          router.push("/profile");
-                        }}
-                      >
-                        Perfil
-                      </NavLink>
-                      <LogoutButton className="cursor-pointer font-semibold pl-8 text-sm py-2 rounded self-start" />
-                    </nav>
-                  </SheetContent>
-                </Sheet>
-              </div>
-            </>
+            <nav className="hidden md:flex gap-2 mx-3">
+              {session.user.role === "paciente" && <PatientLinks />}
+              {session.user.role === "psicologo" && <PsychologistLinks />}
+            </nav>
           )}
           {!session && (
-            <>
-              <nav className="hidden md:flex gap-4">
-                <NavLink href="/about">Sobre</NavLink>
-                <NavLink onClick={gotToServices}>Serviços</NavLink>
-                <NavLink href="/login">Entrar</NavLink>
-              </nav>
-
-              <div className="md:hidden">
-                <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-                  <SheetTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="cursor-pointer"
-                    >
-                      <Menu className="h-6 w-6" />
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent side="right">
-                    <SheetTitle className="hidden sr-only"></SheetTitle>
-                    <nav className="flex flex-col gap-4 mt-6">
-                      <NavLink
-                        onClick={() => {
-                          router.push("/about");
-                          handleCloseSheet();
-                        }}
-                      >
-                        Sobre
-                      </NavLink>
-                      <NavLink
-                        onClick={() => {
-                          gotToServices();
-                          handleCloseSheet();
-                        }}
-                      >
-                        Serviços
-                      </NavLink>
-                      <NavLink
-                        onClick={() => {
-                          handleCloseSheet();
-                          router.push("/login");
-                        }}
-                      >
-                        Entrar
-                      </NavLink>
-                    </nav>
-                  </SheetContent>
-                </Sheet>
-              </div>
-            </>
+            <nav className="hidden md:flex gap-4">
+              <NavLink href="/about">Sobre</NavLink>
+              <NavLink onClick={gotToServices}>Serviços</NavLink>
+              <NavLink href="/login">Entrar</NavLink>
+            </nav>
           )}
+          {session && <Notifications />}
+          {session && <MyDropdown className="hidden sm:block cursor-pointer" />}
           <ThemeToggle />
+          {session ? (
+            <SheetSession
+              sheetOpen={sheetOpen}
+              setSheetOpen={setSheetOpen}
+              handleCloseSheet={handleCloseSheet}
+              session={session}
+            />
+          ) : (
+            <SheetNoSession
+              sheetOpen={sheetOpen}
+              setSheetOpen={setSheetOpen}
+              handleCloseSheet={handleCloseSheet}
+            />
+          )}
         </div>
       </div>
     </header>
   );
 }
-
-
-
-
