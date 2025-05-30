@@ -1,7 +1,6 @@
 import { NavLink } from "@/components/my-ui/NavLink";
 
 export function PatientLinks({ onNavigate }: { onNavigate?: () => void }) {
-
   return (
     <>
       <NavLink
@@ -19,14 +18,6 @@ export function PatientLinks({ onNavigate }: { onNavigate?: () => void }) {
         }}
       >
         Diário
-      </NavLink>
-      <NavLink
-        href="/messages"
-        onClick={() => {
-          onNavigate?.();
-        }}
-      >
-        Mensagens
       </NavLink>
     </>
   );
