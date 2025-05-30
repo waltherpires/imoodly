@@ -49,8 +49,8 @@ export function usePostForm(userId?: string) {
       queryClient.invalidateQueries({ queryKey: ["posts", userId] });
       queryClient.invalidateQueries({ queryKey: ["monthly-emotions", userId] });
     },
-    onError: (_error, _newMoodData, context) => {
-      toast.error("Erro ao enviar.");
+    onError: (error, _newMoodData, context) => {
+      toast.error(error?.message || "Erro ao enviar.");
 
       if (context?.previousPosts) {
         queryClient.setQueryData(["posts", userId], context.previousPosts);

@@ -44,7 +44,7 @@ export function useGoalsProgress(goalId: string, userId: string) {
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["goals", userId] });
     },
-    onError: (err, _variables, context) => {
+    onError: (_err, _variables, context) => {
       queryClient.setQueryData(["goals", userId], context?.previousGoals);
       toast.error("Erro ao alterar progresso.");
     },

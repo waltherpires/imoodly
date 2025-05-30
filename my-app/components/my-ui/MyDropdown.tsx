@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import LogoutButton from "./LogoutButton";
 import { User } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "../ui/button";
 
 type MyDropdownProps = {
   className?: string;
@@ -18,22 +18,24 @@ type MyDropdownProps = {
 export default function MyDropdown({ className }: MyDropdownProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={className} data-testid="my-dropdown-trigger">
-        <Avatar>
-          <AvatarImage />
-          <AvatarFallback className="hover:bg-zinc-200 hover:text-black transition duration-200">
-            <User />
-          </AvatarFallback>
-        </Avatar>
+      <DropdownMenuTrigger
+        className={className}
+        data-testid="my-dropdown-trigger"
+      >
+        <Button variant="ghost" className="transition duration-200">
+          <User className="w-5 h-5" />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href="/profile" data-testid="perfil-item">
-          <DropdownMenuItem className="py-4 font-semibold"><span className="hover:underline underline-offset-4">Perfil</span></DropdownMenuItem>
+          <DropdownMenuItem className="py-4 font-semibold">
+            <span className="hover:underline underline-offset-4">Perfil</span>
+          </DropdownMenuItem>
         </Link>
         <DropdownMenuItem>
-          <LogoutButton className="cursor-pointer pl-0"/>
+          <LogoutButton className="cursor-pointer pl-0" />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

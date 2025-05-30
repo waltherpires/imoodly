@@ -19,14 +19,6 @@ export function PsychologistLinks({ onNavigate }: { onNavigate?: () => void }) {
       >
         Pacientes
       </NavLink>
-      <NavLink
-        href="/messages"
-        onClick={() => {
-          onNavigate?.();
-        }}
-      >
-        Mensagens
-      </NavLink>
     </>
   );
 }

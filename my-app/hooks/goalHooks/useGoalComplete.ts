@@ -49,7 +49,7 @@ export function useGoalComplete(goalId: string, userId: string) {
     },
     onError: (err, _variables, context) => {
       queryClient.setQueryData(["goals", userId], context?.previousGoals);
-      toast.error("Erro ao completar meta.");
+      toast.error(err.message || "Erro ao completar meta.");
     },
   });
 
