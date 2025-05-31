@@ -6,15 +6,19 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import AccordionNotification from "./AccordionNotification";
+import { useNotifications } from "@/hooks/notificationHooks/useNotification";
 
 export default function Notifications() {
-  const hasNotifications = true;
+  const { data: notifications, isLoading } = useNotifications();
+
+  const hasNotifications =
+    !!notifications && notifications.some((n) => !n.isRead);
 
   return (
     <Popover>
       <PopoverTrigger>
         <Button variant="ghost" className="transition duration-200">
-          {hasNotifications ? (
+          {hasNotifications && !isLoading ? (
             <BellRing className="w-5 h-5 text-koromiko-600 fill-koromiko-400 dark:text-koromiko-400 dark:fill-koromiko-300 animate-bounce" />
           ) : (
             <Bell className="w-5 h-5" />
@@ -26,7 +30,7 @@ export default function Notifications() {
           Notificações
         </div>
         <div className="bg-border -mx-1 my-1 h-px" />
-          <AccordionNotification />
+        <AccordionNotification />
       </PopoverContent>
     </Popover>
   );
