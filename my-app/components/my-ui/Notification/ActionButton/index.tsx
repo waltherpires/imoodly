@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { ReactNode, ButtonHTMLAttributes } from "react";
+import { ReactNode } from "react";
 
-interface ActionButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ActionButtonProps = React.ComponentProps<typeof Button> & {
   children: ReactNode;
 }
 

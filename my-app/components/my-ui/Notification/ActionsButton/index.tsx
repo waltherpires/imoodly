@@ -5,5 +5,5 @@ interface ActionsButtonProps {
 }
 
 export function ActionsButton({ children }: ActionsButtonProps) {
-  return <div>{children}</div>;
+  return <div className="flex gap-2 flex-col sm:flex-row justify-between">{children}</div>;
 }

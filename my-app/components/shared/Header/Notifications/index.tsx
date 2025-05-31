@@ -1,28 +1,33 @@
-// import { Notification } from "@/components/my-ui/Notification";
 import { Button } from "@/components/ui/button";
+import { Bell, BellRing } from "lucide-react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-} from "@/components/ui/dropdown-menu";
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { BellRing } from "lucide-react";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import AccordionNotification from "./AccordionNotification";
 
 export default function Notifications() {
+  const hasNotifications = true;
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
+    <Popover>
+      <PopoverTrigger>
         <Button variant="ghost" className="transition duration-200">
-          <BellRing className="w-5 h-5" />
+          {hasNotifications ? (
+            <BellRing className="w-5 h-5 text-koromiko-600 fill-koromiko-400 dark:text-koromiko-400 dark:fill-koromiko-300 animate-bounce" />
+          ) : (
+            <Bell className="w-5 h-5" />
+          )}
         </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-{/*         <Notification.Root>
-          <Notification.Icon icon={BellRing} />
-          <Notification.Content>
-            Teste
-          </Notification.Content>
-        </Notification.Root> */}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </PopoverTrigger>
+      <PopoverContent className="flex-col mr-2 sm:mr-10 min-w-80 sm:min-w-110 max-h-100 overflow-auto">
+        <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground">
+          Notificações
+        </div>
+        <div className="bg-border -mx-1 my-1 h-px" />
+          <AccordionNotification />
+      </PopoverContent>
+    </Popover>
   );
 }
