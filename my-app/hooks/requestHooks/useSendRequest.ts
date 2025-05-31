@@ -18,6 +18,7 @@ export function useSendRequest() {
     mutationFn: (receiverId: string) => sendRequest(receiverId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["psychologists"]})
+      queryClient.invalidateQueries({ queryKey: ["notifications"]})
       toast.success("Solicitação enviada com sucesso.");
     },
     onError: (error: any) => {

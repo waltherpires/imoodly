@@ -42,7 +42,8 @@ export function useGoalsForm(userId?: string) {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["goals", userId] });
-      queryClient.invalidateQueries({ queryKey: ["goals-summary", userId]});
+      queryClient.invalidateQueries({ queryKey: ["goals-summary", userId] });
+      queryClient.invalidateQueries({ queryKey: ["notifications"] });
     },
     onSuccess: () => {
       toast.success("Meta criada com sucesso.");

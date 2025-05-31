@@ -48,6 +48,7 @@ export function usePostForm(userId?: string) {
       toast.success("Registro enviado.");
       queryClient.invalidateQueries({ queryKey: ["posts", userId] });
       queryClient.invalidateQueries({ queryKey: ["monthly-emotions", userId] });
+      queryClient.invalidateQueries({ queryKey: ["notifications"] });
     },
     onError: (error, _newMoodData, context) => {
       toast.error(error?.message || "Erro ao enviar.");
