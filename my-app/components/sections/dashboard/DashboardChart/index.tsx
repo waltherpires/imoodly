@@ -23,7 +23,7 @@ const Chart = dynamic(
 
 export default function DashboardContainer() {
   return (
-    <Card className="not-dark:bg-sea-nymph-100/60">
+    <Card className="not-dark:bg-sea-nymph-100/60 mb-5">
       <CardHeader>
         <CardTitle>Análise de humor</CardTitle>
         <CardDescription className="text-xs">
