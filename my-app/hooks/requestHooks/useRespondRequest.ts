@@ -46,6 +46,9 @@ export default function useRespondRequest() {
       queryClient.invalidateQueries({
         queryKey: ["psychologist", variables.userId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["notifications"],
+      });
       toast.success("Resposta enviada.");
     },
     onError: (error: any) => {
