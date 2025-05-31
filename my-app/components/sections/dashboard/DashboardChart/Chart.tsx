@@ -176,7 +176,7 @@ export default function Chart() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Card className="flex flex-col max-h-140 lg:max-h-160 w-full md:w-6/12 drop-shadow-2xl">
+      <Card className="flex flex-col w-full md:w-6/12 drop-shadow-2xl">
         <CardHeader className="items-center pb-0">
           <CardTitle>Emoções</CardTitle>
           <CardDescription className="flex flex-col md:flew-row md:justify-between">
@@ -220,14 +220,14 @@ export default function Chart() {
             )}
           </AnimatePresence>
         </CardHeader>
-        <CardContent className="flex-1 pb-0 min-w-[100px] min-h-[400px] items-end">
+        <CardContent className="flex-1 min-w-[100px] items-end min-h-[300px] md:min-h-[400px]">
           <AnimatePresence mode="wait">
             <m.div
               key={`${selectedYear}-${viewMode}-${currentMonthIndex}`}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className="h-[500px]"
+              className={viewMode === "ano" ? "h-[250px]" : "md:h-[390px]"}
             >
               <ChartContainer
                 config={chartConfig}
@@ -289,7 +289,7 @@ export default function Chart() {
 }
 
 const CustomLegend = ({ payload }: any) => (
-  <div className="flex flex-wrap justify-center gap-2 mt-3">
+  <div className="flex flex-wrap justify-center gap-2">
     {payload.map((entry: any, index: number) => (
       <div key={`item-${index}`} className="flex items-center gap-2">
         <div
