@@ -76,7 +76,7 @@ export default function Goal({
             Meta: {progress.current}/{progress.total}
           </span>
         </div>
-        <div className="flex justify-between mt-2">
+        <div className="flex flex-col sm:flex-row justify-between mt-2">
           <Button
             className="cursor-pointer mt-2 bg-red-400 text-white hover:bg-red-500"
             onClick={handleRegress}
