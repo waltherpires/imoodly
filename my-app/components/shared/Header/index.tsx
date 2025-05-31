@@ -48,7 +48,7 @@ export default function Navbar() {
             </nav>
           )}
           {session && <Notifications />}
-          {session && <MyDropdown className="hidden sm:block cursor-pointer" />}
+          {session && <MyDropdown className="hidden md:block cursor-pointer" />}
           <ThemeToggle />
           {session ? (
             <SheetSession
