@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CardSkeleton() {
   return (
-    <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800 animate-pulse">
+    <Card className="md:max-w-130 sm:min-w-60 md:min-w-80 hover:bg-zinc-50 dark:hover:bg-zinc-800 animate-pulse">
       <CardHeader>
         <CardTitle className="flex justify-between text-sm">
           <Skeleton className="h-3 w-20 rounded" />

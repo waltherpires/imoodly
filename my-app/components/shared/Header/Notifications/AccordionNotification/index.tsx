@@ -9,7 +9,7 @@ import PostNotification from "../PostNotification";
 import { useNotifications } from "@/hooks/notificationHooks/useNotification";
 
 export default function AccordionNotification() {
-  const { data: notifications, isLoading, isError } = useNotifications();
+  const { data: notifications, isLoading, isError } = useNotifications({ isRead: false });
 
   const linkNotifications = notifications?.filter((n) => n.type === "link_request") || [];
   const postNotifications =

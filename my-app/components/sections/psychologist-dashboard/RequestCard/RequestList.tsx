@@ -22,7 +22,11 @@ type ListProps = {
   isLoading: boolean;
 };
 
-export default function RequestList({ onClose, requests, isLoading }: ListProps) {
+export default function RequestList({
+  onClose,
+  requests,
+  isLoading,
+}: ListProps) {
   const session = useSession();
   const userId = session.data?.user.id;
   const respondRequest = useRespondRequest();
@@ -31,7 +35,6 @@ export default function RequestList({ onClose, requests, isLoading }: ListProps)
     useLoggedPsychologist();
 
   const isOpen = psychologistData?.connectionStatus === "open";
-  console.log("dados psicologo: ", psychologistData);
 
   const handleClose = () => {
     onClose();
@@ -49,7 +52,7 @@ export default function RequestList({ onClose, requests, isLoading }: ListProps)
     <>
       <div className="flex flex-row justify-between items-center gap-2 mb-5">
         <Button
-          className="cursor-pointer not-only-of-type:not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300 rounded-md text-white text-xs"
+          className="cursor-pointer not-only-of-type:not-dark:bg-koromiko-400 not-dark:hover:bg-koromiko-300 rounded-md not-dark:text-white text-xs"
           onClick={() => mutate()}
           disabled={isPending || dataPending}
         >
@@ -62,7 +65,7 @@ export default function RequestList({ onClose, requests, isLoading }: ListProps)
             : "Invisível para pacientes"}
         </Button>
         <Button
-          className="cursor-pointer bg-red-500 hover:bg-red-700 text-white sm:w-35"
+          className="cursor-pointer bg-mandy-500 hover:bg-mandy-400 text-white sm:w-35"
           onClick={handleClose}
         >
           Fechar
@@ -91,7 +94,7 @@ export default function RequestList({ onClose, requests, isLoading }: ListProps)
                 <TableCell>{item.requester.email}</TableCell>
                 <TableCell className="flex flex-row justify-center gap-2">
                   <Button
-                    className="cursor-pointer"
+                    className="cursor-pointer not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300"
                     onClick={() =>
                       handleResponse(item.id, LinkRequestStatus.ACCEPTED)
                     }
@@ -99,7 +102,7 @@ export default function RequestList({ onClose, requests, isLoading }: ListProps)
                     Aceitar
                   </Button>
                   <Button
-                    className="cursor-pointer text-white bg-red-500 hover:bg-red-700"
+                    className="cursor-pointer text-white bg-mandy-500 hover:bg-mandy-400"
                     onClick={() =>
                       handleResponse(item.id, LinkRequestStatus.REJECTED)
                     }

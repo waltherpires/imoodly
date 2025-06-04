@@ -16,8 +16,8 @@ export default function Notifications() {
 
   return (
     <Popover>
-      <PopoverTrigger>
-        <Button variant="ghost" className="transition duration-200">
+      <PopoverTrigger asChild>
+        <Button variant="ghost" className="self-center transition duration-200">
           {hasNotifications && !isLoading ? (
             <BellRing className="w-5 h-5 text-koromiko-600 fill-koromiko-400 dark:text-koromiko-400 dark:fill-koromiko-300 animate-bounce" />
           ) : (

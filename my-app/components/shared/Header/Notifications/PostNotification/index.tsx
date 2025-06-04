@@ -1,7 +1,7 @@
+
 import { Notification } from "@/components/my-ui/Notification";
 import { MessageSquare, ChevronRight } from "lucide-react";
 import { NotificationType } from "../type";
-
 interface PostNotificationProps {
   notification: NotificationType;
 }
@@ -9,6 +9,7 @@ interface PostNotificationProps {
 export default function PostNotification({
   notification,
 }: PostNotificationProps) {
+
   return (
     <>
       <div className="bg-border -mx-1 my-1 h-px" />

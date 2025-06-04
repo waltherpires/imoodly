@@ -5,6 +5,7 @@ import { NotificationType } from "../type";
 import useRespondRequest, {
   LinkRequestStatus,
 } from "@/hooks/requestHooks/useRespondRequest";
+import { useSeeNotification } from "@/hooks/notificationHooks/useSeeNotification";
 interface LinkNotificationProps {
   notification: NotificationType;
 }
@@ -13,6 +14,7 @@ export default function LinkNotification({
   notification,
 }: LinkNotificationProps) {
   const respondRequest = useRespondRequest();
+  const seeNotification = useSeeNotification();
 
   const handleRequest = (status: LinkRequestStatus) => {
     respondRequest.mutate({
@@ -20,6 +22,8 @@ export default function LinkNotification({
       status,
       userId: String(notification.receiver?.id),
     });
+
+    seeNotification.mutate(String(notification.id));
   };
 
   return (

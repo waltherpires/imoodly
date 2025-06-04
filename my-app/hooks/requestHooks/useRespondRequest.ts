@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { fetchClient } from "@/lib/api/fetchClient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -34,20 +35,23 @@ export default function useRespondRequest() {
     },
     onSuccess: (
       _data,
-      variables: {
+      _variables: {
         requestId: string;
         status: LinkRequestStatus;
         userId?: string;
       }
     ) => {
       queryClient.invalidateQueries({
-        queryKey: ["requests", variables.userId],
+        queryKey: ["requests"],
+        exact: false,
       });
       queryClient.invalidateQueries({
-        queryKey: ["psychologist", variables.userId],
+        queryKey: ["psychologist"],
+        exact: false,
       });
       queryClient.invalidateQueries({
         queryKey: ["notifications"],
+        exact: false,
       });
       toast.success("Resposta enviada.");
     },

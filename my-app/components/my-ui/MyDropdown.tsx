@@ -21,8 +21,9 @@ export default function MyDropdown({ className }: MyDropdownProps) {
       <DropdownMenuTrigger
         className={className}
         data-testid="my-dropdown-trigger"
+        asChild
       >
-        <Button variant="ghost" className="transition duration-200">
+        <Button variant="ghost" className="self-center transition duration-200">
           <User className="w-5 h-5" />
         </Button>
       </DropdownMenuTrigger>
