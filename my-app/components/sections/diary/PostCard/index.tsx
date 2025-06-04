@@ -19,9 +19,9 @@ export default function PostCard({ post }: Props) {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+        <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between">
           <CardTitle>{post.title}</CardTitle>
-          <div className="mt-2 sm:ml-2 flex items-center space-x-2 text-sm text-muted-foreground">
+          <div className="mt-2 flex items-center space-x-2 text-sm text-muted-foreground">
             <Clock className="hidden sm:inline h-3.5 w-3.5" />
             <span>{dateFormatter(post.date)}</span>
           </div>
@@ -43,7 +43,7 @@ export default function PostCard({ post }: Props) {
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-sm">{post.description}</p>
+        <p className="text-sm max-w-full whitespace-normal break-words hyphens-auto" lang="pt">{post.description}</p>
       </CardContent>
       <CardFooter className="flex justify-end pt-0">
         <Button variant="ghost" size="sm" className="cursor-pointer">

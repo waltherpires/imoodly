@@ -6,7 +6,11 @@ import { usePosts } from "@/hooks/diaryHooks/usePosts";
 import { Post } from "@/lib/api/diaryPost";
 import { dateFormatterNoHours } from "@/helpers/dateFormatter";
 import { useSession } from "next-auth/react";
-import { createDateFilter, createFilterText, filterData } from "@/helpers/filterDataText";
+import {
+  createDateFilter,
+  createFilterText,
+  filterData,
+} from "@/helpers/filterDataText";
 import { usePagination } from "@/hooks/paginationHooks/usePagination";
 import { TodosTabSkeleton } from "./TodosTabSkeleton";
 import PostCard from "../../PostCard";
@@ -52,7 +56,10 @@ export default function TodosTab({ textFilter, date }: Props) {
   }
 
   return (
-    <TabsContent value="todos" className="mt-4 space-y-4">
+    <TabsContent
+      value="todos"
+      className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+    >
       {isPending ? (
         <TodosTabSkeleton />
       ) : filteredData.length === 0 ? (
@@ -70,12 +77,14 @@ export default function TodosTab({ textFilter, date }: Props) {
         currentItems?.map((item) => <PostCard key={item.id} post={item} />)
       )}
 
-      <CustomPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onNext={goToNextPage}
-        onPrevious={goToPreviousPage}
-      />
+      <div className="col-span-full">
+        <CustomPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onNext={goToNextPage}
+          onPrevious={goToPreviousPage}
+        />
+      </div>
     </TabsContent>
   );
 }
