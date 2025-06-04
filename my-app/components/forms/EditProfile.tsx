@@ -15,7 +15,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export const formSchema = z.object({
-  name: z.string().min(1, { message: "Informe seu nome" }),
+  name: z
+    .string()
+    .min(1, { message: "Informe seu nome" })
+    .regex(/^[\p{L}\p{N} ]+$/u, {
+      message: "Nome só pode conter letras",
+    }),
   birthdate: z
     .string()
     .min(1, { message: "Informe sua data de nascimento" })
@@ -69,7 +74,7 @@ export default function EditProfileForm({
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Digite seu email" {...field} />
+                <Input placeholder="Digite seu email"  {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -88,7 +93,9 @@ export default function EditProfileForm({
             </FormItem>
           )}
         />
-        <span className="text-sm text-muted-foreground">Você será deslogado ao fazer alterações.</span>
+        <span className="text-sm text-muted-foreground">
+          Você será deslogado ao fazer alterações.
+        </span>
         <div className="flex justify-end space-x-2">
           <Button
             className="cursor-pointer"
@@ -96,12 +103,16 @@ export default function EditProfileForm({
             variant="secondary"
             onClick={() => {
               form.reset();
-              onClose(); 
+              onClose();
             }}
           >
             Cancelar
           </Button>
-          <Button className="cursor-pointer not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300" type="submit" variant="default">
+          <Button
+            className="cursor-pointer not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300"
+            type="submit"
+            variant="default"
+          >
             Salvar
           </Button>
         </div>

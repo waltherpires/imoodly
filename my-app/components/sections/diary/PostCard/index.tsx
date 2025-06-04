@@ -2,14 +2,14 @@ import { Clock } from "lucide-react";
 import {
   Card,
   CardContent,
-  CardFooter,
+  // CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Post } from "@/lib/api/diaryPost";
 import { dateFormatter } from "@/helpers/dateFormatter";
 import { getTagColor } from "@/helpers/postHelpers";
+// import { Eye } from 'lucide-react';
 
 type Props = {
   post: Post;
@@ -43,13 +43,16 @@ export default function PostCard({ post }: Props) {
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-sm max-w-full whitespace-normal break-words hyphens-auto" lang="pt">{post.description}</p>
+        <p
+          className="text-sm max-w-full whitespace-normal break-words hyphens-auto"
+          lang="pt"
+        >
+          {post.description}
+        </p>
       </CardContent>
-      <CardFooter className="flex justify-end pt-0">
-        <Button variant="ghost" size="sm" className="cursor-pointer">
-          Ver mais
-        </Button>
-      </CardFooter>
+      {/*       <CardFooter className="flex justify-end pt-0">
+          <Eye className="w-5"/>
+      </CardFooter> */}
     </Card>
   );
 }

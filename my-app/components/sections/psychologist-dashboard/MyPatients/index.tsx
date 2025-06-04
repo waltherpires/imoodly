@@ -3,13 +3,33 @@
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { User } from "lucide-react";
+import { useSession } from "next-auth/react";
+import useMyPatients from "@/hooks/requestHooks/useMyPatients";
+import CardSkeleton from "../../dashboard/DashboardCards/CardSkeleton";
+import ErrorCard from "../../dashboard/DashboardCards/ErrorCard";
 
 export default function MyPatientsCard() {
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
+  const { data, isPending, error } = useMyPatients(userId);
   const router = useRouter();
 
   const handleNavigation = () => {
-    router.push("/psychologist/patients");
+    router.push("patients");
   };
+
+  if (isPending) return <CardSkeleton />;
+
+  if (error) return <ErrorCard />;
+
+  const patientsSummay =
+    data.length === 0 || undefined ? (
+      <p className="text-xl font-semibold mb-1">Sem pacientes</p>
+    ) : data.length === 1 ? (
+      <p className="text-xl font-semibold mb-1">1 paciente</p>
+    ) : (
+      <p className="text-xl font-semibold mb-1">{data.length} paciente</p>
+    );
 
   return (
     <Card
@@ -23,7 +43,7 @@ export default function MyPatientsCard() {
       </CardHeader>
       <CardContent className="flex justify-between items-end">
         <div>
-          <p className="text-xl font-semibold mb-1">3 pacientes</p>
+          {patientsSummay}
           <p className="text-xs text-muted-foreground tracking-tight">
             Usuários que você está acompanhando
           </p>
