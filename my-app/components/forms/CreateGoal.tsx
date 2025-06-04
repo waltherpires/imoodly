@@ -14,10 +14,18 @@ import { Button } from "../ui/button";
 import { ButtonWithLoading } from "../my-ui/ButtonLoading";
 
 export const formSchema = z.object({
-  title: z.string().min(1, { message: "Informe o título." }),
+  title: z
+    .string()
+    .min(1, { message: "Informe o título." })
+    .regex(/^[\p{L}\p{N} '-,]*$/u, {
+      message: "Não são permitidos caracteres especiais ou emojis",
+    }),
   description: z
     .string()
     .max(100, { message: "Informe uma descrição menor." })
+    .regex(/^[\p{L}\p{N} '-,]*$/u, {
+      message: "Não são permitidos caracteres especiais ou emojis",
+    })
     .optional(),
   dueDate: z
     .string()
@@ -126,7 +134,12 @@ export default function CreateGoal({ onSubmit, onClose }: CreateGoalProps) {
           >
             Cancelar
           </Button>
-          <ButtonWithLoading className="cursor-pointer not-dark:bg-koromiko-300 not-dark:hover:bg-koromiko-400" type="submit">Salvar Meta</ButtonWithLoading>
+          <ButtonWithLoading
+            className="cursor-pointer not-dark:bg-koromiko-300 not-dark:hover:bg-koromiko-400"
+            type="submit"
+          >
+            Salvar Meta
+          </ButtonWithLoading>
         </div>
       </form>
     </Form>

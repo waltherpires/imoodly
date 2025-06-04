@@ -53,6 +53,9 @@ export default function useRespondRequest() {
         queryKey: ["notifications"],
         exact: false,
       });
+      queryClient.invalidateQueries({
+        queryKey: ["patients", _variables.userId],
+      });
       toast.success("Resposta enviada.");
     },
     onError: (error: any) => {
