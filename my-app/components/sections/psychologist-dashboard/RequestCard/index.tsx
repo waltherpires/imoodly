@@ -36,7 +36,7 @@ export default function RequestCard() {
             Alguns usuários querem o seu acompanhamento
           </p>
         </div>
-        <ModalButton variant="default" buttonLabel="Buscar">
+        <ModalButton variant="default" buttonLabel="Ver">
           {(close) => (
             <RequestList
               onClose={close}

@@ -3,5 +3,5 @@ interface ContentProps {
 }
 
 export function Content({ children }: ContentProps) {
-  return <div className="text-sm sm:text-base break-words whitespace-normal w-60 text-left hyphens-auto" lang="pt">{children}</div>;
+  return <div className="text-sm break-words whitespace-normal w-60 text-left hyphens-auto" lang="pt">{children}</div>;
 }

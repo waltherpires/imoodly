@@ -44,7 +44,7 @@ export default function TodosTab({ textFilter, date }: Props) {
   if (error) {
     return (
       <Card className="flex flex-col gap-2 justify-center items-center">
-        <h1 className="text-xl font-semibold leading-tight">
+        <h1 className="text-md font-semibold leading-tight">
           Ocorrou um erro ao carregar seus Posts!
         </h1>
       </Card>

@@ -13,5 +13,7 @@ export default function useAvailablePsychologistsList() {
     return useQuery({
         queryKey: ['psychologists'],
         queryFn: fetchAvailablePsychologistsList,
+        refetchInterval: 1000 * 60,
+        refetchOnWindowFocus: true
     });
 }

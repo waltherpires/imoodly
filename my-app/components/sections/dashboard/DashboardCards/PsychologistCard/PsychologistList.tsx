@@ -34,7 +34,7 @@ export default function PsychologistList({ onClose }: PsychologistListProps) {
     <>
       <div className="flex justify-end items-center mb-5">
         <Button
-          className="cursor-pointer bg-red-400 hover:bg-red-300 text-white"
+          className="cursor-pointer bg-mandy-500 hover:bg-mandy-400 text-white"
           onClick={handleClose}
         >
           Fechar

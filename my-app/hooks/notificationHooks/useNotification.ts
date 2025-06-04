@@ -31,5 +31,7 @@ export function useNotifications(options?: {
   return useQuery<Notification[]>({
     queryKey: ["notifications", options],
     queryFn: () => fetchNotifications(options),
+    refetchInterval: 1000 * 30,
+    refetchOnWindowFocus: true,
   });
 }

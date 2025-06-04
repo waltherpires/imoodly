@@ -163,12 +163,23 @@ export default function Chart() {
 
   if (isError) {
     return (
-      <Card className="w-full md:w-6/12 ml-2 drop-shadow-2xl items-center">
+      <Card className="w-full md:w-6/12 ml-2 drop-shadow-2xl">
         <CardHeader>
           <CardTitle>Erro</CardTitle>
           <CardDescription className="text-xs">
             Não foi possível carregar os dados.
           </CardDescription>
+        </CardHeader>
+      </Card>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <Card className="flex flex-col w-full md:w-6/12 drop-shadow-2xl">
+        <CardHeader className="items-center pb-0">
+          <CardTitle>Emoções</CardTitle>
+          <CardDescription className="flex flex-col md:flew-row md:justify-between">Sem dados suficientes!</CardDescription>
         </CardHeader>
       </Card>
     );

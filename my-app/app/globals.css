@@ -88,6 +88,17 @@
   --color-koromiko-800: #974215;
   --color-koromiko-900: #7a3714;
   --color-koromiko-950: #421a08;
+  --color-mandy-50: #fdf4f3;
+  --color-mandy-100: #fce7e8;
+  --color-mandy-200: #f9d2d5;
+  --color-mandy-300: #f3aeb2;
+  --color-mandy-400: #ec808a;
+  --color-mandy-500: #e05263;
+  --color-mandy-600: #cc324c;
+  --color-mandy-700: #ab253f;
+  --color-mandy-800: #90213a;
+  --color-mandy-900: #7b2037;
+  --color-mandy-950: #440d19;
 }
 
 :root {
