@@ -16,6 +16,7 @@ async function sendGoalForm(data: FormDataCreateGoal) {
 export function useGoalsForm(userId?: string) {
   const queryClient = useQueryClient();
 
+  console.log("id do paciente: ", userId);
   const mutation = useMutation({
     mutationFn: sendGoalForm,
     onMutate: async (newGoal) => {
@@ -41,9 +42,24 @@ export function useGoalsForm(userId?: string) {
       return { previousGoals };
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["goals", userId] });
-      queryClient.invalidateQueries({ queryKey: ["goals-summary", userId] });
-      queryClient.invalidateQueries({ queryKey: ["notifications"] });
+      queryClient.invalidateQueries({
+        queryKey: ["goals", userId],
+        exact: false,
+      });
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          Array.isArray(query.queryKey) &&
+          query.queryKey[0] === "goals-summary" &&
+          query.queryKey[1] === userId,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["notifications"],
+        exact: false,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["patients"],
+        exact: false,
+      });
     },
     onSuccess: () => {
       toast.success("Meta criada com sucesso.");

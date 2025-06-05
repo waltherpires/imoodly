@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -31,22 +37,30 @@ export default function PatientProfile({ patientData }: PatientDataProps) {
           <DialogTitle>Perfil</DialogTitle>
         </DialogHeader>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            <div className="flex flex-col justify-center">
-          <Card className="not-dark:bg-sea-nymph-200">
-            <CardHeader>
-              <CardTitle>Dados do Usuário</CardTitle>
-            </CardHeader>
-            <CardContent className="text-sm rounded-sm mx-2 py-2">
-              <p>Nome: {patientData.name}</p>
-              <p>Email: {patientData.email}</p>
-              <p>Idade: {patientData.age} anos</p>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-2">
-                <Button className="w-full bg-koromiko-400 hover:bg-koromiko-500">Diário</Button>
+          <div className="flex flex-col justify-center">
+            <Card className="not-dark:bg-sea-nymph-200">
+              <CardHeader>
+                <CardTitle>Dados do Usuário</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm rounded-sm md:mx-2 py-2">
+                <p>
+                  Nome: <span className="inline-block">{patientData.name}</span>
+                </p>
+                <p>
+                  Email: <span className="inline-block">{patientData.email}</span>
+                </p>
+                <p>
+                  Idade: <span className="inline-block">{patientData.age} anos</span>
+                </p>
+              </CardContent>
+              <CardFooter className="flex flex-col gap-2">
+                <Button className="w-full bg-koromiko-400 hover:bg-koromiko-500">
+                  Diário
+                </Button>
                 <Button className="w-full ">Metas</Button>
-            </CardFooter>
-          </Card>
-            </div>
+              </CardFooter>
+            </Card>
+          </div>
           <Card className="sm:col-span-2 not-dark:bg-sea-nymph-200">
             <CardHeader>
               <CardTitle>Resumo do mês</CardTitle>
