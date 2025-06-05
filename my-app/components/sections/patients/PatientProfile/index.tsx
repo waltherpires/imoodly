@@ -14,71 +14,115 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Suspense } from "react";
 import CardSkeleton from "../../dashboard/DashboardCards/CardSkeleton";
 import PredominantMoodCard from "../../dashboard/DashboardCards/PredominantMoodCard";
 import DiaryRecordsCard from "../../dashboard/DashboardCards/DiaryRecordsCard";
 import GoalsSummaryCard from "../../dashboard/DashboardCards/GoalsSummaryCard";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type PatientDataProps = {
   patientData: any;
 };
 
 export default function PatientProfile({ patientData }: PatientDataProps) {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  if (isDesktop) {
+    return (
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="not-dark:bg-sea-nymph-500 not-dark:hover:bg-sea-nymph-400 cursor-pointer w-30 sm:w-15">
+            Perfil
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-10/11 lg:max-w-4xl my-15">
+          <DialogHeader>
+            <DialogTitle>Perfil</DialogTitle>
+          </DialogHeader>
+          <PatientProfileContent patientData={patientData} />
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <Drawer>
+      <DrawerTrigger asChild>
         <Button className="not-dark:bg-sea-nymph-500 not-dark:hover:bg-sea-nymph-400 cursor-pointer w-30 sm:w-15">
           Perfil
         </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-10/11 lg:max-w-4xl my-15">
-        <DialogHeader>
-          <DialogTitle>Perfil</DialogTitle>
-        </DialogHeader>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-          <div className="flex flex-col justify-center">
-            <Card className="not-dark:bg-sea-nymph-200">
-              <CardHeader>
-                <CardTitle>Dados do Usuário</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm rounded-sm md:mx-2 py-2">
-                <p>
-                  Nome: <span className="inline-block">{patientData.name}</span>
-                </p>
-                <p>
-                  Email: <span className="inline-block">{patientData.email}</span>
-                </p>
-                <p>
-                  Idade: <span className="inline-block">{patientData.age} anos</span>
-                </p>
-              </CardContent>
-              <CardFooter className="flex flex-col gap-2">
-                <Button className="w-full bg-koromiko-400 hover:bg-koromiko-500">
-                  Diário
-                </Button>
-                <Button className="w-full ">Metas</Button>
-              </CardFooter>
-            </Card>
-          </div>
-          <Card className="sm:col-span-2 not-dark:bg-sea-nymph-200">
-            <CardHeader>
-              <CardTitle>Resumo do mês</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-              <Suspense fallback={<CardSkeleton />}>
-                <PredominantMoodCard userId={patientData.id} />
-              </Suspense>
-              <Suspense fallback={<CardSkeleton />}>
-                <DiaryRecordsCard userId={patientData.id} />
-              </Suspense>
-              <Suspense fallback={<CardSkeleton />}>
-                <GoalsSummaryCard userId={patientData.id} />
-              </Suspense>
-            </CardContent>
-          </Card>
+      </DrawerTrigger>
+      <DrawerContent className="flex flex-col max-h-[90vh]">
+        <DrawerHeader>
+          <DrawerTitle>Perfil</DrawerTitle>
+        </DrawerHeader>
+        <div className="flex-1 overflow-y-auto px-4 space-y-4">
+          <PatientProfileContent patientData={patientData} />
+          <DrawerClose asChild>
+            <Button variant="outline" className="w-full my-6">
+              Fechar
+            </Button>
+          </DrawerClose>
         </div>
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+
+function PatientProfileContent({ patientData }: PatientDataProps) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 py-4">
+      <div className="flex flex-col justify-center">
+        <Card className="not-dark:bg-sea-nymph-200">
+          <CardHeader>
+            <CardTitle>Dados do Usuário</CardTitle>
+          </CardHeader>
+          <CardContent className="text-sm rounded-sm md:mx-2 py-2">
+            <p>
+              Nome: <span className="inline-block">{patientData.name}</span>
+            </p>
+            <p>
+              Email: <span className="inline-block">{patientData.email}</span>
+            </p>
+            <p>
+              Idade:{" "}
+              <span className="inline-block">{patientData.age} anos</span>
+            </p>
+          </CardContent>
+          <CardFooter className="flex flex-col gap-2">
+            <Button className="w-full bg-koromiko-400 hover:bg-koromiko-500">
+              Diário
+            </Button>
+            <Button className="w-full">Metas</Button>
+          </CardFooter>
+        </Card>
+      </div>
+
+      <Card className="sm:col-span-2 not-dark:bg-sea-nymph-200">
+        <CardHeader>
+          <CardTitle>Resumo do mês</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4">
+          <Suspense fallback={<CardSkeleton />}>
+            <PredominantMoodCard userId={patientData.id} />
+          </Suspense>
+          <Suspense fallback={<CardSkeleton />}>
+            <DiaryRecordsCard userId={patientData.id} />
+          </Suspense>
+          <Suspense fallback={<CardSkeleton />}>
+            <GoalsSummaryCard userId={patientData.id} />
+          </Suspense>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
