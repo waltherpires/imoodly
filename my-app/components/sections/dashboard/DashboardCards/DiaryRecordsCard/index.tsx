@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { lastWeekRecords, thisMonthRecords } from "@/helpers/dateFormatter";
@@ -21,15 +21,23 @@ export default function DiaryRecordsCard({ userId }: { userId?: string }) {
     return thisMonthRecords(data).length;
   }, [data]);
 
-
   if (isPending) {
-    return <CardSkeleton />
+    return <CardSkeleton />;
   }
 
   if (isError) {
-    return <ErrorCard />
+    return <ErrorCard />;
   }
 
+  const registersThisMonth =
+    thisMonthCount === 0
+      ? "Sem registros neste mês"
+      : `${thisMonthCount} neste mês`;
+
+  const registersLastWeek = 
+    lastWeekCount === 0
+      ? "Sem registros na última semana"
+      : `${lastWeekCount} na última semana`
   return (
     <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800 min-h-40 py-8">
       <CardHeader>
@@ -39,9 +47,9 @@ export default function DiaryRecordsCard({ userId }: { userId?: string }) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-xl font-semibold mb-1">{thisMonthCount} neste mês</p>
+        <p className="text-xl font-semibold mb-1">{registersThisMonth}</p>
         <p className="text-xs text-muted-foreground tracking-tight">
-          {lastWeekCount} na última semana
+          {registersLastWeek}
         </p>
       </CardContent>
     </Card>

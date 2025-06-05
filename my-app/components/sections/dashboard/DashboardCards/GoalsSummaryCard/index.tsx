@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -15,18 +15,28 @@ export default function GoalsSummaryCard({ userId }: { userId?: string }) {
     today.getFullYear()
   );
 
+  console.log("dados de metas: ", data);
+
   let percent = 0;
   if (data && data.totalGoals > 0) {
     percent = (data.completedGoals / data.totalGoals) * 100;
   }
 
   if (isPending) {
-    return <CardSkeleton />
+    return <CardSkeleton />;
   }
 
   if (isError) {
-    return <ErrorCard />
+    return <ErrorCard />;
   }
+
+  const goalMessages =
+    data.totalGoals === 0
+      ? "Sem metas neste mês"
+      : `${data.completedGoals} de ${data.totalGoals}`;
+
+  const messageDescription =
+    data.totalGoals === 0 ? "Sem metas" : `${percent.toFixed(0)}% concluído`;
 
   return (
     <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
@@ -43,11 +53,9 @@ export default function GoalsSummaryCard({ userId }: { userId?: string }) {
           </>
         ) : (
           <>
-            <p className="text-xl font-semibold mb-1">
-              {data.completedGoals} de {data.totalGoals}
-            </p>
+            <p className="text-xl font-semibold mb-1">{goalMessages}</p>
             <p className="text-xs text-muted-foreground tracking-tight">
-              {percent.toFixed(1)}% concluído
+              {messageDescription}
             </p>
           </>
         )}
