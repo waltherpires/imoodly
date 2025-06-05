@@ -9,9 +9,9 @@ async function fetchMyPatients() {
     return response.data;
 }
 
-export default function useMyPatients(userId?: string) {
+export default function useMyPatients() {
     return useQuery({
-        queryKey: ['patients', userId],
+        queryKey: ['my-patients'],
         queryFn: fetchMyPatients,
     });
 }

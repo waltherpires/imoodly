@@ -54,7 +54,7 @@ export default function useRespondRequest() {
         exact: false,
       });
       queryClient.invalidateQueries({
-        queryKey: ["patients", _variables.userId],
+        queryKey: ["my-patients"],
       });
       toast.success("Resposta enviada.");
     },

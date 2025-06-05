@@ -3,15 +3,12 @@
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { User } from "lucide-react";
-import { useSession } from "next-auth/react";
 import useMyPatients from "@/hooks/requestHooks/useMyPatients";
 import CardSkeleton from "../../dashboard/DashboardCards/CardSkeleton";
 import ErrorCard from "../../dashboard/DashboardCards/ErrorCard";
 
 export default function MyPatientsCard() {
-  const { data: session } = useSession();
-  const userId = session?.user?.id;
-  const { data, isPending, error } = useMyPatients(userId);
+  const { data, isPending, error } = useMyPatients();
   const router = useRouter();
 
   const handleNavigation = () => {
