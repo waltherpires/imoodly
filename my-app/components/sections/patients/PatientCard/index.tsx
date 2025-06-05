@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
@@ -8,24 +7,30 @@ import {
 } from "@/components/ui/card";
 import { calculateAge } from "@/helpers/dateFormatter";
 import { useMemo } from "react";
+import PatientProfile from "../PatientProfile";
 
 type PatientCardProps = {
   linkData: any;
-}
+};
 
 export default function PatientCard({ linkData }: PatientCardProps) {
-  const patientData = linkData.requester;
+  const patient = linkData.requester;
 
-  const age = useMemo(() => calculateAge(patientData.birthdate), [patientData.birthdate]);
+  const age = useMemo(
+    () => calculateAge(patient.birthdate),
+    [patient.birthdate]
+  );
+
+  const patientData = { ...patient, age };
 
   return (
     <Card className="min-w-40">
       <CardHeader className="flex flex-row justify-between  items-start">
-          <div className="m-1 sm:ml-0">
-            <CardTitle>{patientData.name}</CardTitle>
-            <CardDescription>{age} anos</CardDescription>
-          </div>
-          <Button className="cursor-pointer w-30 sm:w-15 ease-out">Perfil</Button>
+        <div className="m-1 sm:ml-0">
+          <CardTitle>{patientData.name}</CardTitle>
+          <CardDescription>{patientData.age} anos</CardDescription>
+        </div>
+        <PatientProfile patientData={patientData} />
       </CardHeader>
     </Card>
   );
