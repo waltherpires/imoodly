@@ -86,17 +86,27 @@ function PatientProfileContent({ patientData }: PatientDataProps) {
           <CardHeader>
             <CardTitle>Dados do Usuário</CardTitle>
           </CardHeader>
-          <CardContent className="text-sm rounded-sm md:mx-2 py-2">
-            <p>
-              Nome: <span className="inline-block">{patientData.name}</span>
-            </p>
-            <p>
-              Email: <span className="inline-block">{patientData.email}</span>
-            </p>
-            <p>
-              Idade:{" "}
-              <span className="inline-block">{patientData.age} anos</span>
-            </p>
+          <CardContent className="text-sm rounded-sm md:mx-2 py-2 min-w-50">
+            <div className="flex flex-wrap gap-6">
+              <div className="flex flex-col">
+                <span className="font-semibold">Nome:</span>
+                <span className="inline-block">
+                  {patientData.name}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-semibold">Email:</span>
+                <span className="inline-block">
+                  {patientData.email}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-semibold">Idade:</span>
+                <span className="inline-block">
+                  {patientData.age} anos
+                </span>
+              </div>
+            </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-2">
             <Button className="w-full bg-koromiko-400 hover:bg-koromiko-500">
