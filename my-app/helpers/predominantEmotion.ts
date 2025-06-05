@@ -52,7 +52,7 @@ export function getPredominantEmotion(emotionData: EmotionDataEntry[]) {
         (Number(currentMonthData.emotions[predominantEmotion]) /
           totalEmotions) *
         100
-      ).toFixed(1)
+      ).toFixed(0)
     : "0";
 
   return {
