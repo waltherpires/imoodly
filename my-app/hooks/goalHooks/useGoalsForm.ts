@@ -57,7 +57,7 @@ export function useGoalsForm(userId?: string) {
         exact: false,
       });
       queryClient.invalidateQueries({
-        queryKey: ["patients"],
+        queryKey: ["my-patients"],
         exact: false,
       });
     },

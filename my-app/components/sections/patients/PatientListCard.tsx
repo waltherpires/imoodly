@@ -2,7 +2,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import PatientCard from "./PatientCard";
 import useMyPatients from "@/hooks/requestHooks/useMyPatients";
-import { useSession } from "next-auth/react";
 import PatientCardSkeleton from "./PatientCard/PatientCardSkeleton";
 import NoPatientCard from "./PatientCard/NoPatientCard";
 import { filterData, createFilterText } from "@/helpers/filterDataText";
@@ -14,9 +13,7 @@ type PatientListCardProps = {
 };
 
 export default function PatientListCard({ textFilter }: PatientListCardProps) {
-  const { data: session } = useSession();
-  const userId = session?.user?.id;
-  const { data, isPending, error } = useMyPatients(userId);
+  const { data, isPending, error } = useMyPatients();
   const filters = [];
 
   if (textFilter) {
