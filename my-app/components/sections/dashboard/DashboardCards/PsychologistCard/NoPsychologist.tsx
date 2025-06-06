@@ -2,7 +2,7 @@
 
 import ModalButton from "@/components/my-ui/ModalButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import PsychologistList from "./PsychologistList";
+import PsychologistList from "./PsychologistList/ListContent";
 import { Clock } from "lucide-react";
 
 export default function NoPsychologist() {
