@@ -16,7 +16,7 @@ export default function GoalsList({ userId }: GoalsListProps) {
   if (isPending) return <CardSkeleton />;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 max-h-[400px] overflow-y-auto">
       {data && data.length > 0 ? (
         data.map((goal: any) => (
           <Goal

@@ -4,7 +4,7 @@ import PatientCard from "./PatientCard";
 import useMyPatients from "@/hooks/requestHooks/useMyPatients";
 import PatientCardSkeleton from "./PatientCard/PatientCardSkeleton";
 import NoPatientCard from "./PatientCard/NoPatientCard";
-import { filterData, createFilterText } from "@/helpers/filterDataText";
+import { filterData, createFilterTextByField } from "@/helpers/filterDataText";
 import { usePagination } from "@/hooks/paginationHooks/usePagination";
 import CustomPagination from "@/components/my-ui/CustomPagination";
 
@@ -17,7 +17,7 @@ export default function PatientListCard({ textFilter }: PatientListCardProps) {
   const filters = [];
 
   if (textFilter) {
-    filters.push(createFilterText(textFilter));
+    filters.push(createFilterTextByField(textFilter, 'requester.name'));
   }
 
   const filteredData = filterData(data || [], filters);

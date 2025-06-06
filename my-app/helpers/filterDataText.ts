@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isSameDay } from "@/helpers/postHelpers";
 
 export function filterData<T>(
@@ -7,15 +8,19 @@ export function filterData<T>(
   return data.filter((item) => filters.every((filter) => filter(item)));
 }
 
-type Recordable = Record<string, unknown>
+export function createFilterTextByField<T>(
+  textFilter: string,
+  fieldPath: string
+): (item: T) => boolean {
+  const cleanFilter = textFilter.trim().toLowerCase();
 
-export function createFilterText<T extends Recordable>(textFilter: string): (item: T) => boolean {
-  return (item: T) =>
-    Object.values(item).some(
-      (value) =>
-        typeof value === "string" &&
-        value.toLowerCase().includes(textFilter.toLowerCase())
-    );
+  return (item: T) => {
+    const fieldValue = fieldPath
+      .split(".")
+      .reduce((acc: any, part) => acc && acc[part], item);
+
+    return String(fieldValue).toLowerCase().includes(cleanFilter);
+  };
 }
 
 export function createDateFilter<T extends { date: string}>(date: Date): (item: T) => boolean {

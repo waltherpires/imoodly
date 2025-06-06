@@ -19,7 +19,7 @@ export default function MyPatientsCard() {
 
   if (error) return <ErrorCard />;
 
-  const patientsSummay =
+  const patientsSummary =
     data.length === 0 || undefined ? (
       <p className="text-xl font-semibold mb-1">Sem pacientes</p>
     ) : data.length === 1 ? (
@@ -40,7 +40,7 @@ export default function MyPatientsCard() {
       </CardHeader>
       <CardContent className="flex justify-between items-end">
         <div>
-          {patientsSummay}
+          {patientsSummary}
           <p className="text-xs text-muted-foreground tracking-tight">
             Usuários que você está acompanhando
           </p>
