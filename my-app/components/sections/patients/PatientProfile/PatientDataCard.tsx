@@ -23,7 +23,7 @@ export default function PatientDataCard({
   onViewChange,
 }: PatientDataCardProps) {
   return (
-    <Card className="not-dark:bg-sea-nymph-200">
+    <Card className="not-dark:bg-sea-nymph-200 max-h-130">
       <CardHeader>
         <CardTitle>Dados do Usuário</CardTitle>
       </CardHeader>

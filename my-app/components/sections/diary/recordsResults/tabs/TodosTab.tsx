@@ -8,7 +8,7 @@ import { dateFormatterNoHours } from "@/helpers/dateFormatter";
 import { useSession } from "next-auth/react";
 import {
   createDateFilter,
-  createFilterText,
+  createFilterTextByField,
   filterData,
 } from "@/helpers/filterDataText";
 import { usePagination } from "@/hooks/paginationHooks/usePagination";
@@ -28,7 +28,7 @@ export default function TodosTab({ textFilter, date }: Props) {
   const filters: ((item: Post) => boolean)[] = [];
 
   if (textFilter) {
-    filters.push(createFilterText<Post>(textFilter));
+    filters.push(createFilterTextByField<Post>(textFilter, 'title'));
   }
 
   if (date) {
