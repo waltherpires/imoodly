@@ -16,7 +16,6 @@ async function sendGoalForm(data: FormDataCreateGoal) {
 export function useGoalsForm(userId?: string) {
   const queryClient = useQueryClient();
 
-  console.log("id do paciente: ", userId);
   const mutation = useMutation({
     mutationFn: sendGoalForm,
     onMutate: async (newGoal) => {
