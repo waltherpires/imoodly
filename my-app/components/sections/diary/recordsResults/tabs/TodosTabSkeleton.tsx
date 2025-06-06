@@ -9,7 +9,7 @@ export function TodosTabSkeleton() {
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <CardTitle>
-              <Skeleton className="h-4 w-2/3" />
+              <Skeleton className="h-4 w-1/3" />
             </CardTitle>
             <div className="ml-2 flex items-center space-x-2 text-sm text-muted-foreground">
               <Skeleton className="h-4 w-1/3" />
@@ -17,11 +17,11 @@ export function TodosTabSkeleton() {
             </div>
           </div>
           <div className="flex space-x-2 mt-1">
-            <Skeleton className="h-4 w-[250px]" />
+            <Skeleton className="h-4 w-[100px]" />
           </div>
         </CardHeader>
         <CardContent>
-          <Skeleton className="h-4 w-[200px]" />
+          <Skeleton className="h-4 w-[150px]" />
         </CardContent>
         <CardFooter className="flex justify-end pt-0">
           <Skeleton className="h-6 w-12 rounded" />

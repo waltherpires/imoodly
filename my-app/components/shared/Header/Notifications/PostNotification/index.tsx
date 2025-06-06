@@ -1,7 +1,10 @@
-
 import { Notification } from "@/components/my-ui/Notification";
-import { MessageSquare, ChevronRight } from "lucide-react";
+import { MessageSquare, ChevronUp, X } from "lucide-react";
 import { NotificationType } from "../type";
+import { Button } from "@/components/ui/button";
+import { useSeeNotification } from "@/hooks/notificationHooks/useSeeNotification";
+import PostViewModal from "./PostViewModal";
+import { getTimeAgo } from "@/helpers/dateFormatter";
 interface PostNotificationProps {
   notification: NotificationType;
 }
@@ -9,6 +12,13 @@ interface PostNotificationProps {
 export default function PostNotification({
   notification,
 }: PostNotificationProps) {
+  const seeNotification = useSeeNotification();
+
+  const handleCloseNotification = () => {
+    seeNotification.mutate(String(notification.id));
+  };
+
+  const timePassed = getTimeAgo(new Date(notification.createdAt));
 
   return (
     <>
@@ -17,10 +27,27 @@ export default function PostNotification({
         <Notification.Icon icon={MessageSquare} className="w-4" />
         <Notification.Content>
           {`${notification.sender?.name} fez uma nova postagem`}
+          <p className="text-xs text-muted-foreground mt-1">{timePassed}</p>
         </Notification.Content>
-        <Notification.ActionButton variant="ghost" className="cursor-pointer">
-          <ChevronRight />
-        </Notification.ActionButton>
+        <Notification.ActionsButton>
+          <PostViewModal
+            userId={notification.sender.id}
+            postId={notification.resourceId!}
+            postType={notification.type as "diary" | "goal"}
+            trigger={
+              <Button variant="ghost">
+                <ChevronUp />
+              </Button>
+            }
+          />
+          <Button
+            variant="ghost"
+            className="cursor-pointer"
+            onClick={handleCloseNotification}
+          >
+            <X />
+          </Button>
+        </Notification.ActionsButton>
       </Notification.Root>
     </>
   );

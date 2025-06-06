@@ -5,7 +5,8 @@ import { NotificationType } from "../type";
 import useRespondRequest, {
   LinkRequestStatus,
 } from "@/hooks/requestHooks/useRespondRequest";
-interface LinkNotificationProps {
+import { getTimeAgo } from "@/helpers/dateFormatter";
+export interface LinkNotificationProps {
   notification: NotificationType;
 }
 
@@ -22,6 +23,9 @@ export default function LinkNotification({
     });
   };
 
+  const timePassed = getTimeAgo(new Date(notification.createdAt));
+  
+
   return (
     <>
       <div className="bg-border -mx-1 my-1 h-px" />
@@ -29,6 +33,7 @@ export default function LinkNotification({
         <Notification.Icon icon={Handshake} className="w-4" />
         <Notification.Content>
           {`Solicitação de acompanhamento de ${notification.sender?.name}`}
+          <p className="text-xs text-muted-foreground mt-1">{timePassed}</p>
         </Notification.Content>
         <Notification.ActionsButton>
           <Button

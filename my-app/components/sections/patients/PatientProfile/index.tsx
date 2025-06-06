@@ -23,7 +23,7 @@ type PatientDataProps = {
 };
 
 export default function PatientProfile({ patientData }: PatientDataProps) {
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
     return (
