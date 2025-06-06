@@ -34,8 +34,8 @@ export default function Goal({
 }: GoalProps) {
   const { data: sessionData } = useSession();
   const userId = sessionData?.user.id;
-  const goalProgress = useGoalsProgress(id.toString(), userId ?? '');
-  const goalComplete = useGoalComplete(id.toString(), userId ?? '');
+  const goalProgress = useGoalsProgress(id.toString(), userId ?? "");
+  const goalComplete = useGoalComplete(id.toString(), userId ?? "");
 
   const percentage =
     progress.total === 0 ? 0 : (progress.current / progress.total) * 100;
@@ -55,7 +55,7 @@ export default function Goal({
 
   const handleComplete = () => {
     goalComplete.mutate();
-  }
+  };
 
   return (
     <Card className="w-full mb-2">
@@ -76,25 +76,33 @@ export default function Goal({
             Meta: {progress.current}/{progress.total}
           </span>
         </div>
-        <div className="flex flex-col sm:flex-row justify-between mt-2">
-          <Button
-            className="cursor-pointer mt-2 bg-red-400 text-white hover:bg-red-500"
-            onClick={handleRegress}
-          >
-            Regredir
-          </Button>
-          {percentage < 100 ? (
-            <Button variant="outline" className="cursor-pointer mt-2" onClick={handleAdvance}>
-              Avançar
+        {sessionData?.user.role === "paciente" && (
+          <div className="flex flex-col sm:flex-row justify-between mt-2">
+            <Button
+              className="cursor-pointer mt-2 bg-red-400 text-white hover:bg-red-500"
+              onClick={handleRegress}
+            >
+              Regredir
             </Button>
-          ) : (
-            <Button className="cursor-pointer mt-2 not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300" onClick={handleComplete}>
-              Completar
-            </Button>
-          )}
-        </div>
+            {percentage < 100 ? (
+              <Button
+                variant="outline"
+                className="cursor-pointer mt-2"
+                onClick={handleAdvance}
+              >
+                Avançar
+              </Button>
+            ) : (
+              <Button
+                className="cursor-pointer mt-2 not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300"
+                onClick={handleComplete}
+              >
+                Completar
+              </Button>
+            )}
+          </div>
+        )}
       </CardContent>
     </Card>
   );
 }
-
