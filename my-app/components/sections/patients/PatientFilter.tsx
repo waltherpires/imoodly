@@ -18,7 +18,7 @@ export default function PatientFilter({ textFilter, setTextFilter }: Props) {
         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foregound" />
         <Input
           type="search"
-          placeholder="Buscar registros"
+          placeholder="Buscar usuário"
           className="pl-8 bg-white"
           value={textFilter}
           onChange={handleInputChange}
