@@ -1,9 +1,8 @@
 "use client";
 
-import ModalButton from "@/components/my-ui/ModalButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import PsychologistList from "./PsychologistList/ListContent";
 import { Clock } from "lucide-react";
+import { ResponsivetList } from "./PsychologistList/ResponsiveList";
 
 export default function NoPsychologist() {
   return (
@@ -20,9 +19,7 @@ export default function NoPsychologist() {
             Você ainda não possui psicólogo
           </p>
         </div>
-        <ModalButton variant="default" buttonLabel="Buscar">
-          {(close) => <PsychologistList onClose={close} />}
-        </ModalButton>
+        <ResponsivetList />
       </CardContent>
     </Card>
   );
