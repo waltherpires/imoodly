@@ -42,7 +42,7 @@ export function RequestListContent({ requests, isLoading }: ListProps) {
   };
   return (
     <>
-      <div className="flex flex-row justify-between items-center gap-2 my-5">
+      <div className="flex flex-row justify-between items-center gap-2 my-5 mx-2">
         <Button
           className="cursor-pointer not-only-of-type:not-dark:bg-koromiko-400 not-dark:hover:bg-koromiko-300 rounded-md not-dark:text-white text-xs"
           onClick={() => mutate()}
