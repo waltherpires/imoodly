@@ -12,7 +12,7 @@ export default function DiaryList({ userId }: DiaryListProps) {
   if (isLoading) return <CardSkeleton />;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="max-h-[400px] overflow-y-auto flex flex-col gap-4">
       {data && data.length > 0 ? (
         data.map((post) => <PostCard key={post.id} post={post} />)
       ) : (
