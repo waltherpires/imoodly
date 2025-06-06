@@ -9,7 +9,9 @@ import AccordionNotification from "./AccordionNotification";
 import { useNotifications } from "@/hooks/notificationHooks/useNotification";
 
 export default function Notifications() {
-  const { data: notifications, isLoading } = useNotifications();
+  const { data: notifications, isLoading } = useNotifications({
+    isRead: false
+  });
 
   const hasNotifications =
     !!notifications && notifications.some((n) => !n.isRead);

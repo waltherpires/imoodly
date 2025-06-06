@@ -15,8 +15,6 @@ export default function GoalsSummaryCard({ userId }: { userId?: string }) {
     today.getFullYear()
   );
 
-  console.log("dados de metas: ", data);
-
   let percent = 0;
   if (data && data.totalGoals > 0) {
     percent = (data.completedGoals / data.totalGoals) * 100;

@@ -1,13 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -22,12 +15,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Suspense } from "react";
-import CardSkeleton from "../../dashboard/DashboardCards/CardSkeleton";
-import PredominantMoodCard from "../../dashboard/DashboardCards/PredominantMoodCard";
-import DiaryRecordsCard from "../../dashboard/DashboardCards/DiaryRecordsCard";
-import GoalsSummaryCard from "../../dashboard/DashboardCards/GoalsSummaryCard";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import PatientProfileContent from "./PatientProfileContent";
 
 type PatientDataProps = {
   patientData: any;
@@ -78,61 +67,4 @@ export default function PatientProfile({ patientData }: PatientDataProps) {
   );
 }
 
-function PatientProfileContent({ patientData }: PatientDataProps) {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 py-4">
-      <div className="flex flex-col justify-center">
-        <Card className="not-dark:bg-sea-nymph-200">
-          <CardHeader>
-            <CardTitle>Dados do Usuário</CardTitle>
-          </CardHeader>
-          <CardContent className="text-sm rounded-sm md:mx-2 py-2 min-w-50">
-            <div className="flex flex-wrap gap-6">
-              <div className="flex flex-col">
-                <span className="font-semibold">Nome:</span>
-                <span className="inline-block">
-                  {patientData.name}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-semibold">Email:</span>
-                <span className="inline-block">
-                  {patientData.email}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-semibold">Idade:</span>
-                <span className="inline-block">
-                  {patientData.age} anos
-                </span>
-              </div>
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col gap-2">
-            <Button className="w-full bg-koromiko-400 hover:bg-koromiko-500">
-              Diário
-            </Button>
-            <Button className="w-full">Metas</Button>
-          </CardFooter>
-        </Card>
-      </div>
 
-      <Card className="sm:col-span-2 not-dark:bg-sea-nymph-200">
-        <CardHeader>
-          <CardTitle>Resumo do mês</CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          <Suspense fallback={<CardSkeleton />}>
-            <PredominantMoodCard userId={patientData.id} />
-          </Suspense>
-          <Suspense fallback={<CardSkeleton />}>
-            <DiaryRecordsCard userId={patientData.id} />
-          </Suspense>
-          <Suspense fallback={<CardSkeleton />}>
-            <GoalsSummaryCard userId={patientData.id} />
-          </Suspense>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}

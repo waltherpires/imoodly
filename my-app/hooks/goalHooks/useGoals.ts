@@ -16,7 +16,8 @@ async function fetchGoals(params: FetchGoalsParams) {
     } 
     if (params.month) searchParams.append("month", params.month.toString());
     if (params.year) searchParams.append("year", params.year.toString());
-
+    if (params.userId) searchParams.append("userId", params.userId);
+    
     const response = await fetchClient(`/goals?${searchParams.toString()}`, {
         method: 'GET',
     })
