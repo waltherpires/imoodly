@@ -1,9 +1,8 @@
 "use client";
 
-import ModalButton from "@/components/my-ui/ModalButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Handshake } from "lucide-react";
-import RequestList from "./RequestList";
+import { ResponsiveRequestList } from "./RequestList/ResponsiveRequestList";
 import { useSession } from "next-auth/react";
 import { useFetchRequests } from "@/hooks/requestHooks/useFetchRequests";
 
@@ -13,6 +12,17 @@ export default function RequestCard() {
   const { data, isLoading } = useFetchRequests(userId);
 
   const requestsCount = data?.length ?? 0;
+
+  const requestDescription =
+    requestsCount > 0 ? (
+      <p className="text-xs text-muted-foreground tracking-tight">
+        Alguns usuários querem o seu acompanhamento
+      </p>
+    ) : (
+      <p className="text-xs text-muted-foreground tracking-tight">
+        Sem pedidos no momento
+      </p>
+    );
 
   return (
     <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800 cursor-pointer">
@@ -32,19 +42,13 @@ export default function RequestCard() {
               ? `1 solicitação`
               : `${requestsCount} solicitações`}
           </p>
-          <p className="text-xs text-muted-foreground tracking-tight">
-            Alguns usuários querem o seu acompanhamento
-          </p>
+          {requestDescription}
         </div>
-        <ModalButton variant="default" buttonLabel="Ver">
-          {(close) => (
-            <RequestList
-              onClose={close}
-              requests={data ?? []}
-              isLoading={isLoading}
-            />
-          )}
-        </ModalButton>
+        <ResponsiveRequestList
+          onClose={close}
+          requests={data ?? []}
+          isLoading={isLoading}
+        />
       </CardContent>
     </Card>
   );

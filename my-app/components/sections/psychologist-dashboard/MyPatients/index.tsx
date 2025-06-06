@@ -25,9 +25,19 @@ export default function MyPatientsCard() {
     ) : data.length === 1 ? (
       <p className="text-xl font-semibold mb-1">1 paciente</p>
     ) : (
-      <p className="text-xl font-semibold mb-1">{data.length} paciente</p>
+      <p className="text-xl font-semibold mb-1">{data.length} pacientes</p>
     );
 
+  const patientsSummaryDescription =
+    data.length === 0 || undefined ? (
+      <p className="text-xs text-muted-foreground tracking-tight">
+        Sem pacientes no momento
+      </p>
+    ) : (
+      <p className="text-xs text-muted-foreground tracking-tight">
+        Usuários que você está acompanhando
+      </p>
+    );
   return (
     <Card
       className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800"
@@ -41,9 +51,7 @@ export default function MyPatientsCard() {
       <CardContent className="flex justify-between items-end">
         <div>
           {patientsSummary}
-          <p className="text-xs text-muted-foreground tracking-tight">
-            Usuários que você está acompanhando
-          </p>
+          {patientsSummaryDescription}
         </div>
       </CardContent>
     </Card>

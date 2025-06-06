@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
+import { DialogClose } from "@/components/ui/dialog";
 import {
   Table,
   TableBody,
@@ -16,17 +17,13 @@ import { useToggleConnectionVisibility } from "@/hooks/requestHooks/useToggleCon
 import { useLoggedPsychologist } from "@/hooks/userHooks/useLoggedPsychologist";
 import { useSession } from "next-auth/react";
 
-type ListProps = {
+export type ListProps = {
   onClose: () => void;
   requests: any[];
   isLoading: boolean;
 };
 
-export default function RequestList({
-  onClose,
-  requests,
-  isLoading,
-}: ListProps) {
+export function RequestListContent({ requests, isLoading }: ListProps) {
   const session = useSession();
   const userId = session.data?.user.id;
   const respondRequest = useRespondRequest();
@@ -36,10 +33,6 @@ export default function RequestList({
 
   const isOpen = psychologistData?.connectionStatus === "open";
 
-  const handleClose = () => {
-    onClose();
-  };
-
   const handleResponse = (requestId: string, status: LinkRequestStatus) => {
     respondRequest.mutate({
       requestId,
@@ -47,7 +40,6 @@ export default function RequestList({
       userId,
     });
   };
-
   return (
     <>
       <div className="flex flex-row justify-between items-center gap-2 mb-5">
@@ -64,12 +56,11 @@ export default function RequestList({
             ? "Visível para pacientes"
             : "Invisível para pacientes"}
         </Button>
-        <Button
-          className="cursor-pointer bg-mandy-500 hover:bg-mandy-400 text-white sm:w-35"
-          onClick={handleClose}
-        >
-          Fechar
-        </Button>
+        <DialogClose asChild>
+          <Button className="cursor-pointer bg-mandy-500 hover:bg-mandy-400 text-white sm:w-35">
+            Fechar
+          </Button>
+        </DialogClose>
       </div>
       <Table>
         <TableCaption>Solicitações de Acompanhamento</TableCaption>
