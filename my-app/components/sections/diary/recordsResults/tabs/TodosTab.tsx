@@ -25,10 +25,11 @@ export default function TodosTab({ textFilter, date }: Props) {
   const { data: session } = useSession();
   const userId = session?.user?.id;
   const { data, isPending, error } = usePosts(Number(userId));
+
   const filters: ((item: Post) => boolean)[] = [];
 
   if (textFilter) {
-    filters.push(createFilterTextByField<Post>(textFilter, 'title'));
+    filters.push(createFilterTextByField<Post>(textFilter, "title"));
   }
 
   if (date) {
@@ -74,7 +75,9 @@ export default function TodosTab({ textFilter, date }: Props) {
           </h2>
         </Card>
       ) : (
-        currentItems?.map((item) => <PostCard key={item.id} post={item} />)
+        currentItems?.map((item) => {
+          return <PostCard key={item.id} post={item} />;
+        })
       )}
 
       <div className="col-span-full">

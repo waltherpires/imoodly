@@ -8,6 +8,7 @@ export type Post = {
   description: string;
   tags: Tag[];
   date: string;
+  userId: number;
 };
 
 export async function fetchPosts(userId?: number): Promise<Post[]> {
@@ -18,11 +19,12 @@ export async function fetchPosts(userId?: number): Promise<Post[]> {
   const data = response.data;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return data.map((item: any, index: number) => ({
-    id: index,
+  return data.map((item: any) => ({
+    id: item.id,
     title: item.title,
     description: item.description,
     tags: item.tags as Tag[],
     date: item.createdAt,
+    userId: item.userId,
   }));
 }

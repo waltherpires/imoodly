@@ -16,16 +16,12 @@ export default function GoalsList({ userId, goalId }: GoalsListProps) {
 
   if (isPending) return <CardSkeleton />;
 
-  console.log("Dados sem filtro: ", data);
-
-  
   let filteredData = data;
   
   if (data && goalId) {
     filteredData = data.filter((goal: any) => goal.id === goalId);
   }
   
-  console.log("dados filtrados", filteredData)
   return (
     <div className="flex flex-col gap-4 max-h-[400px] overflow-y-auto">
       {filteredData && filteredData.length > 0 ? (
