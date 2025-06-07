@@ -24,6 +24,7 @@ import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useSignup } from "@/hooks/authHooks/useSignup";
 import { ButtonWithLoading } from "../my-ui/ButtonLoading";
 import { calculateAge, minEighteen } from "@/helpers/dateFormatter";
+import { signIn } from "next-auth/react";
 
 export const formSchema = z
   .object({
@@ -101,7 +102,20 @@ export default function SignupForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    signup(values);
+    signup(values, {
+      onSuccess: async () => {
+        const result = await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          callbackUrl: "/dashboard",
+          redirect: false,
+        });
+
+        if (result?.ok) {
+          window.location.href = result.url || "/dashboard";
+        }
+      }
+    });
   }
 
   return (
