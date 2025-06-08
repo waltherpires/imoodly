@@ -1,15 +1,17 @@
 export function getTagColor(tag: string) {
   switch (tag) {
     case "feliz":
-      return "bg-green-500";
-    case "motivado":
-      return "bg-blue-500";
+      return "bg-[#FECD04]";
+    case "calmo":
+      return "bg-[#A7CF3A]";
     case "triste":
-      return "bg-red-500";
-    case "contente":
-      return "bg-yellow-500";
+      return "bg-[#67C9D6]";
     case "ansioso":
-      return "bg-purple-500";
+      return "bg-[#F79534]";
+    case "irritado":
+      return "bg-[#E8546C]";
+    case "confuso":
+      return "bg-[#BB9FC8]"; 
     default:
       return "bg-gray-500";
   }
