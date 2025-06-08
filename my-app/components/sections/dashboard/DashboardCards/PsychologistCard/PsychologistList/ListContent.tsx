@@ -25,11 +25,13 @@ export default function ListContent() {
 
   return (
     <>
-      <DialogClose asChild>
-        <Button className="cursor-pointer bg-mandy-500 hover:bg-mandy-400 text-white w-50 self-end mx-2 my-3">
-          Fechar
-        </Button>
-      </DialogClose>
+      <div className="flex justify-end">
+        <DialogClose asChild>
+          <Button className="cursor-pointer bg-mandy-500 hover:bg-mandy-400 text-white w-50 self-end mx-2 my-3">
+            Fechar
+          </Button>
+        </DialogClose>
+      </div>
 
       {isPending ? (
         <Skeleton className="w-11/12 h-30" />

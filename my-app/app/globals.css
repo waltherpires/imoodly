@@ -189,11 +189,7 @@ body {
 }
 
 .dark #nprogress .bar {
-  background: #38d940 !important;
-}
-
-#nprogress .bar {
-  background: #be5310 !important;
+  background: #93b5aa !important;
 }
 
 ::-webkit-scrollbar {
@@ -229,7 +225,7 @@ body {
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #30bf37;
+  background: #93b5aa;
   transition: background-color 0.3s ease, transform 0.3s ease;
   border-radius: 9px;
   background-clip: padding-box;
@@ -237,6 +233,6 @@ body {
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #30bf37;
+  background: #93b5aa;
   transform: scale(1.1);
 }
