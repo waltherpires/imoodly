@@ -16,16 +16,10 @@ import { ButtonWithLoading } from "../my-ui/ButtonLoading";
 export const formSchema = z.object({
   title: z
     .string()
-    .min(1, { message: "Informe o título." })
-    .regex(/^[\p{L}\p{N} '-,]*$/u, {
-      message: "Não são permitidos caracteres especiais ou emojis",
-    }),
+    .min(1, { message: "Informe o título." }),
   description: z
     .string()
     .max(100, { message: "Informe uma descrição menor." })
-    .regex(/^[\p{L}\p{N} '-,]*$/u, {
-      message: "Não são permitidos caracteres especiais ou emojis",
-    })
     .optional(),
   dueDate: z
     .string()
