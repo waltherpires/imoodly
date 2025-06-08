@@ -26,7 +26,7 @@ export default function DiaryEditForm({ moodLogId, data, onSuccess }: DiaryEditF
   const { form, onSubmit, mutation } = useEditDiaryForm(moodLogId, data, onSuccess);
 
   return (
-    <Card className="p-3 not-dark:bg-sea-nymph-100/60">
+    <Card className="p-3 not-dark:bg-sea-nymph-100/60 my-3">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
           <FormField
