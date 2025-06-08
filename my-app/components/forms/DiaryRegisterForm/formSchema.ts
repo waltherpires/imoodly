@@ -34,17 +34,11 @@ export const formSchema = z.object({
   title: z
     .string()
     .min(1, { message: "Informe um título" })
-    .max(30, { message: "Título muito grande!" })
-    .regex(/^[\p{L}\p{N} '-,]*$/u, {
-      message: "Não são permitidos caracteres especiais ou emojis",
-    }),
+    .max(50, { message: "Título muito grande!" }),
   description: z
     .string()
     .min(4, { message: "Informe uma descrição" })
-    .max(350, { message: "Descrição muito longa!" })
-    .regex(/^[\p{L}\p{N} '-,]*$/u, {
-      message: "Não são permitidos caracteres especiais ou emojis",
-    }),
+    .max(350, { message: "Descrição muito longa!" }),
   tags: z.array(z.string()).optional(),
 });
 
