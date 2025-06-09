@@ -24,7 +24,7 @@ export default function PostCard({ post }: Props) {
 
   return (
     <Card className="flex flex-col min-h-[250px]">
-      <div className="flex flex-col flex-1 justify-between">
+      <div className="flex flex-col flex-1">
         <CardHeader className="pb-2">
           <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between">
             <CardTitle>{post.title}</CardTitle>
@@ -58,7 +58,7 @@ export default function PostCard({ post }: Props) {
           </p>
         </CardContent>
         {Number(userId) === post.userId && (
-          <CardFooter className="flex justify-end pt-0 self-end">
+          <CardFooter className="flex justify-end pt-0 mt-auto">
             <EditPostDialog post={post} />
             <Button variant="ghost">
               <Eye className="w-4" />

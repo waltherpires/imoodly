@@ -1,6 +1,8 @@
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
+import { Switch } from "@/components/ui/switch";
 import {
   Table,
   TableBody,
@@ -16,6 +18,7 @@ import useRespondRequest, {
 import { useToggleConnectionVisibility } from "@/hooks/requestHooks/useToggleConnectionVisibility";
 import { useLoggedPsychologist } from "@/hooks/userHooks/useLoggedPsychologist";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 export type ListProps = {
   onClose: () => void;
@@ -32,6 +35,12 @@ export function RequestListContent({ requests, isLoading }: ListProps) {
     useLoggedPsychologist();
 
   const isOpen = psychologistData?.connectionStatus === "open";
+  const [isVisible, setIsVisible] = useState(isOpen);
+
+  const handleVisibilityChange = () => {
+    setIsVisible((prev) => !prev);
+    mutate();
+  };
 
   const handleResponse = (requestId: string, status: LinkRequestStatus) => {
     respondRequest.mutate({
@@ -43,19 +52,22 @@ export function RequestListContent({ requests, isLoading }: ListProps) {
   return (
     <>
       <div className="flex flex-row justify-between items-center gap-2 my-5 mx-2">
-        <Button
-          className="cursor-pointer not-only-of-type:not-dark:bg-koromiko-400 not-dark:hover:bg-koromiko-300 rounded-md not-dark:text-white text-xs"
-          onClick={() => mutate()}
-          disabled={isPending || dataPending}
-        >
-          {dataPending
-            ? "Carregando..."
-            : isPending
-            ? "Alterando..."
-            : isOpen
-            ? "Visível para pacientes"
-            : "Invisível para pacientes"}
-        </Button>
+        <div className="flex items-center gap-2">
+          <Switch
+            checked={isVisible}
+            onCheckedChange={handleVisibilityChange}
+            disabled={isPending || dataPending}
+          />
+          <span className="text-sm">
+            {dataPending
+              ? "Carregando..."
+              : isPending
+              ? "Alterando..."
+              : isVisible
+              ? "Visível para pacientes"
+              : "Invisível para pacientes"}
+          </span>
+        </div>
         <DialogClose asChild>
           <Button className="cursor-pointer bg-mandy-500 hover:bg-mandy-400 text-white sm:w-35">
             Fechar
