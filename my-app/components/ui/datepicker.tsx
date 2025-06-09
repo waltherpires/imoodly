@@ -2,11 +2,10 @@
 
 import * as React from "react"
 import { Calendar as CalendarIcon } from "lucide-react"
-import dynamic from "next/dynamic"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-const Calendar = dynamic(() => import("@/components/ui/calendar"));
+import { Calendar } from "@/components/ui/calendar"
 import {
   Popover,
   PopoverContent,
@@ -40,8 +39,9 @@ export default function DatePicker(
           mode="single"
           selected={date}
           onSelect={setDate}
-          initialFocus
-        />
+          className="min-w-xs"
+        > 
+        </Calendar>
       </PopoverContent>
     </Popover>
   )
