@@ -33,7 +33,7 @@ export default function PostNotification({
           <PostViewModal
             userId={notification.sender.id}
             postId={notification.resourceId!}
-            postType={notification.type as "diary" | "goal"}
+            postType={notification.type as "post" | "goal"}
             trigger={
               <Button variant="ghost">
                 <ChevronUp />
