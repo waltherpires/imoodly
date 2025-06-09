@@ -16,7 +16,7 @@ export function ResponsiveRequestList(props: ResponsiveRequestListProps) {
       <DrawerTrigger asChild>
         <Button
           variant="default"
-          className="not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300"
+          className="not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300 not-last:mx-2"
         >
           Ver
         </Button>
@@ -31,7 +31,7 @@ export function ResponsiveRequestList(props: ResponsiveRequestListProps) {
       <DialogTrigger asChild>
         <Button
           variant="default"
-          className="not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300"
+          className="not-dark:bg-sea-nymph-400 not-dark:hover:bg-sea-nymph-300 mx-2"
         >
           Ver
         </Button>

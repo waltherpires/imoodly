@@ -11,7 +11,7 @@ type GoalsListProps = {
 export default function GoalsList({ userId, goalId }: GoalsListProps) {
   const { data, isPending } = useGoals({
     userId,
-    status: ["pending", "in_progress"],
+    status: ["pending", "in_progress", "completed"],
   } as FetchGoalsParams);
 
   if (isPending) return <CardSkeleton />;
@@ -21,6 +21,7 @@ export default function GoalsList({ userId, goalId }: GoalsListProps) {
   if (data && goalId) {
     filteredData = data.filter((goal: any) => goal.id === goalId);
   }
+
   
   return (
     <div className="flex flex-col gap-4 max-h-[400px] overflow-y-auto">
