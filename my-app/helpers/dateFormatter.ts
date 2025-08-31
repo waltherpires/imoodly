@@ -15,17 +15,24 @@ export function dateFormatter(date: string | Date) {
   return formatoData;
 }
 
-export function dateFormatterNoHours(date: string | Date) {
-  const dateObj = typeof date === "string" ? new Date(date) : date;
 
-  const formatoData = new Intl.DateTimeFormat("pt-BR", {
+export function dateFormatterNoHours(date: string | Date) {
+  let dateObj: Date;
+
+  if (typeof date === "string") {
+    const [year, month, day] = date.split("-").map(Number);
+    dateObj = new Date(year, month - 1, day); 
+  } else {
+    dateObj = date;
+  }
+
+  return new Intl.DateTimeFormat("pt-BR", {
     year: "numeric",
     month: "long",
     day: "numeric",
   }).format(dateObj);
-
-  return formatoData;
 }
+
 
 export const monthNamesInPortuguese: Record<string, string> = {
   January: "Janeiro",
