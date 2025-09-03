@@ -20,7 +20,8 @@ export function dateFormatterNoHours(date: string | Date) {
   let dateObj: Date;
 
   if (typeof date === "string") {
-    const [year, month, day] = date.split("-").map(Number);
+    const cleanDate = date.split("T")[0].split(" ")[0];
+    const [year, month, day] = cleanDate.split("-").map(Number);
     dateObj = new Date(year, month - 1, day); 
   } else {
     dateObj = date;
