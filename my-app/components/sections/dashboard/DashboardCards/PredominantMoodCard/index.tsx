@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPredominantEmotion } from "@/helpers/predominantEmotion";
@@ -16,19 +16,23 @@ export default function PredominantMoodCard({ userId }: Props) {
 
   const { emotion, percentage } = getPredominantEmotion(data);
 
-    if (isPending) {
-      return <CardSkeleton />
-    }
-  
-    if (isError) {
-      return <ErrorCard />
-    }
+  if (isPending) {
+    return <CardSkeleton />;
+  }
+
+  if (isError) {
+    return <ErrorCard />;
+  }
 
   return (
     <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
       <CardHeader>
-        <CardTitle className="flex justify-between text-sm">
-          Humor predominante <Smile className="h-4 w-4 text-teal-700" />
+        <CardTitle className="flex justify-between">
+          <span className="text-sm">
+            Humor predominante{" "}
+            <span className="text-xs text-muted-foreground">(mês atual)</span>
+          </span>
+          <Smile className="h-4 w-4 text-teal-700" />
         </CardTitle>
       </CardHeader>
       <CardContent>
