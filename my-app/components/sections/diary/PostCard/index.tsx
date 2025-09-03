@@ -9,7 +9,7 @@ import {
 import { Post } from "@/lib/api/diaryPost";
 import { dateFormatter } from "@/helpers/dateFormatter";
 import { getTagColor } from "@/helpers/postHelpers";
-import { Eye } from "lucide-react";
+import { Eye, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import EditPostDialog from "./EditPostDialog";
 import { useSession } from "next-auth/react";
@@ -21,6 +21,8 @@ type Props = {
 export default function PostCard({ post }: Props) {
   const { data: sessionData } = useSession();
   const userId = sessionData?.user.id;
+  const role = sessionData?.user.role;
+  const isPsychologist = role === "psicologo";
 
   return (
     <Card className="flex flex-col min-h-[250px]">
@@ -62,6 +64,14 @@ export default function PostCard({ post }: Props) {
             <EditPostDialog post={post} />
             <Button variant="ghost">
               <Eye className="w-4" />
+            </Button>
+          </CardFooter>
+        )}
+        {isPsychologist && (
+          <CardFooter className="flex justify-end pt-0 mt-auto">
+            
+            <Button variant="ghost">
+              <MessageCircle className="w-4" />
             </Button>
           </CardFooter>
         )}
