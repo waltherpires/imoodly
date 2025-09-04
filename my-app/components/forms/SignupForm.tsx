@@ -105,20 +105,25 @@ export default function SignupForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    signup(values, {
-      onSuccess: async () => {
-        const result = await signIn("credentials", {
-          email: values.email,
-          password: values.password,
-          callbackUrl: "/dashboard",
-          redirect: false,
-        });
+    const birthdateISO = new Date(values.birthdate).toISOString();
 
-        if (result?.ok) {
-          window.location.href = result.url || "/dashboard";
-        }
-      },
-    });
+    signup(
+      { ...values, birthdate: birthdateISO },
+      {
+        onSuccess: async () => {
+          const result = await signIn("credentials", {
+            email: values.email,
+            password: values.password,
+            callbackUrl: "/dashboard",
+            redirect: false,
+          });
+
+          if (result?.ok) {
+            window.location.href = result.url || "/dashboard";
+          }
+        },
+      }
+    );
   }
 
   return (
