@@ -38,12 +38,15 @@ export const formSchema = z
       .string()
       .min(1, { message: "Data de nascimento obrigatória" })
       .refine((val) => !isNaN(Date.parse(val)), { message: "Data inválida" })
+      .refine((val) => /^\d{4}-\d{2}-\d{2}$/.test(val), {
+        message: "Formato de data inválido",
+      })
       .refine(
         (val) => {
           const date = new Date(val);
-          return date.getFullYear() >= 1910;
+          return calculateAge(date) >= 18;
         },
-        { message: "Ano de nascimento não pode ser anterior a 1910" }
+        { message: "Você precisa ter pelo menos 18 anos" }
       )
       .refine(
         (val) => {
@@ -114,7 +117,7 @@ export default function SignupForm() {
         if (result?.ok) {
           window.location.href = result.url || "/dashboard";
         }
-      }
+      },
     });
   }
 
