@@ -9,14 +9,44 @@ import {
 import { Post } from "@/lib/api/diaryPost";
 import { dateFormatter } from "@/helpers/dateFormatter";
 import { getTagColor } from "@/helpers/postHelpers";
-import { Eye, MessageCircle } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import EditPostDialog from "./EditPostDialog";
 import { useSession } from "next-auth/react";
+import Comments from "@/components/my-ui/Comments";
 
 type Props = {
   post: Post;
 };
+
+const comments = [
+  {
+    user: "Walther",
+    date: "20-08-2025",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores veritatis temporibus dolorum magnam delectus magni reiciendis! Ad et debitis harum, enim eligendi, voluptas unde vitae cumque, facere laudantium nihil repellendus!",
+    replies: [
+      {
+        user: "Maria",
+        date: "21-08-2025",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores veritatis temporibus dolorum magnam delectus magni reiciendis! Ad et debitis harum, enim eligendi, voluptas unde vitae cumque, facere laudantium nihil repellendus!",
+      },
+      {
+        user: "João",
+        date: "21-08-2025",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores veritatis temporibus dolorum magnam delectus magni reiciendis! Ad et debitis harum, enim eligendi, voluptas unde vitae cumque, facere laudantium nihil repellendus!",
+      },
+      {
+        user: "João",
+        date: "21-08-2025",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores veritatis temporibus dolorum magnam delectus magni reiciendis! Ad et debitis harum, enim eligendi, voluptas unde vitae cumque, facere laudantium nihil repellendus!",
+      },
+    ],
+  },
+];
 
 export default function PostCard({ post }: Props) {
   const { data: sessionData } = useSession();
@@ -69,10 +99,7 @@ export default function PostCard({ post }: Props) {
         )}
         {isPsychologist && (
           <CardFooter className="flex justify-end pt-0 mt-auto">
-            
-            <Button variant="ghost">
-              <MessageCircle className="w-4" />
-            </Button>
+            <Comments comments={comments} />
           </CardFooter>
         )}
       </div>
