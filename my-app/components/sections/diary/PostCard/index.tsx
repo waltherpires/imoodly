@@ -14,46 +14,19 @@ import { Button } from "@/components/ui/button";
 import EditPostDialog from "./EditPostDialog";
 import { useSession } from "next-auth/react";
 import Comments from "@/components/my-ui/Comments";
+import { useComments } from "@/hooks/commentHooks/useComments";
 
 type Props = {
   post: Post;
 };
-
-const comments = [
-  {
-    user: "Walther",
-    date: "20-08-2025",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores veritatis temporibus dolorum magnam delectus magni reiciendis! Ad et debitis harum, enim eligendi, voluptas unde vitae cumque, facere laudantium nihil repellendus!",
-    replies: [
-      {
-        user: "Maria",
-        date: "21-08-2025",
-        description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores veritatis temporibus dolorum magnam delectus magni reiciendis! Ad et debitis harum, enim eligendi, voluptas unde vitae cumque, facere laudantium nihil repellendus!",
-      },
-      {
-        user: "João",
-        date: "21-08-2025",
-        description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores veritatis temporibus dolorum magnam delectus magni reiciendis! Ad et debitis harum, enim eligendi, voluptas unde vitae cumque, facere laudantium nihil repellendus!",
-      },
-      {
-        user: "João",
-        date: "21-08-2025",
-        description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores veritatis temporibus dolorum magnam delectus magni reiciendis! Ad et debitis harum, enim eligendi, voluptas unde vitae cumque, facere laudantium nihil repellendus!",
-      },
-    ],
-  },
-
-];
 
 export default function PostCard({ post }: Props) {
   const { data: sessionData } = useSession();
   const userId = sessionData?.user.id;
   const role = sessionData?.user.role;
   const isPsychologist = role === "psicologo";
+
+  const comments = useComments(post.id, "post");
 
   return (
     <Card className="flex flex-col min-h-[250px]">
@@ -100,7 +73,12 @@ export default function PostCard({ post }: Props) {
         )}
         {isPsychologist && (
           <CardFooter className="flex justify-end pt-0 mt-auto">
-            <Comments comments={comments} />
+            <Comments
+              comments={comments.data}
+              entityId={post.id}
+              entityType="post"
+              entityTitle={post.title}
+            />
           </CardFooter>
         )}
       </div>

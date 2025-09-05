@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Comment from "./Comment";
-import { MessageCircle  } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -13,15 +14,27 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import CommentForm from "./CreateComment";
+import { EntityType } from "@/hooks/commentHooks/entityType";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 interface CommentsProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  comments: any[];
+  comments: {
+    content: string;
+    parentId?: number;
+  }[];
+  entityType: EntityType;
+  entityId: number;
+  entityTitle: string;
 }
 
-export default function Comments({ comments }: CommentsProps) {
+export default function Comments({
+  comments = [],
+  entityId,
+  entityType,
+  entityTitle,
+}: CommentsProps) {
   return (
     <Dialog>
       <DialogTrigger>
@@ -30,15 +43,24 @@ export default function Comments({ comments }: CommentsProps) {
           {comments.length}
         </div>
       </DialogTrigger>
-      <DialogContent className="rounded overflow-y-auto max-h-3/4 not-dark:bg-sea-nymph-300">
+      <DialogContent className="rounded overflow-y-auto max-h-3/4 not-dark:bg-sea-nymph-300 ">
         <DialogHeader>
           <DialogTitle>Comentários</DialogTitle>
+          <DialogDescription className="bg-muted p-2">
+            &ldquo;{entityTitle}&rdquo;
+          </DialogDescription>
         </DialogHeader>
         <div>
-          {comments.map((comment) => (
-            <Comment key={comment.id} {...comment} />
-          ))}
-          <Accordion type="single" collapsible className="w-100 mx-1">
+          {Array.isArray(comments) && comments.length > 0 ? (
+            comments.map((comment: any) => (
+              <Comment key={comment.id} {...comment} />
+            ))
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              Nenhum comentário ainda.
+            </p>
+          )}
+          <Accordion type="single" collapsible className="sm:w-80 mx-1">
             <AccordionItem value="comment">
               <AccordionTrigger
                 className="flex justify-end"
@@ -47,15 +69,7 @@ export default function Comments({ comments }: CommentsProps) {
                 <h3>Adicionar comentário</h3>
               </AccordionTrigger>
               <AccordionContent className="flex items-start flex-col gap-2">
-                <Input
-                
-                  min={10}
-                  max={200}
-                  className="min-w-20 min-h-20 max-w-90 not-dark:bg-white"
-                />
-                <Button variant="outline" className=" w-20">
-                  Enviar
-                </Button>
+                <CommentForm entityId={entityId} entityType={entityType} />
               </AccordionContent>
             </AccordionItem>
           </Accordion>
