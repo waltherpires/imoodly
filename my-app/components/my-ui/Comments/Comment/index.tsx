@@ -32,7 +32,7 @@ export default function Comment({
   const hasReplies = replies && replies.length > 0;
 
   return (
-    <Card className="min-w-50 sm:min-w-90">
+    <Card className="min-w-50 sm:min-w-90 mb-4">
       <CardHeader>
         <CardTitle>{user}</CardTitle>
         <CardDescription>{date}</CardDescription>
@@ -63,8 +63,9 @@ export default function Comment({
                 className="flex justify-end"
                 showChevron={false}
               >
-                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-sea-nymph-500 hover:bg-sea-nymph-700 dark:bg-koromiko-600 dark:hover:bg-koromiko-800">
+                <div className="flex items-center justify-center w-25 h-6 rounded-full bg-sea-nymph-500 hover:bg-sea-nymph-700 dark:bg-koromiko-600 dark:hover:bg-koromiko-800 gap-1">
                   <MessageSquare className="w-4 h-4 not-dark:text-white" />
+                  responder
                 </div>
               </AccordionTrigger>
               <AccordionContent className="flex items-start flex-col gap-2">
@@ -73,6 +74,7 @@ export default function Comment({
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+          
         </CardFooter>
       )}
     </Card>
