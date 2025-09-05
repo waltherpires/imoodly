@@ -46,6 +46,7 @@ const comments = [
       },
     ],
   },
+
 ];
 
 export default function PostCard({ post }: Props) {
