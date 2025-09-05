@@ -63,7 +63,7 @@ export default function Comment({
                 className="flex justify-end"
                 showChevron={false}
               >
-                <div className="flex items-center justify-center w-25 h-6 rounded-full bg-sea-nymph-500 hover:bg-sea-nymph-700 dark:bg-koromiko-600 dark:hover:bg-koromiko-800 gap-1">
+                <div className="flex items-center justify-center w-25 h-6 rounded-full bg-sea-nymph-300 hover:bg-sea-nymph-500 dark:bg-koromiko-600 dark:hover:bg-koromiko-800 gap-1">
                   <MessageSquare className="w-4 h-4 not-dark:text-white" />
                   responder
                 </div>

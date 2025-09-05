@@ -48,9 +48,10 @@ export default function Comments({ comments }: CommentsProps) {
               </AccordionTrigger>
               <AccordionContent className="flex items-start flex-col gap-2">
                 <Input
+                
                   min={10}
                   max={200}
-                  className="min-w-20 min-h-20 max-w-90"
+                  className="min-w-20 min-h-20 max-w-90 not-dark:bg-white"
                 />
                 <Button variant="outline" className=" w-20">
                   Enviar
