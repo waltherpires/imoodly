@@ -22,7 +22,7 @@ export default function Comments({ comments }: CommentsProps) {
           {comments.length}
         </div>
       </DialogTrigger>
-      <DialogContent className="overflow-y-auto max-h-3/4">
+      <DialogContent className="rounded overflow-y-auto max-h-3/4 not-dark:bg-sea-nymph-300">
         <DialogHeader>
           <DialogTitle>Comentários</DialogTitle>
         </DialogHeader>
