@@ -16,7 +16,10 @@ import {
 } from "@/components/ui/accordion";
 import CommentForm from "./CreateComment";
 import { EntityType } from "@/hooks/commentHooks/entityType";
-import { DialogDescription } from "@radix-ui/react-dialog";
+import { Post } from "@/lib/api/diaryPost";
+import { GoalProps } from "../Goal";
+import PostResume from "./PostResume";
+import { Button } from "@/components/ui/button";
 
 interface CommentsProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,28 +30,27 @@ interface CommentsProps {
   entityType: EntityType;
   entityId: number;
   entityTitle: string;
+  entity: Post | GoalProps;
 }
 
 export default function Comments({
   comments = [],
   entityId,
   entityType,
-  entityTitle,
+  entity,
 }: CommentsProps) {
   return (
     <Dialog>
       <DialogTrigger>
-        <div className="flex items-center gap-2 text-sm">
+        <Button variant="ghost" className="flex items-center gap-2 text-sm">
           <MessageCircle className="w-5" />
           {comments.length}
-        </div>
+        </Button>
       </DialogTrigger>
       <DialogContent className="rounded overflow-y-auto max-h-3/4 not-dark:bg-sea-nymph-300 ">
-        <DialogHeader>
-          <DialogTitle>Comentários</DialogTitle>
-          <DialogDescription className="bg-muted p-2">
-            &ldquo;{entityTitle}&rdquo;
-          </DialogDescription>
+        <DialogHeader className="mt-2">
+          {entityType === "post" && <PostResume post={entity as Post} />}
+          <DialogTitle className="mt-3 bg-koromiko-400 p-1 rounded-sm text-black">Comentários</DialogTitle>
         </DialogHeader>
         <div>
           {Array.isArray(comments) && comments.length > 0 ? (
@@ -56,9 +58,9 @@ export default function Comments({
               <Comment key={comment.id} {...comment} />
             ))
           ) : (
-            <p className="text-sm text-muted-foreground">
-              Nenhum comentário ainda.
-            </p>
+            <div className="h-8 not-dark:bg-gray-100 p-3 rounded text-center">
+              <p className="text-sm">Nenhum comentário ainda</p>
+            </div>
           )}
           <Accordion type="single" collapsible className="sm:w-80 mx-1">
             <AccordionItem value="comment">

@@ -1,31 +1,14 @@
-import { Clock } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Post } from "@/lib/api/diaryPost";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { dateFormatter } from "@/helpers/dateFormatter";
 import { getTagColor } from "@/helpers/postHelpers";
-import { Eye } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import EditPostDialog from "./EditPostDialog";
-import { useSession } from "next-auth/react";
-import Comments from "@/components/my-ui/Comments";
-import { useComments } from "@/hooks/commentHooks/useComments";
+import { Post } from "@/lib/api/diaryPost";
+import { Clock } from "lucide-react";
 
 type Props = {
   post: Post;
 };
 
-export default function PostCard({ post }: Props) {
-  const { data: sessionData } = useSession();
-  const userId = sessionData?.user.id;
-
-  const comments = useComments(post.id, "post");
-
+export default function PostResume({ post }: Props) {
   return (
     <Card className="flex flex-col min-h-[250px]">
       <div className="flex flex-col flex-1">
@@ -61,23 +44,6 @@ export default function PostCard({ post }: Props) {
             {post.description}
           </p>
         </CardContent>
-        <CardFooter className="flex justify-end pt-0 mt-auto">
-          {Number(userId) === post.userId && (
-            <>
-              <EditPostDialog post={post} />
-              <Button variant="ghost">
-                <Eye className="w-6" />
-              </Button>
-            </>
-          )}
-          <Comments
-            entity={post}
-            comments={comments.data}
-            entityId={post.id}
-            entityType="post"
-            entityTitle={post.title}
-          />
-        </CardFooter>
       </div>
     </Card>
   );

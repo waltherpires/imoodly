@@ -15,8 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { dateFormatter } from "@/helpers/dateFormatter";
-import { Clock, MessageSquare } from "lucide-react";
-
+import { Clock, MessageCircle, MessageSquare } from "lucide-react";
 interface CommentProps {
   user: {
     name: string;
@@ -37,13 +36,16 @@ export default function Comment({
   const date = dateFormatter(createdAt);
 
   return (
-    <Card className="max-w-70 xs:max-w-10/12 mb-3 mx-auto">
-      <CardHeader>
-        <CardTitle>{user.name}</CardTitle>
-        <CardDescription className="flex items-center gap-2">
-          <Clock className="hidden sm:inline h-4 w-4" />
-          {date}
-        </CardDescription>
+    <Card className="max-w-70 xs:max-w-10/12 sm:max-w-400 mb-3 mx-auto">
+      <CardHeader className="flex flex-row justify-between items-center">
+        <div>
+          <CardTitle>{user.name}</CardTitle>
+          <CardDescription className="flex items-center gap-2">
+            <Clock className="hidden sm:inline h-4 w-4" />
+            {date}
+          </CardDescription>
+        </div>
+        <MessageCircle className="w-4" />
         {/** todo: replay button */}
       </CardHeader>
       <CardContent>{content}</CardContent>
