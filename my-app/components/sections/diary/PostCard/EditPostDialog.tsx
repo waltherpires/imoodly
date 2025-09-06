@@ -22,7 +22,7 @@ export default function EditPostDialog({ post }: Props) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="ghost">
-          <Pencil className="w-4" />
+          <Pencil className="w-6" />
         </Button>
       </DialogTrigger>
       <DialogContent>

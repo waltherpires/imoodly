@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import useCreateComment from "./useCreateComment";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function CommentForm({
   entityType,
@@ -42,12 +43,12 @@ export default function CommentForm({
         <Input type="hidden" {...form.register("entityType")} />
         <Input
           type="hidden"
-          {...(form.register("entityId"), { valueAsNumber: true })}
+          {...(form.register("entityId"), { valueasnumber: "true" })}
         />
         {parentId && (
           <Input
             type="hidden"
-            {...form.register("parentId", { valueAsNumber: true })}
+            {...(form.register("parentId"), { valueasnumber: "true" })}
           />
         )}
         <FormField
@@ -56,10 +57,10 @@ export default function CommentForm({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input
-                  min={10}
-                  max={200}
-                  className="min-w-20 min-h-20 max-w-90 not-dark:bg-white"
+                <Textarea
+                  minLength={10}
+                  maxLength={300}
+                  className="min-w-70 sm:w-80 min-h-20  not-dark:bg-white resize-none text-wrap"
                   {...field}
                 />
               </FormControl>
