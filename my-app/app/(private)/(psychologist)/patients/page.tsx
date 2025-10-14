@@ -7,10 +7,10 @@ export default async function Patients() {
         <div className="flex flex-col md:flex-row items-center justify-between mb-6">
           <div className="mx-auto sm:ml-10">
             <h1 className="text-3xl font-bold tracking-tight">
-              Meus Pacientes
+              Meus Agentes
             </h1>
             <p className="text-muted-foreground dark:text-teal-50">
-              Lista com seus pacientes ativos
+              Lista com seus agentes ativos
             </p>
           </div>
         </div>

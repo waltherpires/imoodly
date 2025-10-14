@@ -29,7 +29,7 @@ export default function PsychologistCard({ userId }: { userId?: string }) {
     <Card className="md:max-w-130 hover:bg-zinc-50 dark:hover:bg-zinc-800">
       <CardHeader>
         <CardTitle className="flex justify-between text-sm">
-          Psicólogo <Clock className="h-4 w-4 text-teal-700" />
+          Gerente <Clock className="h-4 w-4 text-teal-700" />
         </CardTitle>
       </CardHeader>
       <CardContent className="flex justify-between items-end">
