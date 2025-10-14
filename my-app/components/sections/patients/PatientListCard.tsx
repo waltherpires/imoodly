@@ -34,7 +34,7 @@ export default function PatientListCard({ textFilter }: PatientListCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Pacientes</CardTitle>
+        <CardTitle>Agentes</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3">

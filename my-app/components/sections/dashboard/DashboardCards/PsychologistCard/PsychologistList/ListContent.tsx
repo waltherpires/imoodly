@@ -39,7 +39,7 @@ export default function ListContent() {
         <div className="w-full flex justify-center">
           <div className="w-full max-w-md sm:max-w-xl md:max-w-3xl">
             <Table>
-              <TableCaption>Psicólogos Disponíveis</TableCaption>
+              <TableCaption>Gerentes Disponíveis</TableCaption>
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[100px]">Nome</TableHead>
@@ -92,7 +92,7 @@ function NoDataRow() {
   return (
     <TableRow>
       <TableCell colSpan={4} className="text-center">
-        Nenhum psicólogo encontrado
+        Nenhum gerente encontrado
       </TableCell>
     </TableRow>
   );

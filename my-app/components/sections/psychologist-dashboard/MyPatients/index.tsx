@@ -21,17 +21,17 @@ export default function MyPatientsCard() {
 
   const patientsSummary =
     data.length === 0 || undefined ? (
-      <p className="text-xl font-semibold mb-1">Sem pacientes</p>
+      <p className="text-xl font-semibold mb-1">Sem agentes</p>
     ) : data.length === 1 ? (
-      <p className="text-xl font-semibold mb-1">1 paciente</p>
+      <p className="text-xl font-semibold mb-1">1 agente</p>
     ) : (
-      <p className="text-xl font-semibold mb-1">{data.length} pacientes</p>
+      <p className="text-xl font-semibold mb-1">{data.length} agentes</p>
     );
 
   const patientsSummaryDescription =
     data.length === 0 || undefined ? (
       <p className="text-xs text-muted-foreground tracking-tight">
-        Sem pacientes no momento
+        Sem agentes no momento
       </p>
     ) : (
       <p className="text-xs text-muted-foreground tracking-tight">
@@ -45,7 +45,7 @@ export default function MyPatientsCard() {
     >
       <CardHeader>
         <CardTitle className="flex justify-between text-sm">
-          Pacientes <User className="h-4 w-4 text-teal-700" />
+          Agentes <User className="h-4 w-4 text-teal-700" />
         </CardTitle>
       </CardHeader>
       <CardContent className="flex justify-between items-end">

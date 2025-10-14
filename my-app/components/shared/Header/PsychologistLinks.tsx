@@ -17,7 +17,7 @@ export function PsychologistLinks({ onNavigate }: { onNavigate?: () => void }) {
           onNavigate?.();
         }}
       >
-        Pacientes
+        Agentes
       </NavLink>
     </>
   );

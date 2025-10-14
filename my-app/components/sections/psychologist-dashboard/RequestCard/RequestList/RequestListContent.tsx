@@ -64,8 +64,8 @@ export function RequestListContent({ requests, isLoading }: ListProps) {
               : isPending
               ? "Alterando..."
               : isVisible
-              ? "Visível para pacientes"
-              : "Invisível para pacientes"}
+              ? "Visível para agentes"
+              : "Invisível para agentes"}
           </span>
         </div>
         <DialogClose asChild>

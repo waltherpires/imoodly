@@ -9,8 +9,8 @@ export default function NoPatientCard() {
   return (
     <Card className="min-w-40">
       <CardHeader className="flex flex-row justify-between  items-start">
-            <CardTitle>Sem Pacientes</CardTitle>
-            <CardDescription>Você não possui pacientes no momento</CardDescription>
+            <CardTitle>Sem Agentes</CardTitle>
+            <CardDescription>Você não possui agentes no momento</CardDescription>
       </CardHeader>
     </Card>
   );
