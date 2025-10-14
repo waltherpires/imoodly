@@ -220,7 +220,7 @@ export default function SignupForm() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="paciente">Usuário</SelectItem>
+                      <SelectItem value="paciente">Agente</SelectItem>
                       <SelectItem value="psicologo">Gerente</SelectItem>
                     </SelectContent>
                   </Select>
