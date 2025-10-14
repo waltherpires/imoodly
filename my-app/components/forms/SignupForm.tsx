@@ -221,7 +221,7 @@ export default function SignupForm() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="paciente">Usuário</SelectItem>
-                      <SelectItem value="psicologo">Psicólogo</SelectItem>
+                      <SelectItem value="psicologo">Gerente</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>
@@ -245,7 +245,7 @@ export default function SignupForm() {
                   name="crp"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>CRP</FormLabel>
+                      <FormLabel>Matrícula</FormLabel>
                       <FormControl>
                         <Input placeholder="Digite seu CRP" {...field} />
                       </FormControl>
